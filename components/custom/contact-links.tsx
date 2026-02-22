@@ -2,24 +2,32 @@
 
 import { CSSProperties } from "react";
 
-const A = "iam";
-const B = "otl";
-const C = "em";
-const D = "iram";
-const E = "piz";
-const F = "signal.me";
-const G = "#eu";
-const H = "fuwiecLvtzpzZeTnDa9fVGZHX1XlrGtXs18";
-const I = "DwflErkxnWpzGZSlB0Jb1TpLzs32w";
+// contact info is base64 encoded and split up so crawlers reading source code dont stumble upon it
+const J = atob("c3A=");
+const L = atob("Mjcu");
+const B = atob("b3Rs");
+const H = atob("ODFzWHRHcmxYMVhIWkdWZjlhRG5UZVp6cHp0dkxjZWl3dWY=");
+const E = atob("cGl6");
+const G = atob("dWUj");
+const K = atob("dHRo");
+const F = atob("ZW0ubGFuZ2lz");
+const D = atob("aXJhbQ==");
+const I = atob("dzIzc3pMcFQxYkowQmxTWkd6cFdueGtyRWxmd0Q=");
+const C = atob("ZW0=");
+const A = atob("aWFt");
+
+function reverse(input: string): string {
+    return input.split("").reverse().join("");
+}
 
 const links = [
-    { label: "Email", value: `${E}.${D}@${C}`, href: `${E}.${D}@${C}:${B}${A}`.split("").reverse().join("") },
+    { label: "Email", value: `${E}.${D}@${C}`, href: `${E}.${D}@${C}:${B}${A}` },
     {
         label: "GitHub",
         value: "github.com/mellowagain",
-        href: "https://github.com/mellowagain",
+        href: reverse("https://github.com/mellowagain"),
     },
-    { label: "Signal", value: "27.redomwoem", href: `https://${F}/${G}/${H}${I}` },
+    { label: "Signal", value: `${L}redomwoem`, href: `${I}${H}/${G}/${F}//:${J}${K}` },
 ];
 
 export default function ContactLinks() {
@@ -29,13 +37,20 @@ export default function ContactLinks() {
                 const isGitHub = link.label === "GitHub";
                 const style: CSSProperties = isGitHub ? {} : { unicodeBidi: "bidi-override", direction: "rtl" };
 
+                const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+                    e.preventDefault();
+
+                    const location = e.currentTarget.dataset.meow;
+                    window.open(reverse(location!), "_blank");
+                };
+
                 return (
                     <a
                         key={i}
-                        href={link.href}
-                        target="_blank"
                         rel="noopener noreferrer"
                         className="group flex items-center justify-between border-b border-border/15 py-2.5 transition-colors last:border-b-0 hover:bg-background/30"
+                        onClick={handleClick}
+                        data-meow={link.href}
                     >
                         <span className="font-sans text-sm uppercase tracking-[0.15em] text-muted-foreground">{link.label}</span>
                         <span
