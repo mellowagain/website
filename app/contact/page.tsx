@@ -1,15 +1,6 @@
 import { NierShell } from "@/components/nier-shell";
 import { NierWindow, NierStatRow } from "@/components/nier-window";
-
-const links = [
-    { label: "Email", value: "me@[this_domain].zip", href: null },
-    {
-        label: "GitHub",
-        value: "github.com/mellowagain",
-        href: "https://github.com/mellowagain",
-    },
-    { label: "Signal", value: "meowmoder.72", href: null },
-];
+import ContactMethods from "@/components/custom/contact";
 
 const pgpFingerprint = "FC7E 9DF4 B088 55C8 8059 C631 EE71 F041 55E9 C6FD";
 
@@ -30,41 +21,7 @@ export default function ContactPage() {
                     <div className="lg:col-span-3">
                         <NierWindow title="Channels">
                             <div className="flex flex-col">
-                                {links.map((link, i) => {
-                                    const content = (
-                                        <>
-                                            <span className="font-sans text-sm uppercase tracking-[0.15em] text-muted-foreground">
-                                                {link.label}
-                                            </span>
-                                            <span className="font-sans text-sm text-foreground/80 group-hover:text-foreground group-hover:underline">
-                                                {link.value}
-                                            </span>
-                                        </>
-                                    );
-
-                                    if (link.href) {
-                                        return (
-                                            <a
-                                                key={i}
-                                                href={link.href}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="group flex items-center justify-between border-b border-border/15 py-2.5 transition-colors last:border-b-0 hover:bg-background/30"
-                                            >
-                                                {content}
-                                            </a>
-                                        );
-                                    } else {
-                                        return (
-                                            <div
-                                                key={i}
-                                                className="group flex items-center justify-between border-b border-border/15 py-2.5 transition-colors last:border-b-0 hover:bg-background/30"
-                                            >
-                                                {content}
-                                            </div>
-                                        );
-                                    }
-                                })}
+                                <ContactMethods />
                             </div>
                         </NierWindow>
                     </div>
