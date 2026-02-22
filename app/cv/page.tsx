@@ -1,5 +1,3 @@
-"use client";
-
 import { NierShell } from "@/components/nier-shell";
 import { NierWindow, NierStatRow } from "@/components/nier-window";
 import Link from "next/link";
@@ -39,6 +37,7 @@ const skills = [
     },
 ];
 
+export const metadata = { title: "CV" };
 export default function CVPage() {
     return (
         <NierShell>

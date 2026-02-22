@@ -25,8 +25,6 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 
-const sectionOrder = ["intro", "custom", "buttons", "inputs", "data", "layout", "feedback"] as const;
-
 export default function ComponentShowcasePage() {
     const [demoMenuActive, setDemoMenuActive] = useState("about");
 

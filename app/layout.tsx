@@ -12,7 +12,10 @@ const libreBaskerville = Libre_Baskerville({
 });
 
 export const metadata: Metadata = {
-    title: "mari.zip",
+    title: {
+        default: "mari.zip",
+        template: "%s - mari.zip",
+    },
     description: "strangely quiet here without you",
     icons: {
         icon: {

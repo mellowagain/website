@@ -1,5 +1,3 @@
-"use client";
-
 import { NierShell } from "@/components/nier-shell";
 import { NierWindow, NierStatRow } from "@/components/nier-window";
 
@@ -48,6 +46,7 @@ const projects = [
     },
 ];
 
+export const metadata = { title: "Projects" };
 export default function ProjectsPage() {
     return (
         <NierShell>

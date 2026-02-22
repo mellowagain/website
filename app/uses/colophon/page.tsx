@@ -1,9 +1,8 @@
-"use client";
-
 import Link from "next/link";
 import { NierShell } from "@/components/nier-shell";
 import { NierWindow, NierStatRow } from "@/components/nier-window";
 
+export const metadata = { title: "Colophon" };
 export default function ColophonPage() {
     return (
         <NierShell>

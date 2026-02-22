@@ -1,3 +1,5 @@
+"use client";
+
 import useSWR from "swr";
 import { NierWindow } from "@/components/nier-window";
 import { NierLoadingIndicator } from "@/components/nier-shell";

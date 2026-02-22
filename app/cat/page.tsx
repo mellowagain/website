@@ -1,10 +1,9 @@
-"use client";
-
 import Image from "next/image";
 import { NierShell } from "@/components/nier-shell";
 import { NierWindow, NierStatRow } from "@/components/nier-window";
 import CatGallery from "@/components/custom/gallery";
 
+export const metadata = { title: "Cat" };
 export default function CatsPage() {
     return (
         <NierShell>

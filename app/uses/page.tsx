@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { NierShell } from "@/components/nier-shell";
 import { NierWindow, NierStatRow } from "@/components/nier-window";
@@ -41,6 +39,7 @@ const editorSetup = [
     { label: "Font", value: "Fira Code Mono, 17px" },
 ];
 
+export const metadata = { title: "Uses" };
 export default function UsesPage() {
     return (
         <NierShell>

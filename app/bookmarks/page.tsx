@@ -1,9 +1,8 @@
-"use client";
-
 import { NierShell } from "@/components/nier-shell";
 import { NierWindow } from "@/components/nier-window";
 import Bookmarks from "@/components/custom/bookmarks";
 
+export const metadata = { title: "Bookmarks" };
 export default function BookmarksPage() {
     return (
         <NierShell>

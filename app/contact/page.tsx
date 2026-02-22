@@ -1,5 +1,3 @@
-"use client";
-
 import { NierShell } from "@/components/nier-shell";
 import { NierWindow, NierStatRow } from "@/components/nier-window";
 
@@ -15,6 +13,7 @@ const links = [
 
 const pgpFingerprint = "FC7E 9DF4 B088 55C8 8059 C631 EE71 F041 55E9 C6FD";
 
+export const metadata = { title: "Contact" };
 export default function ContactPage() {
     return (
         <NierShell>

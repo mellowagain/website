@@ -1,11 +1,10 @@
-"use client";
-
 import { NierShell } from "@/components/nier-shell";
 import { NierWindow, NierStatRow } from "@/components/nier-window";
 import NowPlaying from "@/components/custom/now-playing";
 import RecentlyPlayed from "@/components/custom/recently-played";
 import Link from "next/link";
 
+export const metadata = { title: "Playlist" };
 export default function PlaylistPage() {
     return (
         <NierShell>

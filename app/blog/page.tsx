@@ -3,6 +3,7 @@ import { NierShell } from "@/components/nier-shell";
 import { NierWindow } from "@/components/nier-window";
 import { getAllPosts } from "@/lib/blog";
 
+export const metadata = { title: "Blog" };
 export default function BlogPage() {
     let posts = getAllPosts();
     posts.sort((a, b) => b.frontmatter.date.localeCompare(a.frontmatter.date));

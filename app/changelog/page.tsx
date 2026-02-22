@@ -1,5 +1,3 @@
-"use client";
-
 import { NierShell } from "@/components/nier-shell";
 import { NierWindow } from "@/components/nier-window";
 
@@ -89,6 +87,7 @@ const changelog = [
     },
 ];
 
+export const metadata = { title: "Changelog" };
 export default function ChangelogPage() {
     return (
         <NierShell>
