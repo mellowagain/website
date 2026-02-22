@@ -20,7 +20,7 @@ export default function BlogPage() {
                                         |
                                     </span>
                                     <div className="flex gap-2">
-                                        {post.frontmatter.tags.map((tag) => (
+                                        {post.frontmatter.tags.map((tag: string) => (
                                             <span
                                                 key={tag}
                                                 className="font-sans text-[11px] uppercase tracking-[0.15em] text-muted-foreground/50"

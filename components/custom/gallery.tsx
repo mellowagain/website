@@ -2,6 +2,7 @@
 
 import useSWR from "swr";
 import Image from "next/image";
+import { Key } from "react";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -20,7 +21,7 @@ export default function CatGallery() {
 
     return (
         <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
-            {data.images.map((photo, i) => (
+            {data.images.map((photo: { url: string; filename: string }, i: Key) => (
                 <div key={i} className="group relative aspect-square overflow-hidden border border-border/30 bg-accent/20">
                     <Image
                         src={photo.url}

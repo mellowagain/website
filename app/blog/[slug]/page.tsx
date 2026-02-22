@@ -62,7 +62,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                             |
                         </span>
                         <div className="flex gap-2">
-                            {frontmatter.tags.map((tag) => (
+                            {frontmatter.tags.map((tag: string) => (
                                 <span key={tag} className="font-sans text-[11px] uppercase tracking-[0.15em] text-muted-foreground/50">
                                     {tag}
                                 </span>
