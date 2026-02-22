@@ -153,13 +153,15 @@ export function NierShell({ children }: { children: React.ReactNode }) {
                     </div>
 
                     <div className="mt-10 flex flex-col gap-1.5 px-1 pb-4">
+                        {/*<span className="font-sans text-[11px] font-light tracking-wider text-muted-foreground/50">
+                            Creation: 22 February 2026
+                        </span>*/}
                         <span className="font-sans text-[11px] font-light tracking-wider text-muted-foreground/50">
-                            Creation: 1 January 2024
+                            Last Update: {process.env.NEXT_PUBLIC_GIT_DATE}
                         </span>
                         <span className="font-sans text-[11px] font-light tracking-wider text-muted-foreground/50">
-                            Last Update: 20 February 2026
+                            Version: {process.env.NEXT_PUBLIC_GIT_HASH}
                         </span>
-                        <span className="font-sans text-[11px] font-light tracking-wider text-muted-foreground/50">Version: v2.1.0</span>
                     </div>
                 </div>
 
