@@ -21,7 +21,7 @@ export default function ColophonPage() {
                     </p>
                     <p className="font-sans text-sm leading-relaxed text-foreground/85">
                         My speciality is backend and systems engineering so frontend isn't my strength, thus the design of the website was
-                        made with Vercel's v0 using Claude Opus 4.6. It cost about $10 in credits to generate and refine to my taste.
+                        made with Vercel's v0 using Claude Opus 4.6. It cost about $20 in credits to generate and refine to my taste.
                         Integrations with third-party APIs for the Blog, Projects, Bookmarks, Playlist and Maps are all hand written.
                     </p>
                 </div>
