@@ -4,178 +4,178 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #1a1a18;
-  --foreground: #c8bfa8;
-  --card: #222220;
-  --card-foreground: #c8bfa8;
-  --popover: #222220;
-  --popover-foreground: #c8bfa8;
-  --primary: #c8bfa8;
-  --primary-foreground: #1a1a18;
-  --secondary: #2a2a26;
-  --secondary-foreground: #c8bfa8;
-  --muted: #2a2a26;
-  --muted-foreground: #7a7468;
-  --accent: #302e28;
-  --accent-foreground: #c8bfa8;
-  --destructive: #8b4040;
-  --destructive-foreground: #c8bfa8;
-  --border: #3a3830;
-  --input: #3a3830;
-  --ring: #7a7468;
-  --chart-1: #c8bfa8;
-  --chart-2: #7a7468;
-  --chart-3: #3a3830;
-  --chart-4: #5a5548;
-  --chart-5: #9a9488;
-  --radius: 0rem;
-  --sidebar: #222220;
-  --sidebar-foreground: #c8bfa8;
-  --sidebar-primary: #c8bfa8;
-  --sidebar-primary-foreground: #1a1a18;
-  --sidebar-accent: #2a2a26;
-  --sidebar-accent-foreground: #c8bfa8;
-  --sidebar-border: #3a3830;
-  --sidebar-ring: #7a7468;
+    --background: #1a1a18;
+    --foreground: #c8bfa8;
+    --card: #222220;
+    --card-foreground: #c8bfa8;
+    --popover: #222220;
+    --popover-foreground: #c8bfa8;
+    --primary: #c8bfa8;
+    --primary-foreground: #1a1a18;
+    --secondary: #2a2a26;
+    --secondary-foreground: #c8bfa8;
+    --muted: #2a2a26;
+    --muted-foreground: #7a7468;
+    --accent: #302e28;
+    --accent-foreground: #c8bfa8;
+    --destructive: #8b4040;
+    --destructive-foreground: #c8bfa8;
+    --border: #3a3830;
+    --input: #3a3830;
+    --ring: #7a7468;
+    --chart-1: #c8bfa8;
+    --chart-2: #7a7468;
+    --chart-3: #3a3830;
+    --chart-4: #5a5548;
+    --chart-5: #9a9488;
+    --radius: 0rem;
+    --sidebar: #222220;
+    --sidebar-foreground: #c8bfa8;
+    --sidebar-primary: #c8bfa8;
+    --sidebar-primary-foreground: #1a1a18;
+    --sidebar-accent: #2a2a26;
+    --sidebar-accent-foreground: #c8bfa8;
+    --sidebar-border: #3a3830;
+    --sidebar-ring: #7a7468;
 }
 
 @theme inline {
-  --font-sans: var(--font-libre), "Georgia", serif;
-  --font-mono: "Geist Mono", "Geist Mono Fallback";
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+    --font-sans: var(--font-libre), "Georgia", serif;
+    --font-mono: "Geist Mono", "Geist Mono Fallback";
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+    * {
+        @apply border-border outline-ring/50;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
 }
 
 /* Nier: Automata style cursor */
 * {
-  cursor: default;
+    cursor: default;
 }
 a,
 button,
 [role="button"] {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 /* Hide native scrollbar globally for elements that use NierScrollArea */
 /* Other scrollbars get minimal Webkit styling */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+    width: 6px;
+    height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+    background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
+    background: var(--border);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--muted-foreground);
+    background: var(--muted-foreground);
 }
 
 /* Selection color */
 ::selection {
-  background: #c8bfa840;
-  color: #c8bfa8;
+    background: #c8bfa840;
+    color: #c8bfa8;
 }
 
 /* Square bullet rotation on hover */
 .nier-bullet {
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .group:hover .nier-bullet,
 .nier-bullet-active {
-  transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
 /* Leaflet overrides for Nier theme */
 .nier-marker {
-  background: transparent !important;
-  border: none !important;
+    background: transparent !important;
+    border: none !important;
 }
 .nier-popup .leaflet-popup-content-wrapper {
-  background: transparent;
-  border-radius: 0;
-  box-shadow: none;
-  padding: 0;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
 }
 .nier-popup .leaflet-popup-content {
-  margin: 0;
-  line-height: 1.4;
+    margin: 0;
+    line-height: 1.4;
 }
 .nier-popup .leaflet-popup-tip-container {
-  display: none;
+    display: none;
 }
 .leaflet-control-zoom {
-  border: 1px solid #3a3830 !important;
-  border-radius: 0 !important;
+    border: 1px solid #3a3830 !important;
+    border-radius: 0 !important;
 }
 .leaflet-control-zoom a {
-  background: #222220 !important;
-  color: #c8bfa8 !important;
-  border-color: #3a3830 !important;
-  border-radius: 0 !important;
-  width: 28px !important;
-  height: 28px !important;
-  line-height: 28px !important;
-  font-size: 14px !important;
+    background: #222220 !important;
+    color: #c8bfa8 !important;
+    border-color: #3a3830 !important;
+    border-radius: 0 !important;
+    width: 28px !important;
+    height: 28px !important;
+    line-height: 28px !important;
+    font-size: 14px !important;
 }
 .leaflet-control-zoom a:hover {
-  background: #302e28 !important;
-  color: #c8bfa8 !important;
+    background: #302e28 !important;
+    color: #c8bfa8 !important;
 }
 .leaflet-container {
-  background: #1a1a18 !important;
-  font-family: serif !important;
+    background: #1a1a18 !important;
+    font-family: serif !important;
 }
 .leaflet-control-attribution {
-  background: #1a1a1890 !important;
-  color: #5a5548 !important;
-  font-size: 10px !important;
-  font-family: serif !important;
+    background: #1a1a1890 !important;
+    color: #5a5548 !important;
+    font-size: 10px !important;
+    font-family: serif !important;
 }
 .leaflet-control-attribution a {
-  color: #7a7468 !important;
+    color: #7a7468 !important;
 }
