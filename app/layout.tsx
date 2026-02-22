@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Libre_Baskerville } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import './globals.css'
 
 const libreBaskerville = Libre_Baskerville({ subsets: ["latin"], weight: ["400", "700"], style: ["normal", "italic"], variable: "--font-libre" });
@@ -41,6 +42,7 @@ export default function RootLayout({
       <body className={`${libreBaskerville.variable} font-sans antialiased`}>
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
