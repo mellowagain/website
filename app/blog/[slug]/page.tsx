@@ -4,26 +4,7 @@ import { getPostBySlug, getAllPosts } from "@/lib/blog";
 import { useMDXComponents } from "@/mdx-components";
 import { NierShell } from "@/components/nier-shell";
 import Link from "next/link";
-import { NierStatRow, NierWindow } from "@/components/nier-window";
-import { Separator } from "@/components/ui/separator";
-import { NierMenu } from "@/components/nier-menu";
-import { NierPortrait } from "@/components/nier-portrait";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Switch } from "@/components/ui/switch";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Slider } from "@/components/ui/slider";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Progress } from "@/components/ui/progress";
-import { Skeleton } from "@/components/ui/skeleton";
+import rehypePrettyCode from "rehype-pretty-code";
 
 export async function generateStaticParams() {
     const posts = getAllPosts();
@@ -73,18 +54,14 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
                 <div className="h-px w-full bg-border/20" aria-hidden="true" />
 
-                <div
-                    className="prose-h1:mt-4 prose-h1:mb-2
-  prose-h2:mt-4 prose-h2:mb-2
-  prose-h3:mt-3 prose-h3:mb-1
-"
-                >
+                <div className="prose-h1:mt-4 prose-h1:mb-2 prose-h2:mt-4 prose-h2:mb-2 prose-h3:mt-3 prose-h3:mb-1">
                     <MDXRemote
                         source={content}
                         components={components}
                         options={{
                             mdxOptions: {
                                 remarkPlugins: [remarkGfm],
+                                rehypePlugins: [[rehypePrettyCode, { theme: "vitesse-dark" }]],
                             },
                         }}
                     />
