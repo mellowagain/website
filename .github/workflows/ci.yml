@@ -41,5 +41,5 @@ jobs:
             - name: Check for image metadata
               working-directory: ./public/images/cat
               run: |
-                  apt install libimage-exiftool-perl
+                  sudo apt-get install libimage-exiftool-perl
                   ./check-image-metadata.sh
