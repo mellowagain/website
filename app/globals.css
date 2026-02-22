@@ -1,5 +1,5 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -40,8 +40,8 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-libre), 'Georgia', serif;
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --font-sans: var(--font-libre), "Georgia", serif;
+  --font-mono: "Geist Mono", "Geist Mono Fallback";
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -93,7 +93,9 @@
 * {
   cursor: default;
 }
-a, button, [role="button"] {
+a,
+button,
+[role="button"] {
   cursor: pointer;
 }
 

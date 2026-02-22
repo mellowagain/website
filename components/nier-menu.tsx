@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
 interface MenuItem {
-  id: string
-  label: string
+  id: string;
+  label: string;
 }
 
 interface NierMenuProps {
-  activeSection: string
-  onSectionChange: (section: string) => void
-  items?: MenuItem[]
+  activeSection: string;
+  onSectionChange: (section: string) => void;
+  items?: MenuItem[];
 }
 
 const defaultMenuItems: MenuItem[] = [
@@ -17,15 +17,19 @@ const defaultMenuItems: MenuItem[] = [
   { id: "projects", label: "Projects" },
   { id: "skills", label: "Skills" },
   { id: "contact", label: "Contact" },
-]
+];
 
-export function NierMenu({ activeSection, onSectionChange, items }: NierMenuProps) {
-  const menuItems = items ?? defaultMenuItems
+export function NierMenu({
+  activeSection,
+  onSectionChange,
+  items,
+}: NierMenuProps) {
+  const menuItems = items ?? defaultMenuItems;
   return (
     <nav aria-label="Main navigation" className="w-full">
       <ul className="flex flex-col gap-1.5">
         {menuItems.map((item) => {
-          const isActive = activeSection === item.id
+          const isActive = activeSection === item.id;
 
           return (
             <li key={item.id} className="flex items-center">
@@ -66,16 +70,18 @@ export function NierMenu({ activeSection, onSectionChange, items }: NierMenuProp
 
                 <span
                   className={`font-sans text-sm tracking-wide transition-colors duration-200 ${
-                    isActive ? "text-background" : "text-foreground/80 group-hover:text-foreground"
+                    isActive
+                      ? "text-background"
+                      : "text-foreground/80 group-hover:text-foreground"
                   }`}
                 >
                   {item.label}
                 </span>
               </button>
             </li>
-          )
+          );
         })}
       </ul>
     </nav>
-  )
+  );
 }

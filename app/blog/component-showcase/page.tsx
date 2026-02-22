@@ -1,42 +1,42 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { NierShell } from "@/components/nier-shell"
-import { NierWindow, NierStatRow } from "@/components/nier-window"
-import { NierMenu } from "@/components/nier-menu"
-import { NierPortrait } from "@/components/nier-portrait"
+import { useState } from "react";
+import { NierShell } from "@/components/nier-shell";
+import { NierWindow, NierStatRow } from "@/components/nier-window";
+import { NierMenu } from "@/components/nier-menu";
+import { NierPortrait } from "@/components/nier-portrait";
 
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Switch } from "@/components/ui/switch"
-import { Slider } from "@/components/ui/slider"
-import { Progress } from "@/components/ui/progress"
-import { Separator } from "@/components/ui/separator"
-import { Skeleton } from "@/components/ui/skeleton"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Switch } from "@/components/ui/switch";
+import { Slider } from "@/components/ui/slider";
+import { Progress } from "@/components/ui/progress";
+import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+} from "@/components/ui/accordion";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
+} from "@/components/ui/tooltip";
 import {
   Card,
   CardContent,
@@ -44,8 +44,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import Link from "next/link"
+} from "@/components/ui/card";
+import Link from "next/link";
 
 const sectionOrder = [
   "intro",
@@ -55,10 +55,10 @@ const sectionOrder = [
   "data",
   "layout",
   "feedback",
-] as const
+] as const;
 
 export default function ComponentShowcasePage() {
-  const [demoMenuActive, setDemoMenuActive] = useState("about")
+  const [demoMenuActive, setDemoMenuActive] = useState("about");
 
   return (
     <NierShell>
@@ -689,15 +689,15 @@ export default function ComponentShowcasePage() {
         </section>
       </div>
     </NierShell>
-  )
+  );
 }
 
 function SectionHeading({
   title,
   description,
 }: {
-  title: string
-  description: string
+  title: string;
+  description: string;
 }) {
   return (
     <div className="flex flex-col gap-1">
@@ -708,5 +708,5 @@ function SectionHeading({
         {description}
       </p>
     </div>
-  )
+  );
 }

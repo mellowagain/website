@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { NierShell } from "@/components/nier-shell"
-import { NierWindow, NierStatRow } from "@/components/nier-window"
+import { NierShell } from "@/components/nier-shell";
+import { NierWindow, NierStatRow } from "@/components/nier-window";
 import NowPlaying from "@/components/custom/now-playing";
 import RecentlyPlayed from "@/components/custom/recently-played";
 import Link from "next/link";
@@ -42,16 +42,16 @@ export default function PlaylistPage() {
         <div className="h-px w-full bg-border/20" aria-hidden="true" />
 
         <Link
-            href="https://open.spotify.com/user/31fawrtsshqoldaaorbnkmbhkx4i?si=78b26c211b424b67"
-            className="group flex items-center gap-3 font-sans text-sm tracking-wide text-foreground/70 transition-colors hover:text-foreground"
+          href="https://open.spotify.com/user/31fawrtsshqoldaaorbnkmbhkx4i?si=78b26c211b424b67"
+          className="group flex items-center gap-3 font-sans text-sm tracking-wide text-foreground/70 transition-colors hover:text-foreground"
         >
           <span
-              className="nier-bullet inline-block h-2.5 w-2.5 border border-foreground/30 bg-foreground/15"
-              aria-hidden="true"
+            className="nier-bullet inline-block h-2.5 w-2.5 border border-foreground/30 bg-foreground/15"
+            aria-hidden="true"
           />
           Spotify
         </Link>
       </div>
     </NierShell>
-  )
+  );
 }

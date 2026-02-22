@@ -1,15 +1,19 @@
-"use client"
+"use client";
 
-import { NierShell } from "@/components/nier-shell"
-import { NierWindow, NierStatRow } from "@/components/nier-window"
+import { NierShell } from "@/components/nier-shell";
+import { NierWindow, NierStatRow } from "@/components/nier-window";
 
 const links = [
   { label: "Email", value: "me@[this_domain].zip", href: null },
-  { label: "GitHub", value: "github.com/mellowagain", href: "https://github.com/mellowagain" },
+  {
+    label: "GitHub",
+    value: "github.com/mellowagain",
+    href: "https://github.com/mellowagain",
+  },
   { label: "Signal", value: "meowmoder.72", href: null },
-]
+];
 
-const pgpFingerprint = "FC7E 9DF4 B088 55C8 8059 C631 EE71 F041 55E9 C6FD"
+const pgpFingerprint = "FC7E 9DF4 B088 55C8 8059 C631 EE71 F041 55E9 C6FD";
 
 export default function ContactPage() {
   return (
@@ -30,33 +34,37 @@ export default function ContactPage() {
               <div className="flex flex-col">
                 {links.map((link, i) => {
                   const content = (
-                      <>
-                        <span className="font-sans text-sm uppercase tracking-[0.15em] text-muted-foreground">
-                          {link.label}
-                        </span>
-                        <span className="font-sans text-sm text-foreground/80 group-hover:text-foreground group-hover:underline">
-                          {link.value}
-                        </span>
-                      </>
+                    <>
+                      <span className="font-sans text-sm uppercase tracking-[0.15em] text-muted-foreground">
+                        {link.label}
+                      </span>
+                      <span className="font-sans text-sm text-foreground/80 group-hover:text-foreground group-hover:underline">
+                        {link.value}
+                      </span>
+                    </>
                   );
 
                   if (link.href) {
-                    return (<a
+                    return (
+                      <a
                         key={i}
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="group flex items-center justify-between border-b border-border/15 py-2.5 transition-colors last:border-b-0 hover:bg-background/30"
-                    >
-                      {content}
-                    </a>);
+                      >
+                        {content}
+                      </a>
+                    );
                   } else {
-                    return (<div
+                    return (
+                      <div
                         key={i}
                         className="group flex items-center justify-between border-b border-border/15 py-2.5 transition-colors last:border-b-0 hover:bg-background/30"
-                    >
-                      {content}
-                    </div>);
+                      >
+                        {content}
+                      </div>
+                    );
                   }
                 })}
               </div>
@@ -83,10 +91,10 @@ export default function ContactPage() {
             </p>
             <code className="break-all font-mono text-xs leading-relaxed text-foreground/50">
               <a
-                  href="/pgp.asc"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-between border-b border-border/15 py-2.5 transition-colors last:border-b-0"
+                href="/pgp.asc"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center justify-between border-b border-border/15 py-2.5 transition-colors last:border-b-0"
               >
                 {pgpFingerprint}
               </a>
@@ -95,5 +103,5 @@ export default function ContactPage() {
         </NierWindow>
       </div>
     </NierShell>
-  )
+  );
 }

@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { NierShell } from "@/components/nier-shell"
-import { NierWindow } from "@/components/nier-window"
+import { NierShell } from "@/components/nier-shell";
+import { NierWindow } from "@/components/nier-window";
 
 const changelog = [
   {
@@ -48,9 +48,9 @@ const changelog = [
     date: "October 2023",
     title: "Moved to Zug",
     changes: [
-        "Moved out of my parents home into a flatshare with two friends",
-        "Mysta was lovingly welcomed as part of the new household as well",
-        "Switched to Windows on my personal desktop",
+      "Moved out of my parents home into a flatshare with two friends",
+      "Mysta was lovingly welcomed as part of the new household as well",
+      "Switched to Windows on my personal desktop",
     ],
   },
   {
@@ -68,11 +68,11 @@ const changelog = [
     date: "July 2022",
     title: "Cat update",
     changes: [
-      "Adopted Mysta, lovingly calling him \"Cat 1\" at that time",
-      "Adopted Millie, also lovingly calling her \"Cat 2\" at that time",
+      'Adopted Mysta, lovingly calling him "Cat 1" at that time',
+      'Adopted Millie, also lovingly calling her "Cat 2" at that time',
       "Productivity decreased by 30%, happiness increased by 200%",
       "Keyboard frequently occupied by unauthorized user",
-      "Had to give away Millie sadly to my cousin in preparation for my upcoming move"
+      "Had to give away Millie sadly to my cousin in preparation for my upcoming move",
     ],
   },
   {
@@ -82,18 +82,16 @@ const changelog = [
     changes: [
       "First full-time software engineering job at Fiberplane",
       "Travelled for the first time alone to a foreign country: Amsterdam, Netherlands",
-      "Visited internet friends for the first time in Gothenburg, Sweden"
+      "Visited internet friends for the first time in Gothenburg, Sweden",
     ],
   },
   {
     version: "v0.9.0-beta",
     date: "January 2022",
     title: "Finished school",
-    changes: [
-      "Ready to enter the real world (was not ready)",
-    ],
+    changes: ["Ready to enter the real world (was not ready)"],
   },
-]
+];
 
 export default function ChangelogPage() {
   return (
@@ -128,5 +126,5 @@ export default function ChangelogPage() {
         ))}
       </div>
     </NierShell>
-  )
+  );
 }

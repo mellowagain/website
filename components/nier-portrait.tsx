@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import Image from "next/image"
+import Image from "next/image";
 
 interface NierPortraitProps {
-  src: string
-  alt: string
+  src: string;
+  alt: string;
 }
 
 export function NierPortrait({ src, alt }: NierPortraitProps) {
@@ -26,5 +26,5 @@ export function NierPortrait({ src, alt }: NierPortraitProps) {
         />
       </div>
     </div>
-  )
+  );
 }

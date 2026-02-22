@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { NierShell } from "@/components/nier-shell"
-import { NierWindow, NierStatRow } from "@/components/nier-window"
+import Link from "next/link";
+import { NierShell } from "@/components/nier-shell";
+import { NierWindow, NierStatRow } from "@/components/nier-window";
 
 const pc = [
   { label: "CPU", value: "Intel Core i7-13700K 16 Core" },
@@ -16,15 +16,15 @@ const pc = [
 ];
 
 const hardware = [
-  { label: "Main Monitor", value: "Samsung 32\" Odyssey OLED G8 (4K, 240hz)" },
-  { label: "Second Monitor", value: "Samsung 24\" CRG50 (1080p, 144hz)" },
+  { label: "Main Monitor", value: 'Samsung 32" Odyssey OLED G8 (4K, 240hz)' },
+  { label: "Second Monitor", value: 'Samsung 24" CRG50 (1080p, 144hz)' },
   { label: "Keyboard", value: "Wooting 80HE (Lekker V2 L60 Linear)" },
   { label: "Mouse", value: "Logitech G PRO X Superlight" },
   { label: "Play Headphones", value: "SteelSeries Arctis 7 Wireless" },
   { label: "Work Headphones", value: "Sony WH-1000XM4 Limited Edition" },
   { label: "On-the-go Headphones", value: "Samsung Galaxy Buds Pro 2" },
   { label: "Phone", value: "Samsung Galaxy S23 Ultra" },
-]
+];
 
 const software = [
   { label: "OS", value: "Garuda Linux" },
@@ -34,12 +34,12 @@ const software = [
   { label: "Shell", value: "fish" },
   { label: "Browser", value: "Firefox" },
   { label: "Music", value: "Spotify" },
-]
+];
 
 const editorSetup = [
   { label: "Theme", value: "Islands Dark" },
   { label: "Font", value: "Fira Code Mono, 17px" },
-]
+];
 
 export default function UsesPage() {
   return (
@@ -62,18 +62,17 @@ export default function UsesPage() {
           <NierWindow title="Hardware">
             <div className="flex flex-col">
               {hardware.map((item, i) => (
-                  <NierStatRow key={i} label={item.label} value={item.value} />
+                <NierStatRow key={i} label={item.label} value={item.value} />
               ))}
             </div>
           </NierWindow>
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-
           <NierWindow title="Software">
             <div className="flex flex-col">
               {software.map((item, i) => (
-                  <NierStatRow key={i} label={item.label} value={item.value} />
+                <NierStatRow key={i} label={item.label} value={item.value} />
               ))}
             </div>
           </NierWindow>
@@ -85,7 +84,6 @@ export default function UsesPage() {
               ))}
             </div>
           </NierWindow>
-
         </div>
 
         {/*<NierWindow title="Dotfiles">
@@ -116,5 +114,5 @@ export default function UsesPage() {
         </Link>
       </div>
     </NierShell>
-  )
+  );
 }

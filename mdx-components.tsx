@@ -1,4 +1,4 @@
-import type { MDXComponents } from "mdx/types"
+import type { MDXComponents } from "mdx/types";
 import {
   Table,
   TableHeader,
@@ -6,9 +6,9 @@ import {
   TableRow,
   TableHead,
   TableCell,
-} from "@/components/ui/table"
-import { Separator } from "@/components/ui/separator"
-import { NierWindow } from "@/components/nier-window"
+} from "@/components/ui/table";
+import { Separator } from "@/components/ui/separator";
+import { NierWindow } from "@/components/nier-window";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -48,9 +48,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     strong: (props) => (
       <strong className="font-medium text-foreground" {...props} />
     ),
-    em: (props) => (
-      <em className="italic text-foreground/70" {...props} />
-    ),
+    em: (props) => <em className="italic text-foreground/70" {...props} />,
 
     // Links
     a: (props) => (
@@ -67,7 +65,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <ul className="mb-4 ml-1 flex flex-col gap-1.5" {...props} />
     ),
     ol: (props) => (
-      <ol className="mb-4 ml-1 flex flex-col gap-1.5 [counter-reset:item]" {...props} />
+      <ol
+        className="mb-4 ml-1 flex flex-col gap-1.5 [counter-reset:item]"
+        {...props}
+      />
     ),
     li: (props) => (
       <li className="flex items-start gap-2.5 font-sans text-sm leading-relaxed text-foreground/85">
@@ -88,10 +89,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
             className="border border-border/40 bg-accent/50 px-1.5 py-0.5 font-mono text-[13px] text-foreground/90"
             {...props}
           />
-        )
+        );
       }
       // Code block (rendered by syntax highlighter with className)
-      return <code className="font-mono text-[13px]" {...props} />
+      return <code className="font-mono text-[13px]" {...props} />;
     },
     pre: (props) => (
       <NierWindow title="Code">
@@ -158,5 +159,5 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 
     // Allow overrides
     ...components,
-  }
+  };
 }

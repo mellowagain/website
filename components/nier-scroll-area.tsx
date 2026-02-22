@@ -1,119 +1,117 @@
-"use client"
+"use client";
 
-import { useRef, useState, useCallback, useEffect } from "react"
+import { useRef, useState, useCallback, useEffect } from "react";
 
 interface NierScrollAreaProps {
-  children: React.ReactNode
-  className?: string
+  children: React.ReactNode;
+  className?: string;
 }
 
-export function NierScrollArea({ children, className = "" }: NierScrollAreaProps) {
-  const contentRef = useRef<HTMLDivElement>(null)
-  const trackRef = useRef<HTMLDivElement>(null)
-  const [thumbHeight, setThumbHeight] = useState(0)
-  const [thumbTop, setThumbTop] = useState(0)
-  const [isScrollable, setIsScrollable] = useState(false)
-  const [isDragging, setIsDragging] = useState(false)
-  const [isHovering, setIsHovering] = useState(false)
-  const dragStartY = useRef(0)
-  const dragStartScrollTop = useRef(0)
+export function NierScrollArea({
+  children,
+  className = "",
+}: NierScrollAreaProps) {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [thumbHeight, setThumbHeight] = useState(0);
+  const [thumbTop, setThumbTop] = useState(0);
+  const [isScrollable, setIsScrollable] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+  const dragStartY = useRef(0);
+  const dragStartScrollTop = useRef(0);
 
   const updateThumb = useCallback(() => {
-    const el = contentRef.current
-    if (!el) return
+    const el = contentRef.current;
+    if (!el) return;
 
-    const { scrollTop, scrollHeight, clientHeight } = el
-    const canScroll = scrollHeight > clientHeight
-    setIsScrollable(canScroll)
+    const { scrollTop, scrollHeight, clientHeight } = el;
+    const canScroll = scrollHeight > clientHeight;
+    setIsScrollable(canScroll);
 
-    if (!canScroll) return
+    if (!canScroll) return;
 
-    const ratio = clientHeight / scrollHeight
-    const tHeight = Math.max(ratio * clientHeight, 32)
-    const tTop = (scrollTop / (scrollHeight - clientHeight)) * (clientHeight - tHeight)
+    const ratio = clientHeight / scrollHeight;
+    const tHeight = Math.max(ratio * clientHeight, 32);
+    const tTop =
+      (scrollTop / (scrollHeight - clientHeight)) * (clientHeight - tHeight);
 
-    setThumbHeight(tHeight)
-    setThumbTop(tTop)
-  }, [])
+    setThumbHeight(tHeight);
+    setThumbTop(tTop);
+  }, []);
 
   useEffect(() => {
-    updateThumb()
-    const el = contentRef.current
-    if (!el) return
+    updateThumb();
+    const el = contentRef.current;
+    if (!el) return;
 
-    const observer = new ResizeObserver(updateThumb)
-    observer.observe(el)
+    const observer = new ResizeObserver(updateThumb);
+    observer.observe(el);
     // Also observe the scroll content child if it exists
     if (el.firstElementChild) {
-      observer.observe(el.firstElementChild)
+      observer.observe(el.firstElementChild);
     }
 
-    return () => observer.disconnect()
-  }, [updateThumb])
+    return () => observer.disconnect();
+  }, [updateThumb]);
 
   const handleScroll = useCallback(() => {
-    updateThumb()
-  }, [updateThumb])
+    updateThumb();
+  }, [updateThumb]);
 
   // Drag to scroll
-  const handleMouseDown = useCallback(
-    (e: React.MouseEvent) => {
-      e.preventDefault()
-      e.stopPropagation()
-      setIsDragging(true)
-      dragStartY.current = e.clientY
-      dragStartScrollTop.current = contentRef.current?.scrollTop ?? 0
-    },
-    []
-  )
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+    dragStartY.current = e.clientY;
+    dragStartScrollTop.current = contentRef.current?.scrollTop ?? 0;
+  }, []);
 
   useEffect(() => {
-    if (!isDragging) return
+    if (!isDragging) return;
 
     const handleMouseMove = (e: MouseEvent) => {
-      const el = contentRef.current
-      if (!el) return
+      const el = contentRef.current;
+      if (!el) return;
 
-      const { scrollHeight, clientHeight } = el
-      const trackHeight = clientHeight
-      const deltaY = e.clientY - dragStartY.current
-      const scrollRange = scrollHeight - clientHeight
-      const thumbRange = trackHeight - thumbHeight
-      const scrollDelta = (deltaY / thumbRange) * scrollRange
+      const { scrollHeight, clientHeight } = el;
+      const trackHeight = clientHeight;
+      const deltaY = e.clientY - dragStartY.current;
+      const scrollRange = scrollHeight - clientHeight;
+      const thumbRange = trackHeight - thumbHeight;
+      const scrollDelta = (deltaY / thumbRange) * scrollRange;
 
-      el.scrollTop = dragStartScrollTop.current + scrollDelta
-    }
+      el.scrollTop = dragStartScrollTop.current + scrollDelta;
+    };
 
     const handleMouseUp = () => {
-      setIsDragging(false)
-    }
+      setIsDragging(false);
+    };
 
-    document.addEventListener("mousemove", handleMouseMove)
-    document.addEventListener("mouseup", handleMouseUp)
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
     return () => {
-      document.removeEventListener("mousemove", handleMouseMove)
-      document.removeEventListener("mouseup", handleMouseUp)
-    }
-  }, [isDragging, thumbHeight])
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [isDragging, thumbHeight]);
 
   // Click on track to jump
-  const handleTrackClick = useCallback(
-    (e: React.MouseEvent) => {
-      const el = contentRef.current
-      const track = trackRef.current
-      if (!el || !track) return
+  const handleTrackClick = useCallback((e: React.MouseEvent) => {
+    const el = contentRef.current;
+    const track = trackRef.current;
+    if (!el || !track) return;
 
-      const trackRect = track.getBoundingClientRect()
-      const clickY = e.clientY - trackRect.top
-      const { scrollHeight, clientHeight } = el
-      const ratio = clickY / trackRect.height
+    const trackRect = track.getBoundingClientRect();
+    const clickY = e.clientY - trackRect.top;
+    const { scrollHeight, clientHeight } = el;
+    const ratio = clickY / trackRect.height;
 
-      el.scrollTop = ratio * (scrollHeight - clientHeight) - clientHeight / 2
-    },
-    []
-  )
+    el.scrollTop = ratio * (scrollHeight - clientHeight) - clientHeight / 2;
+  }, []);
 
-  const showThumb = isScrollable && (isHovering || isDragging)
+  const showThumb = isScrollable && (isHovering || isDragging);
 
   return (
     <div
@@ -160,5 +158,5 @@ export function NierScrollArea({ children, className = "" }: NierScrollAreaProps
         </div>
       )}
     </div>
-  )
+  );
 }

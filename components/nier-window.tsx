@@ -1,10 +1,14 @@
 interface NierWindowProps {
-  title: string
-  children: React.ReactNode
-  className?: string
+  title: string;
+  children: React.ReactNode;
+  className?: string;
 }
 
-export function NierWindow({ title, children, className = "" }: NierWindowProps) {
+export function NierWindow({
+  title,
+  children,
+  className = "",
+}: NierWindowProps) {
   return (
     <div className={`flex flex-col border border-border/30 ${className}`}>
       {/* Muted header bar */}
@@ -18,16 +22,14 @@ export function NierWindow({ title, children, className = "" }: NierWindowProps)
         </h3>
       </div>
       {/* Content body */}
-      <div className="bg-card/30 p-4">
-        {children}
-      </div>
+      <div className="bg-card/30 p-4">{children}</div>
     </div>
-  )
+  );
 }
 
 interface NierStatRowProps {
-  label: string
-  value: string
+  label: string;
+  value: string;
 }
 
 export function NierStatRow({ label, value }: NierStatRowProps) {
@@ -41,5 +43,5 @@ export function NierStatRow({ label, value }: NierStatRowProps) {
         <span className="font-sans text-sm text-foreground/90">{value}</span>
       </div>
     </div>
-  )
+  );
 }

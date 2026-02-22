@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { NierShell } from "@/components/nier-shell"
-import { NierWindow, NierStatRow } from "@/components/nier-window"
+import { NierShell } from "@/components/nier-shell";
+import { NierWindow, NierStatRow } from "@/components/nier-window";
 
 const projects = [
   {
@@ -45,11 +45,10 @@ const projects = [
     type: "Website",
     tech: "Next.js, TypeScript",
     status: "Stable",
-    description:
-        "This current website you're viewing.",
+    description: "This current website you're viewing.",
     url: "https://github.com/mellowagain/website",
-  }
-]
+  },
+];
 
 export default function ProjectsPage() {
   return (
@@ -67,11 +66,7 @@ export default function ProjectsPage() {
                 {project.description}
               </p>
               <span className="font-mono text-xs text-muted-foreground/50">
-                <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
+                <a href={project.url} target="_blank" rel="noopener noreferrer">
                   {project.url.replaceAll("https://", "")}
                 </a>
               </span>
@@ -80,5 +75,5 @@ export default function ProjectsPage() {
         ))}
       </div>
     </NierShell>
-  )
+  );
 }

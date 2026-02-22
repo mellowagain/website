@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { NierShell } from "@/components/nier-shell"
-import { NierWindow, NierStatRow } from "@/components/nier-window"
+import { NierShell } from "@/components/nier-shell";
+import { NierWindow, NierStatRow } from "@/components/nier-window";
 import Link from "next/link";
 
 const experience = [
@@ -9,24 +9,38 @@ const experience = [
     period: "2026 -- currently",
     title: "Platforms Engineer",
     company: "AXA",
-    description: "Building internal observability platform. OpenTelemetry, Dynatrace, real-time data processing, dashboards.",
+    description:
+      "Building internal observability platform. OpenTelemetry, Dynatrace, real-time data processing, dashboards.",
   },
   {
     period: "2022 -- 2025",
     title: "Software Engineer",
     company: "Fiberplane",
-    description:
-      "Backend development, developer tooling, cloud infrastructure",
+    description: "Backend development, developer tooling, cloud infrastructure",
   },
-]
+];
 
 const skills = [
-  { category: "Languages", items: "Rust, Go, TypeScript, JavaScript, Python, SQL, Java, C#, C++, Bash" },
-  { category: "Frameworks", items: "Hono, Cloudflare, Svelte, gRPC, Boost, Actix Web, Tokio, sqlx, Django, Flask" },
-  { category: "DevOps & Cloud", items: "Docker, Kubernetes, Terraform, AWS, GCP, Azure, Cloudflare, CI/CD, Git, Dependabot" },
+  {
+    category: "Languages",
+    items: "Rust, Go, TypeScript, JavaScript, Python, SQL, Java, C#, C++, Bash",
+  },
+  {
+    category: "Frameworks",
+    items:
+      "Hono, Cloudflare, Svelte, gRPC, Boost, Actix Web, Tokio, sqlx, Django, Flask",
+  },
+  {
+    category: "DevOps & Cloud",
+    items:
+      "Docker, Kubernetes, Terraform, AWS, GCP, Azure, Cloudflare, CI/CD, Git, Dependabot",
+  },
   { category: "Databases", items: "MySQL, PostgreSQL, MSSQL" },
-  { category: "Spoken", items: "German (native), Tagalog (native), English (fluent)" },
-]
+  {
+    category: "Spoken",
+    items: "German (native), Tagalog (native), English (fluent)",
+  },
+];
 
 export default function CVPage() {
   return (
@@ -73,16 +87,16 @@ export default function CVPage() {
         <div className="h-px w-full bg-border/20" aria-hidden="true" />
 
         <Link
-            href="/contact"
-            className="group flex items-center gap-3 font-sans text-sm tracking-wide text-foreground/70 transition-colors hover:text-foreground"
+          href="/contact"
+          className="group flex items-center gap-3 font-sans text-sm tracking-wide text-foreground/70 transition-colors hover:text-foreground"
         >
           <span
-              className="nier-bullet inline-block h-2.5 w-2.5 border border-foreground/30 bg-foreground/15"
-              aria-hidden="true"
+            className="nier-bullet inline-block h-2.5 w-2.5 border border-foreground/30 bg-foreground/15"
+            aria-hidden="true"
           />
           Contact me to get my full CV
         </Link>
       </div>
     </NierShell>
-  )
+  );
 }

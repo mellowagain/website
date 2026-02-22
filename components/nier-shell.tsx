@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useCallback, useTransition, useRef } from "react"
-import { usePathname, useRouter } from "next/navigation"
-import { NierBackground } from "@/components/nier-background"
-import { NierMenu } from "@/components/nier-menu"
-import { NierScrollArea } from "@/components/nier-scroll-area"
+import { useState, useEffect, useCallback, useTransition, useRef } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { NierBackground } from "@/components/nier-background";
+import { NierMenu } from "@/components/nier-menu";
+import { NierScrollArea } from "@/components/nier-scroll-area";
 
 const menuItems = [
   { id: "/", label: "About" },
@@ -18,32 +18,32 @@ const menuItems = [
   { id: "/map", label: "Map" },
   { id: "/changelog", label: "Changelog" },
   { id: "/contact", label: "Contact" },
-]
+];
 
 function getActiveId(pathname: string) {
-  if (pathname === "/") return "/"
+  if (pathname === "/") return "/";
   // match /uses/colophon to /uses
   const match = menuItems.find(
-    (item) => item.id !== "/" && pathname.startsWith(item.id)
-  )
-  return match?.id ?? "/"
+    (item) => item.id !== "/" && pathname.startsWith(item.id),
+  );
+  return match?.id ?? "/";
 }
 
 function getPageLabel(pathname: string) {
-  if (pathname === "/uses/colophon") return "Colophon"
-  const item = menuItems.find((i) => i.id === getActiveId(pathname))
-  return item?.label ?? "About"
+  if (pathname === "/uses/colophon") return "Colophon";
+  const item = menuItems.find((i) => i.id === getActiveId(pathname));
+  return item?.label ?? "About";
 }
 
 export function NierLoadingIndicator() {
-  const [dots, setDots] = useState(0)
+  const [dots, setDots] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setDots((d) => (d + 1) % 4)
-    }, 350)
-    return () => clearInterval(interval)
-  }, [])
+      setDots((d) => (d + 1) % 4);
+    }, 350);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="flex h-full items-center justify-center">
@@ -57,8 +57,18 @@ export function NierLoadingIndicator() {
           style={{ animationDuration: "2.5s" }}
           aria-hidden="true"
         >
-          <path d="M12 0 L24 12 L12 24 L0 12 Z" fill="none" stroke="currentColor" strokeWidth="1" />
-          <path d="M12 4 L20 12 L12 20 L4 12 Z" fill="none" stroke="currentColor" strokeWidth="0.5" />
+          <path
+            d="M12 0 L24 12 L12 24 L0 12 Z"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1"
+          />
+          <path
+            d="M12 4 L20 12 L12 20 L4 12 Z"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="0.5"
+          />
         </svg>
 
         <div className="flex items-center gap-1">
@@ -71,71 +81,79 @@ export function NierLoadingIndicator() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export function NierShell({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname()
-  const router = useRouter()
-  const [isPending, startTransition] = useTransition()
-  const [showMobileMenu, setShowMobileMenu] = useState(false)
-  const [isNavigating, setIsNavigating] = useState(false)
-  const prevPathname = useRef(pathname)
+  const pathname = usePathname();
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
+  const prevPathname = useRef(pathname);
 
-  const activeId = getActiveId(pathname)
-  const pageLabel = getPageLabel(pathname)
+  const activeId = getActiveId(pathname);
+  const pageLabel = getPageLabel(pathname);
 
   // Clear navigating state when pathname actually changes
   useEffect(() => {
     if (prevPathname.current !== pathname) {
-      setIsNavigating(false)
-      prevPathname.current = pathname
+      setIsNavigating(false);
+      prevPathname.current = pathname;
     }
-  }, [pathname])
+  }, [pathname]);
 
-  const showLoading = isPending || isNavigating
+  const showLoading = isPending || isNavigating;
 
   const handleNav = useCallback(
     (id: string) => {
-      if (id === pathname) return
-      setIsNavigating(true)
-      setShowMobileMenu(false)
+      if (id === pathname) return;
+      setIsNavigating(true);
+      setShowMobileMenu(false);
       startTransition(() => {
-        router.push(id)
-      })
+        router.push(id);
+      });
     },
-    [router, pathname, startTransition]
-  )
+    [router, pathname, startTransition],
+  );
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      const currentIndex = menuItems.findIndex((i) => i.id === activeId)
+      const currentIndex = menuItems.findIndex((i) => i.id === activeId);
 
       if (e.key === "w" || e.key === "W" || e.key === "ArrowUp") {
-        if ((e.target as HTMLElement)?.tagName === "INPUT" || (e.target as HTMLElement)?.tagName === "TEXTAREA") return
-        e.preventDefault()
-        const prev = currentIndex > 0 ? currentIndex - 1 : menuItems.length - 1
-        handleNav(menuItems[prev].id)
+        if (
+          (e.target as HTMLElement)?.tagName === "INPUT" ||
+          (e.target as HTMLElement)?.tagName === "TEXTAREA"
+        )
+          return;
+        e.preventDefault();
+        const prev = currentIndex > 0 ? currentIndex - 1 : menuItems.length - 1;
+        handleNav(menuItems[prev].id);
       }
 
       if (e.key === "s" || e.key === "S" || e.key === "ArrowDown") {
-        if ((e.target as HTMLElement)?.tagName === "INPUT" || (e.target as HTMLElement)?.tagName === "TEXTAREA") return
-        e.preventDefault()
-        const next = currentIndex < menuItems.length - 1 ? currentIndex + 1 : 0
-        handleNav(menuItems[next].id)
+        if (
+          (e.target as HTMLElement)?.tagName === "INPUT" ||
+          (e.target as HTMLElement)?.tagName === "TEXTAREA"
+        )
+          return;
+        e.preventDefault();
+        const next = currentIndex < menuItems.length - 1 ? currentIndex + 1 : 0;
+        handleNav(menuItems[next].id);
       }
 
       if (e.key === "Escape") {
-        setShowMobileMenu(false)
+        setShowMobileMenu(false);
       }
     },
-    [activeId, handleNav]
-  )
+    [activeId, handleNav],
+  );
 
   useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown)
-    return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [handleKeyDown])
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleKeyDown]);
 
   return (
     <div className="relative flex h-dvh flex-col overflow-hidden bg-background">
@@ -249,9 +267,10 @@ export function NierShell({ children }: { children: React.ReactNode }) {
       <div className="relative z-10 flex items-center justify-between px-6 pb-8 pt-4 md:px-16 md:pb-10 lg:px-32 lg:pb-12 xl:px-52 xl:pb-14 2xl:px-80 2xl:pb-16">
         <div className="h-px flex-1 bg-border/20" aria-hidden="true" />
         <p className="pl-6 font-sans text-xs font-light italic tracking-wider text-muted-foreground/40">
-          "Simplicity is not the absence of complexity, it's what you build after you understand it"
+          "Simplicity is not the absence of complexity, it's what you build
+          after you understand it"
         </p>
       </div>
     </div>
-  )
+  );
 }
