@@ -43,6 +43,7 @@ export default function PlaylistPage() {
 
                 <Link
                     href="https://open.spotify.com/user/31fawrtsshqoldaaorbnkmbhkx4i?si=78b26c211b424b67"
+                    target="_blank"
                     className="group flex items-center gap-3 font-sans text-sm tracking-wide text-foreground/70 transition-colors hover:text-foreground"
                 >
                     <span

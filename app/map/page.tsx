@@ -47,7 +47,7 @@ const places = [
                 name: "Amsterdam, Netherlands",
                 coords: [52.3547418, 4.8215612],
                 year: "2022, 2023, 2024, 2025",
-                note: "Work",
+                note: "Work, Vacation w/ friends",
             },
             {
                 name: "Brussels, Belgium",
