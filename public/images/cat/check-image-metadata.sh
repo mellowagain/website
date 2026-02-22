@@ -7,9 +7,11 @@ echo "Checking images in $(pwd) for metadata..."
 violations=0
 
 while IFS= read -r -d '' file; do
-  meta=$(exiftool -s -G1 -a "$file" | grep -vE '^\[(System|File|JFIF|Composite|ExifTool)\]')
+  echo "checking $file"
+  meta="$(exiftool -s -G1 -a "$file" | grep -vE '^\[(System|File|JFIF|Composite|ExifTool)\]' || true)"
 
   if [ -n "$meta" ]; then
+    echo
     echo "[!] Metadata found in: $file"
     echo "$meta"
     echo
