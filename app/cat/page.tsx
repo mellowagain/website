@@ -40,7 +40,7 @@ export default function CatsPage() {
                 {/* Photo Gallery */}
                 <div className="h-px w-full bg-border/20" aria-hidden="true" />
                 <p className="font-sans text-xs uppercase tracking-[0.2em] text-muted-foreground/50">Gallery</p>
-                <p className="font-sans text-sm leading-relaxed text-foreground/70">However over images to see them in color!</p>
+                <p className="font-sans text-sm leading-relaxed text-foreground/70">Hover over images to see them in color. Click to enlarge.</p>
                 <CatGallery />
             </div>
         </NierShell>
