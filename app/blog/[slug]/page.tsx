@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         return null;
     }
 
-    return { title: post.frontmatter.title };
+    return { title: post.frontmatter.title, description: post.frontmatter.summary };
 }
 
 const components = useMDXComponents({});
