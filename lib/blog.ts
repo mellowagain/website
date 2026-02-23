@@ -17,7 +17,13 @@ export function getAllPosts() {
 }
 
 export function getPostBySlug(slug: string) {
-    const raw = fs.readFileSync(path.join(BLOG_DIR, `${slug}.mdx`), "utf-8");
+    const blogPath = path.join(BLOG_DIR, `${slug}.mdx`);
+
+    if (!fs.existsSync(blogPath)) {
+        return null;
+    }
+
+    const raw = fs.readFileSync(blogPath, "utf-8");
     const { data: frontmatter, content } = matter(raw);
     return { slug, frontmatter, content };
 }

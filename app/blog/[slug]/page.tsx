@@ -5,6 +5,7 @@ import { useMDXComponents } from "@/mdx-components";
 import { NierShell } from "@/components/nier-shell";
 import Link from "next/link";
 import rehypePrettyCode from "rehype-pretty-code";
+import NotFound from "@/app/not-found";
 
 export async function generateStaticParams() {
     const posts = getAllPosts();
@@ -13,15 +14,26 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
-    const { frontmatter } = getPostBySlug(slug);
-    return { title: frontmatter.title };
+    const post = getPostBySlug(slug);
+
+    if (!post) {
+        return null;
+    }
+
+    return { title: post.frontmatter.title };
 }
 
 const components = useMDXComponents({});
 
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
-    const { content, frontmatter } = getPostBySlug(slug);
+    const post = getPostBySlug(slug);
+
+    if (!post) {
+        return <NotFound />;
+    }
+
+    const { content, frontmatter } = post;
 
     return (
         <NierShell>
