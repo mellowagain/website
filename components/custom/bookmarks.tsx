@@ -34,7 +34,7 @@ export default function Bookmarks() {
                         },
                         j: Key
                     ) => (
-                        <Link key={j} href={item.link} className="group block transition-opacity hover:opacity-90">
+                        <Link key={j} href={item.link} target="_blank" className="group block transition-opacity hover:opacity-90">
                             <div className="flex items-baseline justify-between gap-4 border-b border-border/15 py-2 last:border-b-0">
                                 <div className="flex flex-col gap-0.5">
                                     <span className="font-sans text-sm text-foreground/90">{item.title}</span>
