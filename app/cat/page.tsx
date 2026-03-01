@@ -41,7 +41,7 @@ export default function CatsPage() {
                             <NierStatRow label="Age" value="4 years" />
                             <NierStatRow label="Weight" value="4.5 kg" />
                             <NierStatRow label="Personality" value="Clingy, cute, always sleepy" />
-                            <NierStatRow label="Favorite spot" value="On my pillow" />
+                            <NierStatRow label="Favorite spot" value="On Mari's pillow" />
                         </div>
                     </div>
                 </NierWindow>
