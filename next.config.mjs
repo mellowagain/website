@@ -16,7 +16,13 @@ const nextConfig = {
         ignoreBuildErrors: true,
     },
     images: {
-        unoptimized: true,
+        unoptimized: false,
+        localPatterns: [
+            {
+                pathname: "/images/**/*.{jpg,png,svg}",
+                search: "",
+            },
+        ],
     },
     env: {
         NEXT_PUBLIC_GIT_HASH: gitHash,

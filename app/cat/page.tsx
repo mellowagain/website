@@ -4,6 +4,7 @@ import { NierWindow, NierStatRow } from "@/components/nier-window";
 import CatGallery from "@/components/custom/gallery";
 import fs from "fs";
 import path from "path";
+import CatPortrait from "../../public/images/cat/20240925_142354.jpg";
 
 export const metadata = { title: "Cat" };
 export const dynamic = "force-static";
@@ -22,7 +23,7 @@ export default function CatsPage() {
                         {/* Cat photo */}
                         <div className="group relative aspect-square w-full shrink-0 overflow-hidden border border-border/30 bg-accent/20 md:w-48 lg:w-56">
                             <Image
-                                src="/images/cat/20240925_142354.jpg"
+                                src={CatPortrait}
                                 alt="Mysta"
                                 fill
                                 className="object-cover transition-all duration-700 ease-out grayscale-[60%] brightness-[0.85] sepia-[0.6] saturate-[0.7] group-hover:grayscale-0 group-hover:brightness-100 group-hover:sepia-0 group-hover:saturate-100"
