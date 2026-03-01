@@ -2,9 +2,18 @@ import Image from "next/image";
 import { NierShell } from "@/components/nier-shell";
 import { NierWindow, NierStatRow } from "@/components/nier-window";
 import CatGallery from "@/components/custom/gallery";
+import fs from "fs";
+import path from "path";
 
 export const metadata = { title: "Cat" };
+export const dynamic = "force-static";
+
 export default function CatsPage() {
+    const IMAGE_EXTENSIONS = [".jpg", ".jpeg", ".png", ".gif", ".webp", ".avif"];
+
+    const files = fs.readdirSync(path.join(process.cwd(), "public/images/cat"));
+    const images = files.filter((f) => IMAGE_EXTENSIONS.includes(path.extname(f).toLowerCase())).sort((a, b) => b.localeCompare(a));
+
     return (
         <NierShell>
             <div className="flex flex-col gap-6">
@@ -43,7 +52,7 @@ export default function CatsPage() {
                 <p className="font-sans text-sm leading-relaxed text-foreground/70">
                     Hover over images to see them in color. Click to enlarge.
                 </p>
-                <CatGallery />
+                <CatGallery images={images} />
             </div>
         </NierShell>
     );
