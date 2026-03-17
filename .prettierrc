@@ -5,5 +5,13 @@
     "useTabs": false,
     "tabWidth": 4,
     "semi": true,
-    "singleQuote": false
+    "singleQuote": false,
+    "overrides": [
+        {
+            "files": ["*.yaml", "*.yml"],
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
 }
