@@ -37,6 +37,8 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-
 
       - name: Build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
         run: pnpm run build
 
       - name: Check formatting
