@@ -53,6 +53,7 @@ export default function ColophonPage() {
 
                 <Link
                     href="https://github.com/mellowagain/website"
+                    target="_blank"
                     className="group flex items-center gap-3 font-sans text-sm tracking-wide text-foreground/70 transition-colors hover:text-foreground"
                 >
                     <span
