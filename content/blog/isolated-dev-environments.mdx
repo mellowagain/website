@@ -251,7 +251,8 @@ Having keys attached means that everytime you `litterbox attach` to a litterbox,
 ## Adding to launcher
 
 To be able to launch the IDE easier, I add it to my system launcher. As litterbox requests your SSH key store password, we need to have
-an interactive script to input it when required. I generated this quick Python script with AI to do that, be sure to adjust the path to your own username:
+an interactive script to input it when required. I generated this quick Python script with Claude to do that, the only required dependency
+is `pexpect` (on Arch: `sudo pacman -S python-pexpect`). Be sure to adjust the path to your own username:
 
 ```python
 #!/usr/bin/env python3
@@ -295,7 +296,7 @@ update-desktop-database ~/.local/share/applications
 
 ## Conclusion
 
-We now have a isolated development environment setup. In case one of our dependencies do end up shipping malware:
+We now have an isolated development environment setup. In case one of our dependencies do end up shipping malware:
 
 1. It only affects the container we are in
 2. The only secrets that can be stolen are the ones we store in our environment, which in the ideal case should be none or just development credentials with weak permissions.
