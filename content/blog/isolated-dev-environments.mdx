@@ -1,0 +1,309 @@
+---
+title: "Isolated development environments with litterbox"
+date: "2026-03-22"
+summary: "After a recent string of supply chain attacks, it was time to isolate my development environments"
+tags: ["litterbox", "isolation", "development", "environments"]
+---
+
+import MdxLayout from "../components/mdx-layout";
+
+The past few months have not been the best for developers. There has been too many supply chain attacks, targeting not
+just the NPM ecosystem but also the Cargo ecosystem as well as GitHub actions:
+
+- [The Shai-Hulud 2.0 npm worm](https://securitylabs.datadoghq.com/articles/shai-hulud-2.0-npm-worm/)
+- [GitLab discovers widespread npm supply chain attack](https://about.gitlab.com/blog/gitlab-discovers-widespread-npm-supply-chain-attack/)
+- [Malicious Rust Packages Hit crates.io](https://www.abhs.in/blog/rust-crates-io-supply-chain-attack-developer-credentials-2026)
+- [Ghostaction: 3,325 Secrets Stolen Through Compromised GitHub Workflows](https://blog.gitguardian.com/ghostaction-campaign-3-325-secrets-stolen/)
+
+This recent uptick of attacks and self-propagating worms is scary, and it means we have to start taking security more
+seriously as developers. I have looked around and found [`litterbox`](https://litterbox.work/), a Linux sandbox environment
+catered to the needs of developers. While it is in early stage, I decided to give it a try and it was surprisingly easy.
+
+## What litterbox is and what it isn't
+
+Before using any tool, it's good to get a sense of what it does and what it doesn't. Notably, Litterbox is not a full
+virtual machine, instead running inside of rootless Podman containers with only access to a dedicated home folder
+(located in `~/Litterbox/homes/<container name>`) and nothing above it. It also features a special SSH agent, showing a
+GUI prompt every time a program wants to use your SSH key:
+
+![Litterbox SSH request popup](/images/blog/dev-envs/ssh-request.png)
+
+More importantly, it is **not a virtual machine**. This means that all programs still run on your original OS' kernel and
+your native Wayland server. This is especially bad because having access to the Wayland server means also having access
+to your global clipboard, a limitation that you sadly are not able to work around (for now, I hope). Ofcourse if there
+is a exploit in the Linux kernel or anything that is exposed to the Litterbox (including Wayland and any devices you
+explicitly attached with `litterbox devices`) that can then also be exploited. But recent supply chain attacks have
+mostly been trying to get your credentials to stuff like Git, NPM, crates.io etc. so this provides a good shield
+against that. Read all about the limitations of Litterbox on its [README](https://github.com/Gerharddc/litterbox?tab=readme-ov-file#isolation-limitations).
+
+## My development environment
+
+So let's get ready to set up a Litterbox. I have decided to have **one litterbox per project**. This gives the best
+isolation between projects but at the expense of disk space, as all runtimes, dependencies and IDE's need to be
+installed in every litterbox separately. That is a trade-off I am willing to make for the sake of security. You can
+choose to instead define a litterbox per-language or however you see fit.
+
+I'm going to setup a container for this very website, [mari.zip](https://github.com/mellowagain/website) so we need:
+
+* `nodejs`, as my project is a Next.js app
+* `pnpm`, the projects default package manager
+* `WebStorm`, the Jetbrains IDE of choice for Node web development
+* A new ssh key for the litterbox
+
+This list is different per-project, for example for [GitArena](https://github.com/mellowagain/gitarena) I installed `cargo`
+and `RustRover` instead.
+
+## Installing litterbox
+
+Installing it is as simple as running:
+
+```bash
+curl -fsSL https://litterbox.work/install.sh | sh
+```
+
+This will install the latest litterbox version **for your local user**, in my case `litterbox 0.3.2`. Explicitly not
+system-wide, as it should be. Of course, you can critique the old curl and then pipe into bash, but if you're like that
+it seems that litterbox is easy to compile by yourself, being fully written in Rust.
+
+## Creating the litterbox
+
+Creating the litterbox is a simple two-step progress, first defining it and then building the container. For the
+name I have chosen marizip to represent the project that is inside of it.
+
+```bash
+litterbox define marizip
+```
+
+It will then ask you for a template, I picked `CachyOS` becaue my main system is Arch so the commands are similiar enough
+to not get mixed up between main system and container. There is an argument to be had to explicitly use a different distro
+for your container to always be sure you're running commands in the correct environment, but I decided against it.
+
+Next up we need to build the litterbox:
+
+```bash
+litterbox build marizip
+```
+
+It will prompt you to set a user password. I have Bitwarden as my password manager so I generate a new, unique password
+for all of my litterboxes.
+
+Afterwards it will ask you a lot of questions, these are **very important** to consider as after they have been defined
+you cannot change them and would have to rebuild your litterbox if you really wanted to.
+
+## The questions
+
+#### Network mode
+
+```
+? Choose the network mode for this Litterbox:
+> Pasta (isolated user-mode networking stack)
+  Pasta with automatic port forwarding (host to container)
+  Pasta with automatic port forwarding (container to host)
+  Pasta with automatic port forwarding (bidirectional)
+  Host networking (i.e. NO ISOLATION)
+```
+
+This should be self explaining. As mari.zip is a web app, I often use `pnpm run dev` to quickly spin up a dev server
+to see changes immediately, so I chose `Pasta with automatic port forwarding (container to host)`. Depending on your
+applications, you should choose differently. **Do not choose the last option, unless you have good reason to.**
+
+#### CAP_NET_RAW
+
+```
+? Do you want to support `ping` inside this Litterbox? (y/N)
+[This will enable `CAP_NET_RAW`.]
+```
+
+If you're around the Kubernetes or devops world, you probably [already know of this](https://kyverno.io/policies/best-practices/require-drop-cap-net-raw/require-drop-cap-net-raw/).
+`CAP_NET_RAW` enables applications to craft and send arbitrary network packets, as used by tools like `ping` and `nmap`
+as well as binding to any network address regardless of ownership and intercepting traffic on the network interface.
+**Unless you have a specific need for it, do not enable it.**
+
+#### CAP_NET_ADMIN
+
+```
+? Do you want to support TUN/TAP creation inside this Litterbox? (y/N)
+[This will enable `CAP_NET_ADMIN` and expose `/dev/net/tun`.]
+```
+
+`CAP_NET_ADMIN` is the equivalent of granting root access to network, allowing programs to bring interfaces up and down,
+assigning IP addresses, modifying the routing table, modifying iptables rules and creating and configuring network namespaces.
+This is mostly useful if you'd like to run an iptables firewall or a VPN daemon inside the litterbox. **Again, unless you
+have a specific need for it, do not enable it.**
+
+#### Packet forwarding
+
+```
+? Do you want to enable packet forwarding inside this Litterbox? (y/N)
+```
+
+Packet forwarding allows programs within the litterbox to act as packet routers, routing packets from one interface
+to another. This is useful if you're running a VPN server or a proxy within the container. This is **not** however
+needed for my use case where I just want to visit the local dev server from my main machines browser outside the container.
+This is just for routing traffic _between_ network interfaces. **Again, unless you have a specific need for it, do not enable it.**
+
+#### User groups
+
+```
+? Do you want to keep your user groups inside this Litterbox? (y/N)
+[This will preserve your host user's group memberships.]
+```
+
+In Linux a lot of access is managed through groups, for example `docker` (for rootless docker) or `root` (for running `sudo`).
+I found this to only really useful if you're passing in `litterbox devices` which are bound to a specific group. **It is most
+cleanly to not enable it but for your use case it might be required.** For my normal web development however, it isn't.
+
+#### seccomp confinement
+
+```
+? Do you want to disable seccomp confinement? (y/N) $
+[This enables 'dangerous' syscalls required by things like the Mojo debugger.]
+```
+
+Seccomp stands for Secure Computing Mode and is a kernel feature to filter syscalls programs can call. Confinement restricts
+them to be the normal syscalls most programs use, but for some special ones like debuggers which use `ptrace`, you
+would need to enable it. **Enable this if your programs need it.**
+
+#### Pipewire
+
+```
+? Do you want to expose PipeWire inside this Litterbox? (y/N)
+[This will allow audio applications to work inside the Litterbox.]
+```
+
+This one is relatively simple. Do you need audio in your container like speaker output or microphone input? If yes,
+go ahead and enable it but for my use case I do not need it.
+
+#### SHM size
+
+```
+? Shared memory size in GB (leave empty for default): ()
+[Sets --shm-size for the container (e.g., 8 for 8G).]
+```
+
+Setting a big enough shared memory size is essential for programs using IPC, such as for example web browsers or in my
+case JetBrains IDE's such as WebStorm. I set it to 4 GB for mine, but depending on your setup you might want to choose
+a different size.
+
+## Installing dependencies
+
+Now the litterbox should be successfully built we need to go ahead and install our projects required dependencies. First
+we need to attach to a terminal within the container:
+
+```bash
+litterbox attach marizip
+```
+
+For the project itself we just need nodejs and pnpm:
+
+```bash
+paru -S nodejs npm
+sudo npm install --global corepack@latest
+corepack enable pnpm
+```
+
+and for Webstorm we need to install some additional packages, as described in my [Installing Jetbrains IDE in litterbox](https://github.com/Gerharddc/litterbox/discussions/63) post:
+
+```bash
+paru -S webstorm webstorm-jre freetype2 ttf-dejavu fontconfig libxkbcommon libxkbcommon-x11
+fc-cache -fv
+```
+
+Then we can launch WebStorm for the first time within the container with a forced override to use Wayland:
+
+```bash
+_JAVA_OPTIONS="-Dawt.toolkit.name=WLToolkit" webstorm
+```
+
+Webstorm will warn us that we used the `_JAVA_OPTIONS` override, so we should persist the forced usage of Wayland the right way.
+We do this by clicking on the Settings cog and then `Edit Custom VM options` and adding the argument into the newly opened file/window:
+
+```
+-Dawt.toolkit.name=WLToolki
+```
+
+From now on we can just start it within the container by typing `webstorm`, no need to set the `_JAVA_OPTIONS` env variable first.
+
+## Setting up ssh keys
+
+As said, I like to have a separate SSH key for every litterbox. I chose `marizip` for the SSH key name, but you can choose whatever,
+it **doesn't** have to be the same as the container name. **The password it prompts for is for the SSH key storage, not the container**:
+
+```bash
+litterbox keys generate marizip
+litterbox keys attach marizip marizip
+```
+
+You might have to restart your litterbox once or twice to have the new key be correctly attached to it. Litterbox stops
+the container automatically when all windows to it all closed.
+
+Now to allow cloning and pushing from GitHub, I add the SSH key as a **project specific** [deploy key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys#deploy-keys)
+so it's scoped to only the project that is actually running inside the Litterbox. First we need to get our public key:
+
+```bash
+litterbox keys print marizip
+```
+
+and then we can add it to our GitHub project by going to the repo -> Settings -> Deploy Keys and then adding it as a read
+and write deploy key.
+
+Having keys attached means that everytime you `litterbox attach` to a litterbox, you will need to enter your SSH key storage password.
+
+## Adding to launcher
+
+To be able to launch the IDE easier, I add it to my system launcher. As litterbox requests your SSH key store password, we need to have
+an interactive script to input it when required. I generated this quick Python script with AI to do that, be sure to adjust the path to your own username:
+
+```python
+#!/usr/bin/env python3
+import pexpect
+import sys
+import os
+
+name     = sys.argv[1]
+ide      = sys.argv[2]
+password = os.environ['LITTERBOX_PASSWORD']
+
+child = pexpect.spawn(f'/home/mari/.local/bin/litterbox enter {name} {ide}', timeout=60)
+child.expect('password')
+child.sendline(password)
+child.expect(pexpect.EOF, timeout=None)
+```
+
+It takes the name of the container as the first argument and the launch command for the IDE as the second.
+The password gets pulled from the `LITTERBOX_PASSWORD` environment variable, which I set globally for my system.
+
+Then we can create a `.desktop` file in a folder our launcher looks for, in my example `~/.local/share/applications/`
+(find out with `printenv XDG_DATA_DIRS`):
+
+```ini
+[Desktop Entry]
+Name=WebStorm (marizip)
+Comment=Webstorm for maridotzip Project
+Exec=/home/mari/.local/bin/litterbox-jb.py "marizip" "webstorm"
+Icon=webstorm
+Terminal=false
+Type=Application
+Categories=Development;IDE;
+StartupWMClass=jetbrains-webstorm
+```
+
+and to apply the changes we just need to refresh our desktop database:
+
+```bash
+update-desktop-database ~/.local/share/applications
+```
+
+## Conclusion
+
+We now have a isolated development environment setup. In case one of our dependencies do end up shipping malware:
+
+1. It only affects the container we are in
+2. The only secrets that can be stolen are the ones we store in our environment, which in the ideal case should be none or just development credentials with weak permissions.
+3. Our SSH key cannot be used to further spread the malware as our SSH agent popup would make us suspicious.
+
+Finally, we can code in peace. Time for the exciting stuff.
+
+export default function MDXPage({ children }) {
+    return <MdxLayout>{children}</MdxLayout>
+}
