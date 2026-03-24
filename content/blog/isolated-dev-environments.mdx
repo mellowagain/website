@@ -91,7 +91,7 @@ you cannot change them and would have to rebuild your litterbox if you really wa
 
 ## The questions
 
-#### Network mode
+### Network mode
 
 ```text
 ? Choose the network mode for this Litterbox:
@@ -106,7 +106,7 @@ This should be self explaining. As mari.zip is a web app, I often use `pnpm run 
 to see changes immediately, so I chose `Pasta with automatic port forwarding (container to host)`. Depending on your
 applications, you should choose differently. **Do not choose the last option, unless you have good reason to.**
 
-#### CAP_NET_RAW
+### CAP_NET_RAW
 
 ```text
 ? Do you want to support `ping` inside this Litterbox? (y/N)
@@ -118,7 +118,7 @@ If you're around the Kubernetes or devops world, you probably [already know of t
 as well as binding to any network address regardless of ownership and intercepting traffic on the network interface.
 **Unless you have a specific need for it, do not enable it.**
 
-#### CAP_NET_ADMIN
+### CAP_NET_ADMIN
 
 ```text
 ? Do you want to support TUN/TAP creation inside this Litterbox? (y/N)
@@ -130,7 +130,7 @@ assigning IP addresses, modifying the routing table, modifying iptables rules an
 This is mostly useful if you'd like to run an iptables firewall or a VPN daemon inside the litterbox. **Again, unless you
 have a specific need for it, do not enable it.**
 
-#### Packet forwarding
+### Packet forwarding
 
 ```text
 ? Do you want to enable packet forwarding inside this Litterbox? (y/N)
@@ -141,7 +141,7 @@ to another. This is useful if you're running a VPN server or a proxy within the 
 needed for my use case where I just want to visit the local dev server from my main machines browser outside the container.
 This is just for routing traffic _between_ network interfaces. **Again, unless you have a specific need for it, do not enable it.**
 
-#### User groups
+### User groups
 
 ```text
 ? Do you want to keep your user groups inside this Litterbox? (y/N)
@@ -152,7 +152,7 @@ In Linux a lot of access is managed through groups, for example `docker` (for ro
 I found this to only really useful if you're passing in `litterbox devices` which are bound to a specific group. **It is most
 cleanly to not enable it but for your use case it might be required.** For my normal web development however, it isn't.
 
-#### seccomp confinement
+### seccomp confinement
 
 ```text
 ? Do you want to disable seccomp confinement? (y/N) $
@@ -163,7 +163,7 @@ Seccomp stands for Secure Computing Mode and is a kernel feature to filter sysca
 them to be the normal syscalls most programs use, but for some special ones like debuggers which use `ptrace`, you
 would need to enable it. **Enable this if your programs need it.**
 
-#### Pipewire
+### Pipewire
 
 ```text
 ? Do you want to expose PipeWire inside this Litterbox? (y/N)
@@ -173,7 +173,7 @@ would need to enable it. **Enable this if your programs need it.**
 This one is relatively simple. Do you need audio in your container like speaker output or microphone input? If yes,
 go ahead and enable it but for my use case I do not need it.
 
-#### SHM size
+### SHM size
 
 ```text
 ? Shared memory size in GB (leave empty for default): ()
