@@ -24,15 +24,14 @@ catered to the needs of developers. While it is in early stage, I decided to giv
 Before using any tool, it's good to get a sense of what it does and what it doesn't. Notably, Litterbox is not a full
 virtual machine, instead running inside of rootless Podman containers with only access to a dedicated home folder
 (located in `~/Litterbox/homes/<container name>`) and nothing above it. It also features a special SSH agent, showing a
-GUI prompt every time a program wants to use your SSH key:
-
-![Litterbox SSH request popup](/images/blog/dev-envs/ssh-request.png)
+GUI prompt every time a program wants to use your SSH key. See the appendix the end of the article for a screenshot of that.
 
 More importantly, it is **not a virtual machine**. This means that all programs still run on your original OS' kernel and
 your native Wayland server. This is especially bad because having access to the Wayland server means also having access
-to your global clipboard, a limitation that you sadly are not able to work around (for now, I hope). Ofcourse if there
-is a exploit in the Linux kernel or anything that is exposed to the Litterbox (including Wayland and any devices you
-explicitly attached with `litterbox devices`) that can then also be exploited. But recent supply chain attacks have
+to your global clipboard, a limitation that you sadly are not able to work around (for now, I hope).
+
+Of course if there is an exploit in the Linux kernel or anything that is exposed to the Litterbox (including Wayland and
+any devices you explicitly attached with `litterbox devices`), that can then also be exploited. But recent supply chain attacks have
 mostly been trying to get your credentials to stuff like Git, NPM, crates.io etc. so this provides a good shield
 against that. Read all about the limitations of Litterbox on its [README](https://github.com/Gerharddc/litterbox?tab=readme-ov-file#isolation-limitations).
 
@@ -43,11 +42,11 @@ isolation between projects but at the expense of disk space, as all runtimes, de
 installed in every litterbox separately. That is a trade-off I am willing to make for the sake of security. You can
 choose to instead define a litterbox per-language or however you see fit.
 
-I'm going to setup a container for this very website, [mari.zip](https://github.com/mellowagain/website) so we need:
+I'm going to set up a container for this very website, [mari.zip](https://github.com/mellowagain/website) so we need:
 
 * `nodejs`, as my project is a Next.js app
 * `pnpm`, the projects default package manager
-* `WebStorm`, the Jetbrains IDE of choice for Node web development
+* `WebStorm`, the JetBrains IDE of choice for Node web development
 * A new ssh key for the litterbox
 
 This list is different per-project, for example for [GitArena](https://github.com/mellowagain/gitarena) I installed `cargo`
@@ -84,7 +83,7 @@ Next up we need to build the litterbox:
 litterbox build marizip
 ```
 
-It will prompt you to set a user password. I have Bitwarden as my password manager so I generate a new, unique password
+It will prompt you to set a user password. I have Bitwarden as my password manager, so I generate a new, unique password
 for all of my litterboxes.
 
 Afterwards it will ask you a lot of questions, these are **very important** to consider as after they have been defined
@@ -94,7 +93,7 @@ you cannot change them and would have to rebuild your litterbox if you really wa
 
 #### Network mode
 
-```
+```text
 ? Choose the network mode for this Litterbox:
 > Pasta (isolated user-mode networking stack)
   Pasta with automatic port forwarding (host to container)
@@ -109,7 +108,7 @@ applications, you should choose differently. **Do not choose the last option, un
 
 #### CAP_NET_RAW
 
-```
+```text
 ? Do you want to support `ping` inside this Litterbox? (y/N)
 [This will enable `CAP_NET_RAW`.]
 ```
@@ -121,7 +120,7 @@ as well as binding to any network address regardless of ownership and intercepti
 
 #### CAP_NET_ADMIN
 
-```
+```text
 ? Do you want to support TUN/TAP creation inside this Litterbox? (y/N)
 [This will enable `CAP_NET_ADMIN` and expose `/dev/net/tun`.]
 ```
@@ -133,7 +132,7 @@ have a specific need for it, do not enable it.**
 
 #### Packet forwarding
 
-```
+```text
 ? Do you want to enable packet forwarding inside this Litterbox? (y/N)
 ```
 
@@ -144,7 +143,7 @@ This is just for routing traffic _between_ network interfaces. **Again, unless y
 
 #### User groups
 
-```
+```text
 ? Do you want to keep your user groups inside this Litterbox? (y/N)
 [This will preserve your host user's group memberships.]
 ```
@@ -155,7 +154,7 @@ cleanly to not enable it but for your use case it might be required.** For my no
 
 #### seccomp confinement
 
-```
+```text
 ? Do you want to disable seccomp confinement? (y/N) $
 [This enables 'dangerous' syscalls required by things like the Mojo debugger.]
 ```
@@ -166,7 +165,7 @@ would need to enable it. **Enable this if your programs need it.**
 
 #### Pipewire
 
-```
+```text
 ? Do you want to expose PipeWire inside this Litterbox? (y/N)
 [This will allow audio applications to work inside the Litterbox.]
 ```
@@ -176,7 +175,7 @@ go ahead and enable it but for my use case I do not need it.
 
 #### SHM size
 
-```
+```text
 ? Shared memory size in GB (leave empty for default): ()
 [Sets --shm-size for the container (e.g., 8 for 8G).]
 ```
@@ -194,7 +193,7 @@ we need to attach to a terminal within the container:
 litterbox attach marizip
 ```
 
-For the project itself we just need nodejs and pnpm:
+For the project itself we just need Node.js and pnpm:
 
 ```bash
 paru -S nodejs npm
@@ -202,7 +201,7 @@ sudo npm install --global corepack@latest
 corepack enable pnpm
 ```
 
-and for Webstorm we need to install some additional packages, as described in my [Installing Jetbrains IDE in litterbox](https://github.com/Gerharddc/litterbox/discussions/63) post:
+and for Webstorm we need to install some additional packages, as described in my [Installing JetBrains IDE in litterbox](https://github.com/Gerharddc/litterbox/discussions/63) post:
 
 ```bash
 paru -S webstorm webstorm-jre freetype2 ttf-dejavu fontconfig libxkbcommon libxkbcommon-x11
@@ -244,7 +243,7 @@ so it's scoped to only the project that is actually running inside the Litterbox
 litterbox keys print marizip
 ```
 
-and then we can add it to our GitHub project by going to the repo -> Settings -> Deploy Keys and then adding it as a read
+and then we can add it to our GitHub project by going to the repo → Settings → Deploy Keys and then adding it as a read
 and write deploy key.
 
 Having keys attached means that everytime you `litterbox attach` to a litterbox, you will need to enter your SSH key storage password.
@@ -303,6 +302,10 @@ We now have a isolated development environment setup. In case one of our depende
 3. Our SSH key cannot be used to further spread the malware as our SSH agent popup would make us suspicious.
 
 Finally, we can code in peace. Time for the exciting stuff.
+
+## Appendix: Litterbox SSH request popup
+
+![Litterbox SSH request popup](/images/blog/dev-envs/ssh-request.png)
 
 export default function MDXPage({ children }) {
     return <MdxLayout>{children}</MdxLayout>
