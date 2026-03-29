@@ -223,8 +223,8 @@ _JAVA_OPTIONS="-Dawt.toolkit.name=WLToolkit" webstorm
 Webstorm will warn us that we used the `_JAVA_OPTIONS` override, so we should persist the forced usage of Wayland the right way.
 We do this by clicking on the Settings cog and then `Edit Custom VM options` and adding the argument into the newly opened file/window:
 
-```
--Dawt.toolkit.name=WLToolki
+```text
+-Dawt.toolkit.name=WLToolkit
 ```
 
 From now on we can just start it within the container by typing `webstorm`, no need to set the `_JAVA_OPTIONS` env variable first.
