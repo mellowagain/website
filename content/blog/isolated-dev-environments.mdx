@@ -208,6 +208,12 @@ paru -S webstorm webstorm-jre freetype2 ttf-dejavu fontconfig libxkbcommon libxk
 fc-cache -fv
 ```
 
+If you want to render the Markdown preview in the JetBrains IDE additionally install:
+
+```bash
+paru -S alsa-lib pango libxrandr libxdamage libxcomposite libcups at-spi2-core nss
+```
+
 Then we can launch WebStorm for the first time within the container with a forced override to use Wayland:
 
 ```bash
