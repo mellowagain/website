@@ -190,10 +190,16 @@ Now the litterbox should be successfully built we need to go ahead and install o
 we need to attach to a terminal within the container:
 
 ```bash
-litterbox attach marizip
+litterbox enter marizip
 ```
 
-For the project itself we just need Node.js and pnpm:
+First we should update all packages in our system:
+
+```bash
+paru -Syu
+```
+
+and then for the project itself we just need Node.js and pnpm, you should adjust for the dependencies required for your project:
 
 ```bash
 paru -S nodejs npm
@@ -252,7 +258,7 @@ litterbox keys print marizip
 and then we can add it to our GitHub project by going to the repo → Settings → Deploy Keys and then adding it as a read
 and write deploy key.
 
-Having keys attached means that everytime you `litterbox attach` to a litterbox, you will need to enter your SSH key storage password.
+Having keys attached means that everytime you `litterbox enter` to a litterbox, you will need to enter your SSH key storage password.
 
 ## Adding to launcher
 
