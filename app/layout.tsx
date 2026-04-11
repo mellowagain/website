@@ -23,6 +23,13 @@ export const metadata: Metadata = {
             type: "image/svg+xml",
         },
     },
+    alternates: {
+        types: {
+            "application/rss+xml": "/feed/rss.xml",
+            "application/atom+xml": "/feed/atom.xml",
+            "application/feed+json": "/feed/feed.json",
+        },
+    },
 };
 
 export const viewport = {
