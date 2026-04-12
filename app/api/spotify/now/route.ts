@@ -71,7 +71,7 @@ export async function GET() {
         return Response.json({ isPlaying: false } as RouteResponse);
     }
 
-    let jsonResponse: SpotifyResponse = await response.json();
+    const jsonResponse: SpotifyResponse = await response.json();
 
     if (!jsonResponse.is_playing || !jsonResponse.item) {
         return Response.json({ isPlaying: false } as RouteResponse);

@@ -9,7 +9,7 @@ import { Key } from "react";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function RecentlyPlayed() {
-    let { data, error, isLoading } = useSWR("/api/spotify/recent", fetcher, {
+    const { data, error, isLoading } = useSWR("/api/spotify/recent", fetcher, {
         refreshInterval: 10000,
         revalidateOnFocus: true,
         refreshWhenHidden: false,

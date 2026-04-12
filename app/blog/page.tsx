@@ -5,7 +5,7 @@ import { getAllPosts } from "@/lib/blog";
 
 export const metadata = { title: "Blog" };
 export default function BlogPage() {
-    let posts = getAllPosts();
+    const posts = getAllPosts();
     posts.sort((a, b) => b.frontmatter.date.localeCompare(a.frontmatter.date));
 
     return (

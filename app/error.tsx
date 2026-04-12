@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Link from "next/link";
 import { NierBackground } from "@/components/nier-background";
 
 export default function ErrorPage({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
@@ -70,7 +71,7 @@ export default function ErrorPage({ error, reset }: { error: Error & { digest?: 
                         </span>
                     </button>
 
-                    <a
+                    <Link
                         href="/"
                         className="group flex items-center gap-3 border border-border/40 bg-accent/30 px-6 py-3 transition-all duration-200 hover:bg-foreground/[0.08]"
                     >
@@ -81,7 +82,7 @@ export default function ErrorPage({ error, reset }: { error: Error & { digest?: 
                         <span className="font-sans text-sm uppercase tracking-[0.2em] text-foreground/70 transition-colors group-hover:text-foreground/90">
                             Return home
                         </span>
-                    </a>
+                    </Link>
                 </div>
 
                 {/* Bottom decoration */}

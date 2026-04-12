@@ -213,8 +213,8 @@ export default function Map() {
         <NierShell>
             <div className="flex flex-col gap-6">
                 <p className="font-sans text-sm leading-relaxed text-foreground/70">
-                    Places I've called home and places I've visited. Mostly motivated by transit infrastructure, cities, and the occasional
-                    conference. Zoom out to see all places as markers.
+                    Places I&apos;ve called home and places I&apos;ve visited. Mostly motivated by transit infrastructure, cities, and the
+                    occasional conference. Zoom out to see all places as markers.
                 </p>
 
                 {/* Leaflet map in a Nier window */}
@@ -233,7 +233,7 @@ export default function Map() {
                         <p className="text-center font-sans text-2xl font-light text-foreground/80">203</p>
                     </NierWindow>
                     <NierWindow title="Distance Travelled">
-                        <p className="text-center font-sans text-2xl font-light text-foreground/80">242'810 km</p>
+                        <p className="text-center font-sans text-2xl font-light text-foreground/80">242&apos;810 km</p>
                         {/*<p className="text-center font-sans text-xs leading-relaxed text-foreground/80">Zurich HB</p>*/}
                     </NierWindow>
                 </div>

@@ -82,6 +82,7 @@ export function NierShell({ children }: { children: React.ReactNode }) {
     // Clear navigating state when pathname actually changes
     useEffect(() => {
         if (prevPathname.current !== pathname) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setIsNavigating(false);
             prevPathname.current = pathname;
         }
@@ -231,7 +232,7 @@ export function NierShell({ children }: { children: React.ReactNode }) {
             <div className="relative z-10 flex items-center justify-between px-6 pb-8 pt-4 md:px-16 md:pb-10 lg:px-32 lg:pb-12 xl:px-52 xl:pb-14 2xl:px-80 2xl:pb-16">
                 <div className="h-px flex-1 bg-border/20" aria-hidden="true" />
                 <p className="pl-6 font-sans text-xs font-light italic tracking-wider text-muted-foreground/40">
-                    "Simplicity is not the absence of complexity, it's what you build after you understand it"
+                    &ldquo;Simplicity is not the absence of complexity, it&apos;s what you build after you understand it&rdquo;
                 </p>
             </div>
         </div>

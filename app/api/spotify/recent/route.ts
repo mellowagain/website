@@ -50,7 +50,7 @@ export async function GET() {
         return Response.json({ success: false, items: [] });
     }
 
-    let jsonResponse: SpotifyResponse = await response.json();
+    const jsonResponse: SpotifyResponse = await response.json();
 
     if (!jsonResponse.items) {
         return Response.json({ success: false, items: [] });

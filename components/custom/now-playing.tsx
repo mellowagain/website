@@ -7,7 +7,7 @@ import { NierLoadingIndicator } from "@/components/nier-shell";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function NowPlaying() {
-    let { data, error, isLoading } = useSWR("/api/spotify/now", fetcher, {
+    const { data, error, isLoading } = useSWR("/api/spotify/now", fetcher, {
         refreshInterval: 10000,
         revalidateOnFocus: true,
         refreshWhenHidden: false,

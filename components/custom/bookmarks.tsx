@@ -9,7 +9,7 @@ import { Key } from "react";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function Bookmarks() {
-    let { data, error, isLoading } = useSWR("/api/bookmarks", fetcher, {
+    const { data, error, isLoading } = useSWR("/api/bookmarks", fetcher, {
         revalidateOnFocus: false,
     });
 

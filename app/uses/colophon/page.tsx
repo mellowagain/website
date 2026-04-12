@@ -10,8 +10,8 @@ export default function ColophonPage() {
                 <div className="flex flex-col gap-4">
                     <p className="font-sans text-sm leading-relaxed text-foreground/85">
                         This site is a personal experiment in bringing game UI aesthetics to the web. The design is heavily inspired by the
-                        menu system of Nier: Automata, a 2017 action jRPG by PlatinumGames. I think it's the most elegant interface ever
-                        designed for a video game.
+                        menu system of Nier: Automata, a 2017 action jRPG by PlatinumGames. I think it&apos;s the most elegant interface
+                        ever designed for a video game.
                     </p>
                     <p className="font-sans text-sm leading-relaxed text-foreground/85">
                         Every element of the website such as the muted palette, geometric background, floating sidebar, window-based content
@@ -19,9 +19,9 @@ export default function ColophonPage() {
                         game uses warm beige tones.
                     </p>
                     <p className="font-sans text-sm leading-relaxed text-foreground/85">
-                        My speciality is backend and systems engineering so frontend isn't my strength, thus the design of the website was
-                        made with Vercel's v0 using Claude Opus 4.6. It cost about $20 in credits to generate and refine to my taste.
-                        Integrations with third-party APIs for the Blog, Projects, Bookmarks, Playlist and Maps are all hand written.
+                        My speciality is backend and systems engineering so frontend isn&apos;t my strength, thus the design of the website
+                        was made with Vercel&apos;s v0 using Claude Opus 4.6. It cost about $20 in credits to generate and refine to my
+                        taste. Integrations with third-party APIs for the Blog, Projects, Bookmarks, Playlist and Maps are all hand written.
                     </p>
                 </div>
 

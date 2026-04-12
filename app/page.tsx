@@ -1,7 +1,7 @@
 "use client";
 
 import { NierShell } from "@/components/nier-shell";
-import { NierWindow, NierStatRow } from "@/components/nier-window";
+import { NierStatRow } from "@/components/nier-window";
 import { NierPortrait } from "@/components/nier-portrait";
 
 export default function HomePage() {
@@ -24,13 +24,13 @@ export default function HomePage() {
                     {/* Bio */}
                     <div className="flex flex-col gap-4">
                         <p className="font-sans text-sm leading-relaxed text-foreground/85">
-                            I'm Mari, a software engineer who builds high-performance backend systems and developer platforms. I've been
-                            writing code since I was 9 and that early obsession grew into a career focused on scalable infrastructure and
-                            great developer tooling.
+                            I&apos;m Mari, a software engineer who builds high-performance backend systems and developer platforms.
+                            I&apos;ve been writing code since I was 9 and that early obsession grew into a career focused on scalable
+                            infrastructure and great developer tooling.
                         </p>
                         <p className="font-sans text-sm leading-relaxed text-foreground/85">
-                            Outside of work, you'll find me exploring transit networks across Europe and the world, photographing my cats or
-                            deep in aviation rabbit holes.
+                            Outside of work, you&apos;ll find me exploring transit networks across Europe and the world, photographing my
+                            cats or deep in aviation rabbit holes.
                         </p>
                     </div>
 

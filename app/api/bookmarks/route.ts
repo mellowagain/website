@@ -27,6 +27,6 @@ export async function GET() {
         return NextResponse.json({ error: "Non 200 response from raindrop" }, { status: 500 });
     }
 
-    let jsonResponse: RaindropResponse = await response.json();
+    const jsonResponse: RaindropResponse = await response.json();
     return NextResponse.json(jsonResponse);
 }
