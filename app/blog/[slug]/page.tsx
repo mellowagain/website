@@ -1,7 +1,7 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { getPostBySlug, getAllPosts } from "@/lib/blog";
-import { useMDXComponents } from "@/mdx-components";
+import { useMDXComponents as getMDXComponents } from "@/mdx-components";
 import { NierShell } from "@/components/nier-shell";
 import Link from "next/link";
 import rehypePrettyCode from "rehype-pretty-code";
@@ -23,8 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return { title: post.frontmatter.title, description: post.frontmatter.summary };
 }
 
-// eslint-disable-next-line react-hooks/rules-of-hooks
-const components = useMDXComponents({});
+const components = getMDXComponents({});
 
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;

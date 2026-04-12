@@ -86,14 +86,14 @@ export function NierLeafletMap({ locations }: { locations: MapLocation[] }) {
         });
 
         mapInstance.current = map;
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setReady(true);
 
         return () => {
             map.remove();
             mapInstance.current = null;
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [locations]);
 
     return (
         <div className="relative h-full w-full">
