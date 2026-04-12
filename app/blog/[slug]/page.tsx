@@ -23,6 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return { title: post.frontmatter.title, description: post.frontmatter.summary };
 }
 
+// eslint-disable-next-line react-hooks/rules-of-hooks
 const components = useMDXComponents({});
 
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {

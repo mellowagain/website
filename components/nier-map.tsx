@@ -92,6 +92,7 @@ export function NierLeafletMap({ locations }: { locations: MapLocation[] }) {
             map.remove();
             mapInstance.current = null;
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

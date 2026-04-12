@@ -11,8 +11,8 @@ export default function ContactPage() {
             <div className="flex flex-col gap-6">
                 <div className="flex flex-col gap-4">
                     <p className="font-sans text-sm leading-relaxed text-foreground/85">
-                        I'm always open to interesting conversations about Rust, transit infrastructure, developer tooling or anything else
-                        that's cool. Prefer async communication. I'll usually reply within a day or two.
+                        I&apos;m always open to interesting conversations about Rust, transit infrastructure, developer tooling or anything
+                        else that&apos;s cool. Prefer async communication. I&apos;ll usually reply within a day or two.
                     </p>
                 </div>
 
