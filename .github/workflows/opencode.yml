@@ -52,6 +52,11 @@ jobs:
 
           chmod 600 "$XDG_DATA_HOME/opencode/auth.json"
 
+      - name: Set git identity
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
       - name: Run opencode
         uses: anomalyco/opencode/github@77fc88c8ade8e5a620ebbe1197f3a572d29ae91a # v1.4.6
         env:
