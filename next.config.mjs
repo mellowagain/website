@@ -38,6 +38,20 @@ const nextConfig = {
                 source: "/:path*",
                 headers: headers,
             },
+            {
+                source: "/.well-known/openpgpkey/policy",
+                headers: [
+                    { key: "Content-Type", value: "text/plain" },
+                    { key: "Access-Control-Allow-Origin", value: "*" },
+                ],
+            },
+            {
+                source: "/.well-known/openpgpkey/hu/:hash",
+                headers: [
+                    { key: "Content-Type", value: "application/octet-stream" },
+                    { key: "Access-Control-Allow-Origin", value: "*" },
+                ],
+            },
         ];
     },
 };
