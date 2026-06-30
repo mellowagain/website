@@ -82,7 +82,6 @@ export function NierShell({ children }: { children: React.ReactNode }) {
     // Clear navigating state when pathname actually changes
     useEffect(() => {
         if (prevPathname.current !== pathname) {
-            // eslint-disable-next-line react-hooks/set-state-in-effect
             setIsNavigating(false);
             prevPathname.current = pathname;
         }
