@@ -86,7 +86,6 @@ export function NierLeafletMap({ locations }: { locations: MapLocation[] }) {
         });
 
         mapInstance.current = map;
-        // eslint-disable-next-line react-hooks/set-state-in-effect
         setReady(true);
 
         return () => {
