@@ -1,7 +1,7 @@
 import { execSync } from "node:child_process";
 
 const headers = [
-    { key: "X-Clacks-Overhead", value: "GNU Hans Steiner, Terry Davis" }, // https://xclacksoverhead.org/
+    { key: "X-Clacks-Overhead", value: "GNU Lola Belying, Hans Steiner" }, // https://xclacksoverhead.org/
     { key: "X-ServerNickname", value: "Pixel" },
     { key: "X-Hacker", value: "Please open a issue on https://github.com/mellowagain/website" },
 ];
