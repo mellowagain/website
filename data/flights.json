@@ -3299,7 +3299,7 @@
             },
             "registration": "PH-BCD",
             "seat": {
-                "number": null,
+                "number": "9F",
                 "type": "window"
             },
             "class": "economy",
@@ -3326,7 +3326,7 @@
             },
             "registration": "PH-EXH",
             "seat": {
-                "number": null,
+                "number": "8F",
                 "type": "window"
             },
             "class": "economy",
@@ -3377,7 +3377,7 @@
             },
             "registration": "F-HZUJ",
             "seat": {
-                "number": null,
+                "number": "11A",
                 "type": "window"
             },
             "class": "economy",

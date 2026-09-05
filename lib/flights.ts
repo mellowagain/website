@@ -167,6 +167,14 @@ function countVisits(list: Flight[]): Tally[] {
     return [...map.values()].sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
 }
 
+/**
+ * Longest first. Distance decides, but the two directions of a route are the
+ * same distance, so the one that took longer counts as the longer flight.
+ */
+function byDistanceThenDuration(a: { flight: Flight; distance: number }, b: { flight: Flight; distance: number }): number {
+    return b.distance - a.distance || (b.flight.duration ?? 0) - (a.flight.duration ?? 0);
+}
+
 /** How an aircraft type is identified in the tallies: its ICAO code, or the name when it has none. */
 export function aircraftKey(flight: Flight): string | null {
     return flight.aircraft ? (flight.aircraft.code ?? flight.aircraft.name) : null;
@@ -199,7 +207,7 @@ export function aircraftDetail(list: Flight[], key: string): AircraftDetail {
     const ranked = flown
         .map((flight) => ({ flight, distance: distanceKm(flight.from, flight.to) ?? 0 }))
         .filter((entry) => entry.distance > 0)
-        .sort((a, b) => b.distance - a.distance);
+        .sort(byDistanceThenDuration);
 
     return {
         flights: flown.length,
@@ -257,7 +265,7 @@ export function computeStats(list: Flight[]): FlightStats {
         perYear.set(year, bucket);
     }
 
-    const ranked = withDistance.filter(({ distance }) => distance > 0).sort((a, b) => b.distance - a.distance);
+    const ranked = withDistance.filter(({ distance }) => distance > 0).sort(byDistanceThenDuration);
     const chronological = air.slice().sort((a, b) => a.date.localeCompare(b.date));
     const distance = withDistance.reduce((sum, entry) => sum + entry.distance, 0);
 

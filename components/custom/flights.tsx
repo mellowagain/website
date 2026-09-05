@@ -34,6 +34,14 @@ const NierFlightMap = dynamic(() => import("@/components/nier-flight-map").then(
 const ALL = "all";
 const availableYears = years();
 
+const CABINS: Record<string, string> = {
+    economy: "Economy",
+    "premium-economy": "Premium",
+    business: "Business",
+    first: "First",
+    private: "Private",
+};
+
 const MOON_KM = 384_400;
 const MARS_KM = 225_000_000;
 const COMPARISON_INTERVAL_MS = 4500;
@@ -232,11 +240,8 @@ function Superlative({ label, value, detail }: { label: string; value: string; d
 function FlightRow({ flight }: { flight: Flight }) {
     const distance = distanceKm(flight.from, flight.to);
     const rail = flight.mode === "rail";
-    const extras = [
-        flight.class && flight.class !== "economy" ? flight.class.replace("-", " ") : null,
-        flight.seat?.number,
-        flight.registration,
-    ].filter(Boolean);
+    const cabin = flight.class ? (CABINS[flight.class] ?? flight.class) : null;
+    const extras = [flight.seat?.number, flight.registration].filter(Boolean);
 
     return (
         <div className="border-b border-border/15 py-2.5 last:border-b-0">
@@ -273,9 +278,18 @@ function FlightRow({ flight }: { flight: Flight }) {
                     </>
                 )}
                 {flight.note && <span className="font-sans text-xs italic text-muted-foreground/40">({flight.note})</span>}
-                {extras.length > 0 && (
-                    <span className="ml-auto shrink-0 font-mono text-xs capitalize text-muted-foreground/60">{extras.join(" · ")}</span>
-                )}
+                <span className="ml-auto flex shrink-0 items-baseline gap-2.5">
+                    {cabin && (
+                        <span
+                            className={`font-mono text-[11px] uppercase tracking-wider ${
+                                flight.class === "economy" ? "text-muted-foreground/40" : "text-foreground/75"
+                            }`}
+                        >
+                            {cabin}
+                        </span>
+                    )}
+                    {extras.length > 0 && <span className="font-mono text-xs text-muted-foreground/60">{extras.join(" · ")}</span>}
+                </span>
             </div>
         </div>
     );

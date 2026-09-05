@@ -12,10 +12,16 @@
  * segments as flights) are not in that dataset and have to be filled in by hand;
  * the script writes a stub and tells you which ones.
  *
+ * Details the export is missing (a seat number never filled in on FR24) go in
+ * `data/flight-overrides.json`, keyed by "<date> <flight number>". Whatever a
+ * key holds is merged over the flight built from the CSV, so those corrections
+ * survive re-imports too.
+ *
  * Flags:
- *   --out <file>       output flight log      (default data/flights.json)
- *   --airports <file>  airport lookup table   (default data/airports.json)
- *   --offline          never hit the network, stub unknown airports instead
+ *   --out <file>        output flight log      (default data/flights.json)
+ *   --airports <file>   airport lookup table   (default data/airports.json)
+ *   --overrides <file>  per-flight corrections (default data/flight-overrides.json)
+ *   --offline           never hit the network, stub unknown airports instead
  */
 
 import fs from "node:fs";
@@ -30,12 +36,19 @@ const FLIGHT_CLASSES = { 1: "economy", 2: "business", 3: "first", 4: "premium-ec
 const FLIGHT_REASONS = { 1: "leisure", 2: "business", 3: "crew", 4: "other" };
 
 function parseArgs(argv) {
-    const args = { csv: null, out: "data/flights.json", airports: "data/airports.json", offline: false };
+    const args = {
+        csv: null,
+        out: "data/flights.json",
+        airports: "data/airports.json",
+        overrides: "data/flight-overrides.json",
+        offline: false,
+    };
 
     for (let i = 0; i < argv.length; i++) {
         const arg = argv[i];
         if (arg === "--out") args.out = argv[++i];
         else if (arg === "--airports") args.airports = argv[++i];
+        else if (arg === "--overrides") args.overrides = argv[++i];
         else if (arg === "--offline") args.offline = true;
         else if (arg.startsWith("-")) fail(`unknown flag: ${arg}`);
         else args.csv = arg;
@@ -208,6 +221,7 @@ async function main() {
     const args = parseArgs(process.argv.slice(2));
     const outPath = path.resolve(args.out);
     const airportsPath = path.resolve(args.airports);
+    const overridesPath = path.resolve(args.overrides);
 
     const rows = csvToObjects(fs.readFileSync(path.resolve(args.csv), "utf8"));
     console.log(`read ${rows.length} rows from ${args.csv}`);
@@ -235,10 +249,15 @@ async function main() {
 
     const unresolved = [...stops.keys()].filter((code) => airports[code].lat === null || airports[code].lon === null);
 
+    const overrides = fs.existsSync(overridesPath) ? JSON.parse(fs.readFileSync(overridesPath, "utf8")) : {};
+    const applied = new Set();
+
     const flights = rows.map((row) => {
         const from = parseAirport(row.From);
         const to = parseAirport(row.To);
         const rail = airports[from.code].kind === "rail" || airports[to.code].kind === "rail";
+        const key = `${row.Date} ${row["Flight number"]}`;
+        if (overrides[key]) applied.add(key);
 
         return {
             date: row.Date,
@@ -259,6 +278,7 @@ async function main() {
             reason: FLIGHT_REASONS[row["Flight reason"]] ?? null,
             note: row.Note || null,
             mode: rail ? "rail" : "flight",
+            ...overrides[key],
         };
     });
 
@@ -275,6 +295,10 @@ async function main() {
 
     console.log(`wrote ${flights.length} flights to ${path.relative(process.cwd(), outPath)}`);
     console.log(`wrote ${Object.keys(sortedAirports).length} airports to ${path.relative(process.cwd(), airportsPath)}`);
+    if (applied.size) console.log(`applied ${applied.size} override(s)`);
+
+    const stale = Object.keys(overrides).filter((key) => !applied.has(key));
+    if (stale.length) console.warn(`\nwarning: no flight matches ${stale.join(", ")} in ${path.relative(process.cwd(), overridesPath)}`);
 
     if (unresolved.length) {
         console.error(`\nwarning: no coordinates for ${unresolved.join(", ")}`);
