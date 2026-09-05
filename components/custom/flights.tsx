@@ -151,7 +151,7 @@ function AircraftDetail({ item, list }: { item: Tally; list: Flight[] }) {
                     </span>
                     {detail.registrations.map((tail) => (
                         <div key={tail.registration} className="flex items-baseline gap-3 py-0.5">
-                            <span className="w-20 shrink-0 font-mono text-[11px] text-foreground/70">{tail.registration}</span>
+                            <span className="w-20 shrink-0 font-mono text-xs text-foreground/75">{tail.registration}</span>
                             <span className="truncate font-sans text-[11px] text-muted-foreground/55">{tail.airline ?? "--"}</span>
                             <span className="ml-auto shrink-0 font-mono text-[10px] text-muted-foreground/40">{tail.count}x</span>
                         </div>
@@ -257,7 +257,7 @@ function FlightRow({ flight }: { flight: Flight }) {
 
             <div className="mt-1 flex flex-wrap items-baseline gap-x-2 md:pl-[11.5rem]">
                 <span
-                    className={`shrink-0 border px-1 font-mono text-[10px] uppercase tracking-wider ${
+                    className={`shrink-0 border px-1 font-mono text-[11px] uppercase tracking-wider ${
                         rail ? "border-border/30 text-muted-foreground/45" : "border-border/50 text-muted-foreground/70"
                     }`}
                 >
@@ -274,7 +274,7 @@ function FlightRow({ flight }: { flight: Flight }) {
                 )}
                 {flight.note && <span className="font-sans text-xs italic text-muted-foreground/40">({flight.note})</span>}
                 {extras.length > 0 && (
-                    <span className="ml-auto shrink-0 font-mono text-[10px] capitalize text-muted-foreground/45">{extras.join(" · ")}</span>
+                    <span className="ml-auto shrink-0 font-mono text-xs capitalize text-muted-foreground/60">{extras.join(" · ")}</span>
                 )}
             </div>
         </div>
