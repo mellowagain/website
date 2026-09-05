@@ -30,4 +30,4 @@ pnpm run format:check # prettier --check (CI runs this)
 
 - `public/images/cat/` photos MUST be stripped of metadata BEFORE committing with the `public/images/cat/check-image-metadata.sh` script
 - Updating the React version requires changing the version in both `package.json` and `eslint.config.mjs`
-- `data/flights.json` is generated, never hand-edit it. Drop a fresh my.flightradar24.com flight diary export in and re-run `pnpm run flights:import <export.csv>`. Airports missing from OurAirports (rail stations) need lat/lon added to `data/airports.json` by hand once; manual entries there are never overwritten.
+- `data/flights.json` is generated, never hand-edit it. Drop a fresh my.flightradar24.com flight diary export in and re-run `pnpm run flights:import <export.csv>`; the export itself is gitignored and stays local. Airports missing from OurAirports (rail stations) need lat/lon added to `data/airports.json` by hand once; manual entries there are never overwritten.
