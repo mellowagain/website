@@ -6,8 +6,8 @@ import { NierShell } from "@/components/nier-shell";
 import { NierWindow } from "@/components/nier-window";
 import { MapLocation } from "@/components/nier-map";
 import { FlightsTab } from "@/components/custom/flights";
-import { formatDate, formatDuration, formatNumber, tripsTo, tripsVia, type Trip } from "@/lib/flights";
-import { places, servingAirports, visitedPlaces, type Place } from "@/lib/places";
+import { formatDate, formatDateRange, formatDuration, formatNumber, type Trip, type Visit } from "@/lib/flights";
+import { places, visitedPlaces, visitsByPlace, type Place, type PlaceVisits } from "@/lib/places";
 
 const NierLeafletMap = dynamic(() => import("@/components/nier-map").then((mod) => mod.NierLeafletMap), {
     ssr: false,
@@ -42,48 +42,78 @@ function TripChain({ trip }: { trip: Trip }) {
     );
 }
 
-interface PlaceTrips {
-    trips: Trip[];
-    /** true when I only ever changed planes here */
-    transit: boolean;
+/** One journey there and, when there was one, the journey back. */
+function VisitEntry({ visit }: { visit: Visit }) {
+    return (
+        <div className="flex flex-col gap-1 py-1.5 md:flex-row md:items-baseline md:gap-3">
+            <span className="shrink-0 font-mono text-[11px] text-muted-foreground/50 md:w-36">
+                {formatDateRange(visit.start, visit.end)}
+            </span>
+
+            <div className="flex min-w-0 flex-col gap-0.5">
+                <div className="flex items-baseline gap-2">
+                    <span className="w-8 shrink-0 font-mono text-[10px] uppercase tracking-wider text-muted-foreground/35">out</span>
+                    <TripChain trip={visit.outbound} />
+                </div>
+                {visit.inbound && (
+                    <div className="flex items-baseline gap-2">
+                        <span className="w-8 shrink-0 font-mono text-[10px] uppercase tracking-wider text-muted-foreground/35">back</span>
+                        <TripChain trip={visit.inbound} />
+                    </div>
+                )}
+            </div>
+
+            <span className="font-mono text-[10px] text-muted-foreground/40 md:ml-auto md:text-right">
+                {[visit.days > 0 ? `${visit.days} ${visit.days === 1 ? "day" : "days"}` : null, formatNumber(visit.distance) + " km"]
+                    .filter(Boolean)
+                    .join(" · ")}
+            </span>
+        </div>
+    );
 }
 
-function PlaceRow({
-    place,
-    trips,
-    transit,
-    expanded,
-    onToggle,
-}: {
-    place: Place;
-    trips: Trip[];
-    transit: boolean;
-    expanded: boolean;
-    onToggle: () => void;
-}) {
-    const Row = trips.length > 0 ? "button" : "div";
-    const label = transit ? (trips.length === 1 ? "transit" : "transits") : trips.length === 1 ? "flown trip" : "flown trips";
+function TransitEntry({ trip }: { trip: Trip }) {
+    return (
+        <div className="flex flex-col gap-1 py-1.5 md:flex-row md:items-baseline md:gap-3">
+            <span className="shrink-0 font-mono text-[11px] text-muted-foreground/50 md:w-36">{formatDate(trip.start)}</span>
+            <div className="flex items-baseline gap-2">
+                <span className="w-8 shrink-0 font-mono text-[10px] uppercase tracking-wider text-muted-foreground/35">via</span>
+                <TripChain trip={trip} />
+            </div>
+            <span className="font-mono text-[10px] text-muted-foreground/40 md:ml-auto">{formatDuration(trip.duration)}</span>
+        </div>
+    );
+}
+
+function PlaceRow({ place, entry, expanded, onToggle }: { place: Place; entry?: PlaceVisits; expanded: boolean; onToggle: () => void }) {
+    const visits = entry?.visits ?? [];
+    const transits = entry?.transits ?? [];
+    const count = visits.length || transits.length;
+    const label = visits.length ? (visits.length === 1 ? "visit" : "visits") : transits.length === 1 ? "transit" : "transits";
+    const Row = count > 0 ? "button" : "div";
 
     return (
         <>
             <Row
-                {...(trips.length > 0 ? { onClick: onToggle, "aria-expanded": expanded } : {})}
-                className="group flex w-full items-baseline justify-between gap-4 border-b border-border/15 py-2 text-left transition-colors last:border-b-0 hover:bg-background/30"
+                {...(count > 0 ? { onClick: onToggle, "aria-expanded": expanded } : {})}
+                className="group flex w-full flex-col gap-0.5 border-b border-border/15 py-2 text-left transition-colors last:border-b-0 hover:bg-background/30 md:flex-row md:items-baseline md:justify-between md:gap-4"
             >
                 <div className="flex min-w-0 items-baseline gap-3">
                     <span
                         className={`nier-bullet mt-px inline-block h-1.5 w-1.5 shrink-0 border ${
-                            trips.length > 0 ? "border-foreground/40" : "border-transparent"
+                            count > 0 ? "border-foreground/40" : "border-transparent"
                         } ${expanded ? "nier-bullet-active bg-foreground/25" : "bg-transparent"}`}
                         aria-hidden="true"
                     />
                     <span className="font-sans text-sm text-foreground/90">{place.name}</span>
-                    <span className="truncate font-sans text-[11px] text-muted-foreground/40">{place.note}</span>
+                    <span className="truncate font-sans text-[11px] text-muted-foreground/40 max-md:hidden">{place.note}</span>
                 </div>
-                <div className="flex shrink-0 items-baseline gap-3">
-                    {trips.length > 0 && (
-                        <span className="font-mono text-[10px] text-muted-foreground/40">
-                            {trips.length} {label}
+
+                <div className="flex shrink-0 items-baseline gap-3 pl-[calc(0.375rem+0.75rem)] md:pl-0">
+                    <span className="font-sans text-[11px] text-muted-foreground/40 md:hidden">{place.note}</span>
+                    {count > 0 && (
+                        <span className="ml-auto font-mono text-[10px] text-muted-foreground/40 md:ml-0">
+                            {count} {label}
                         </span>
                     )}
                     <span className="font-mono text-xs text-muted-foreground/50">{place.year}</span>
@@ -91,16 +121,12 @@ function PlaceRow({
             </Row>
 
             {expanded && (
-                <div className="flex flex-col border-b border-border/15 bg-background/20 px-3 py-1.5">
-                    {trips.map((trip) => (
-                        <div key={trip.start} className="flex flex-wrap items-baseline gap-x-3 py-1">
-                            <span className="w-24 shrink-0 font-mono text-[11px] text-muted-foreground/50">{formatDate(trip.start)}</span>
-                            <TripChain trip={trip} />
-                            <span className="ml-auto font-mono text-[10px] text-muted-foreground/40">
-                                {trip.legs.length} {trip.legs.length === 1 ? "leg" : "legs"} · {formatDuration(trip.duration)} ·{" "}
-                                {formatNumber(trip.distance)} km
-                            </span>
-                        </div>
+                <div className="flex flex-col border-b border-border/15 bg-background/20 px-3 py-1">
+                    {visits.map((visit) => (
+                        <VisitEntry key={visit.start} visit={visit} />
+                    ))}
+                    {transits.map((trip) => (
+                        <TransitEntry key={trip.start} trip={trip} />
                     ))}
                 </div>
             )}
@@ -111,21 +137,8 @@ function PlaceRow({
 function PlacesTab() {
     const [expandedPlace, setExpandedPlace] = useState<string | null>(null);
 
-    // Which flights got me to which place -- matched by the airports that serve it
-    const tripsByPlace = useMemo(() => {
-        const map = new Map<string, PlaceTrips>();
-
-        for (const group of places) {
-            for (const place of group.locations) {
-                const codes = servingAirports(place, group.category);
-                const arrivals = codes.length ? tripsTo(codes) : [];
-                // Doha was only ever a stopover, so fall back to the trips that passed through
-                map.set(place.name, arrivals.length ? { trips: arrivals, transit: false } : { trips: tripsVia(codes), transit: true });
-            }
-        }
-
-        return map;
-    }, []);
+    // Which journeys got me to which place -- matched by the airports that serve it
+    const visits = useMemo(() => visitsByPlace(), []);
 
     const focus = useMemo(() => places.flatMap((g) => g.locations).find((place) => place.name === expandedPlace)?.coords, [expandedPlace]);
 
@@ -161,8 +174,7 @@ function PlacesTab() {
                             <PlaceRow
                                 key={place.name}
                                 place={place}
-                                trips={tripsByPlace.get(place.name)?.trips ?? []}
-                                transit={tripsByPlace.get(place.name)?.transit ?? false}
+                                entry={visits.get(place.name)}
                                 expanded={expandedPlace === place.name}
                                 onToggle={() => setExpandedPlace(expandedPlace === place.name ? null : place.name)}
                             />

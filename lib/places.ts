@@ -1,10 +1,22 @@
-import { airportsNear } from "@/lib/flights";
+import { airportsNear, tripsVia, visitsTo, type Trip, type Visit } from "@/lib/flights";
+
+/**
+ * Pins a place to specific flights when the airport alone gets it wrong: Delft
+ * shares Schiphol with every Amsterdam trip, and Plymouth was a Heathrow flight
+ * that would otherwise read as a visit to London.
+ */
+export interface PlaceMatch {
+    airports: string[];
+    from?: string;
+    to?: string;
+}
 
 export interface Place {
     name: string;
     coords: [number, number];
     year: string;
     note: string;
+    match?: PlaceMatch;
 }
 
 export interface PlaceGroup {
@@ -77,6 +89,7 @@ export const places: PlaceGroup[] = [
                 coords: [51.9995595, 4.3430983],
                 year: "2024",
                 note: "RustNL 2024",
+                match: { airports: ["AMS"], from: "2024-04-30", to: "2024-05-15" },
             },
             {
                 name: "Cophenhagen, Denmark",
@@ -119,6 +132,7 @@ export const places: PlaceGroup[] = [
                 coords: [50.3884916, -4.1537691],
                 year: "2020",
                 note: "Language exchange",
+                match: { airports: ["LHR"], from: "2019-01-01", to: "2020-12-31" },
             },
             {
                 name: "Lisbon, Portugal",
@@ -214,5 +228,42 @@ export const visitedPlaces = places.filter((group) => group.category !== "Want t
  */
 export function servingAirports(place: Place, category: string): string[] {
     if (!category.startsWith("Visited")) return [];
-    return airportsNear(place.coords, PLACE_RADIUS_KM);
+    return place.match?.airports ?? airportsNear(place.coords, PLACE_RADIUS_KM);
+}
+
+export interface PlaceVisits {
+    visits: Visit[];
+    /** places I only ever changed planes at, listed by the trips that passed through */
+    transits: Trip[];
+}
+
+/**
+ * Matches every visited place up with the journeys there. Pinned places go
+ * first and claim their trips, so the Delft flights don't show up a second time
+ * under Amsterdam and the Heathrow trip stays with Plymouth.
+ */
+export function visitsByPlace(): Map<string, PlaceVisits> {
+    const entries = places
+        .filter((group) => group.category.startsWith("Visited"))
+        .flatMap((group) => group.locations.map((place) => ({ place, category: group.category })));
+
+    const claimed = new Set<Trip>();
+    const result = new Map<string, PlaceVisits>();
+
+    for (const pinned of [true, false]) {
+        for (const { place, category } of entries.filter((entry) => Boolean(entry.place.match) === pinned)) {
+            const codes = servingAirports(place, category);
+            const visits = visitsTo(codes, { from: place.match?.from, to: place.match?.to, exclude: claimed });
+
+            for (const visit of visits) {
+                claimed.add(visit.outbound);
+                if (visit.inbound) claimed.add(visit.inbound);
+            }
+
+            // Doha was only ever a stopover on the way to Manila, so fall back to what passed through
+            result.set(place.name, { visits, transits: visits.length ? [] : tripsVia(codes) });
+        }
+    }
+
+    return result;
 }

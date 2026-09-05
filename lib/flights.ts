@@ -107,10 +107,20 @@ export function formatDuration(minutes: number): string {
     return `${mins}m`;
 }
 
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
 export function formatDate(date: string): string {
     const [year, month, day] = date.split("-");
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    return `${day} ${months[Number(month) - 1]} ${year}`;
+    return `${day} ${MONTHS[Number(month) - 1]} ${year}`;
+}
+
+/** "22 Sep -- 05 Oct 2023", dropping the year from the first half when both share it. */
+export function formatDateRange(start: string, end: string): string {
+    if (start === end) return formatDate(start);
+    if (start.slice(0, 4) !== end.slice(0, 4)) return `${formatDate(start)} – ${formatDate(end)}`;
+
+    const [, month, day] = start.split("-");
+    return `${day} ${MONTHS[Number(month) - 1]} – ${formatDate(end)}`;
 }
 
 export function airportLabel(code: string): string {
@@ -155,6 +165,53 @@ function countVisits(list: Flight[]): Tally[] {
     }
 
     return [...map.values()].sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
+}
+
+/** How an aircraft type is identified in the tallies: its ICAO code, or the name when it has none. */
+export function aircraftKey(flight: Flight): string | null {
+    return flight.aircraft ? (flight.aircraft.code ?? flight.aircraft.name) : null;
+}
+
+export interface AircraftDetail {
+    flights: number;
+    registrations: { registration: string; airline: string | null; count: number }[];
+    longest: Flight | null;
+    shortest: Flight | null;
+    topRoute: Tally | null;
+}
+
+/** Everything behind one row of the aircraft tally: the tails I sat in and what I did with them. */
+export function aircraftDetail(list: Flight[], key: string): AircraftDetail {
+    const flown = list.filter((flight) => aircraftKey(flight) === key);
+
+    const tails = new Map<string, { registration: string; airline: string | null; count: number }>();
+    for (const flight of flown) {
+        if (!flight.registration) continue;
+        const tail = tails.get(flight.registration) ?? {
+            registration: flight.registration,
+            airline: flight.airline?.name ?? null,
+            count: 0,
+        };
+        tail.count += 1;
+        tails.set(flight.registration, tail);
+    }
+
+    const ranked = flown
+        .map((flight) => ({ flight, distance: distanceKm(flight.from, flight.to) ?? 0 }))
+        .filter((entry) => entry.distance > 0)
+        .sort((a, b) => b.distance - a.distance);
+
+    return {
+        flights: flown.length,
+        registrations: [...tails.values()].sort((a, b) => b.count - a.count || a.registration.localeCompare(b.registration)),
+        longest: ranked[0]?.flight ?? null,
+        shortest: ranked[ranked.length - 1]?.flight ?? null,
+        topRoute:
+            tally(flown, (flight) => ({
+                key: routeKey(flight.from, flight.to),
+                label: routeKey(flight.from, flight.to).replace("-", " ↔ "),
+            }))[0] ?? null,
+    };
 }
 
 export interface FlightStats {
@@ -220,15 +277,10 @@ export function computeStats(list: Flight[]): FlightStats {
                   }
                 : null
         ),
-        aircraft: tally(air, (flight) =>
-            flight.aircraft
-                ? {
-                      key: flight.aircraft.code ?? flight.aircraft.name,
-                      label: flight.aircraft.name,
-                      sublabel: flight.aircraft.code ?? undefined,
-                  }
-                : null
-        ),
+        aircraft: tally(air, (flight) => {
+            const key = aircraftKey(flight);
+            return key && flight.aircraft ? { key, label: flight.aircraft.name, sublabel: flight.aircraft.code ?? undefined } : null;
+        }),
         topAirports: countVisits(list),
         routes: tally(list, (flight) => ({
             key: routeKey(flight.from, flight.to),
@@ -261,11 +313,41 @@ function daysBetween(from: string, to: string): number {
     return Math.round((Date.parse(to) - Date.parse(from)) / 86_400_000);
 }
 
+/** "09:25" -> 565 */
+function minutesOfDay(time: string | null): number | null {
+    return time ? Number(time.slice(0, 2)) * 60 + Number(time.slice(3, 5)) : null;
+}
+
+/** Anything longer than this at the same airport is a stay, not a connection. */
+const MAX_LAYOVER_MINUTES = 12 * 60;
+
+/**
+ * Whether a leg continues the previous one. Both times are local to the same
+ * airport, so comparing them directly is fine; an arrival earlier in the day
+ * than its own departure means the flight landed the next morning.
+ */
+function connects(previous: Flight, leg: Flight): boolean {
+    if (previous.to !== leg.from) return false;
+
+    const gap = daysBetween(previous.date, leg.date);
+    if (gap < 0 || gap > 1) return false;
+
+    const departure = minutesOfDay(leg.depTime);
+    const arrival = minutesOfDay(previous.arrTime);
+    const previousDeparture = minutesOfDay(previous.depTime);
+    if (departure === null || arrival === null || previousDeparture === null) return gap === 0;
+
+    const overnight = arrival < previousDeparture ? 1440 : 0;
+    const layover = gap * 1440 + departure - (overnight + arrival);
+
+    return layover >= 0 && layover <= MAX_LAYOVER_MINUTES;
+}
+
 /**
  * Chains legs into journeys: ZRH -> AMS -> BRU booked as two segments on the
  * same day is one trip to Brussels, not two unrelated flights. A leg continues
- * the previous one when it leaves from where the last one landed, at most a day
- * later.
+ * the previous one when it leaves from where the last one landed within a
+ * layover, so a night spent in the connecting city starts a new trip.
  */
 export function groupTrips(list: Flight[]): Trip[] {
     const chronological = list.slice().sort((a, b) => a.date.localeCompare(b.date) || (a.depTime ?? "").localeCompare(b.depTime ?? ""));
@@ -274,9 +356,8 @@ export function groupTrips(list: Flight[]): Trip[] {
     for (const leg of chronological) {
         const current = result[result.length - 1];
         const previous = current?.legs[current.legs.length - 1];
-        const connects = previous && previous.to === leg.from && daysBetween(previous.date, leg.date) <= 1;
 
-        if (current && connects) {
+        if (current && previous && connects(previous, leg)) {
             current.legs.push(leg);
             current.to = leg.to;
             current.end = leg.date;
@@ -317,9 +398,60 @@ function turnaround(trip: Trip): string {
 
 export const trips = groupTrips(flightData.flights as Flight[]);
 
-/** Trips that went to one of `codes` -- the journeys to a place, not the way home. */
-export function tripsTo(codes: string[]): Trip[] {
-    return trips.filter((trip) => codes.includes(trip.destination) && !codes.includes(trip.from)).reverse();
+export interface Visit {
+    outbound: Trip;
+    /** the way back, which is rarely the way out reversed */
+    inbound: Trip | null;
+    start: string;
+    end: string;
+    distance: number;
+    duration: number;
+    days: number;
+}
+
+export interface VisitOptions {
+    /** only count journeys that set off between these dates */
+    from?: string;
+    to?: string;
+    /** trips already claimed by a more specific place */
+    exclude?: Set<Trip>;
+}
+
+/** A journey home this long after arriving belongs to some other trip. */
+const RETURN_WINDOW_DAYS = 45;
+
+/**
+ * Pairs the journey out to a place with the journey back from it. The two rarely
+ * mirror each other -- New York was ZRH -> CDG -> EWR out and JFK -> AMS -> ZRH
+ * back -- so the return is whichever trip next sets off from where this one left
+ * me, not something matched on route.
+ */
+export function visitsTo(codes: string[], options: VisitOptions = {}): Visit[] {
+    const visits: Visit[] = [];
+
+    trips.forEach((outbound, index) => {
+        if (!codes.includes(outbound.destination) || codes.includes(outbound.from)) return;
+        if (options.from && outbound.start < options.from) return;
+        if (options.to && outbound.start > options.to) return;
+        if (options.exclude?.has(outbound)) return;
+
+        const inbound =
+            trips
+                .slice(index + 1)
+                .find((trip) => codes.includes(trip.from) && daysBetween(outbound.end, trip.start) <= RETURN_WINDOW_DAYS) ?? null;
+
+        visits.push({
+            outbound,
+            inbound,
+            start: outbound.start,
+            end: inbound?.end ?? outbound.end,
+            distance: outbound.distance + (inbound?.distance ?? 0),
+            duration: outbound.duration + (inbound?.duration ?? 0),
+            days: daysBetween(outbound.end, inbound?.start ?? outbound.end),
+        });
+    });
+
+    return visits.reverse();
 }
 
 /** Trips that only touched one of `codes` on the way somewhere else. */

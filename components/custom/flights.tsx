@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { NierWindow } from "@/components/nier-window";
 import type { FlightPoint, FlightRoute } from "@/components/nier-flight-map";
 import {
+    aircraftDetail,
     airportLabel,
     computeStats,
     distanceKm,
@@ -85,36 +86,118 @@ function Stat({ label, value, hint }: { label: string; value: string; hint?: Rea
     );
 }
 
-function BarList({ items, limit = 12 }: { items: Tally[]; limit?: number }) {
+function BarList({ items, limit = 12, detail }: { items: Tally[]; limit?: number; detail?: (item: Tally) => React.ReactNode }) {
     const [expanded, setExpanded] = useState(false);
+    const [openItem, setOpenItem] = useState<string | null>(null);
     const max = Math.max(1, ...items.map((item) => item.count));
     const visible = expanded ? items : items.slice(0, limit);
 
     return (
         <>
             <div className="flex flex-col">
-                {visible.map((item) => (
-                    <div key={item.key} className="border-b border-border/15 py-2 last:border-b-0">
-                        <div className="flex items-baseline justify-between gap-4">
-                            <div className="flex min-w-0 items-baseline gap-2">
-                                <span className="truncate font-sans text-sm capitalize text-foreground/90">{item.label}</span>
-                                {item.sublabel && (
-                                    <span className="shrink-0 font-mono text-[10px] text-muted-foreground/40">{item.sublabel}</span>
-                                )}
+                {visible.map((item) => {
+                    const open = openItem === item.key;
+                    const Row = detail ? "button" : "div";
+
+                    return (
+                        <div key={item.key} className="border-b border-border/15 py-2 last:border-b-0">
+                            <Row
+                                {...(detail ? { onClick: () => setOpenItem(open ? null : item.key), "aria-expanded": open } : {})}
+                                className="group flex w-full items-baseline justify-between gap-4 text-left"
+                            >
+                                <div className="flex min-w-0 items-baseline gap-2">
+                                    {detail && (
+                                        <span
+                                            className={`nier-bullet inline-block h-1.5 w-1.5 shrink-0 border border-foreground/40 ${
+                                                open ? "nier-bullet-active bg-foreground/25" : "bg-transparent"
+                                            }`}
+                                            aria-hidden="true"
+                                        />
+                                    )}
+                                    <span className="truncate font-sans text-sm capitalize text-foreground/90">{item.label}</span>
+                                    {item.sublabel && (
+                                        <span className="shrink-0 font-mono text-[10px] text-muted-foreground/40">{item.sublabel}</span>
+                                    )}
+                                </div>
+                                <span className="shrink-0 font-mono text-xs text-muted-foreground/60">{item.count}</span>
+                            </Row>
+
+                            <div className="mt-1.5 h-px w-full bg-border/20" aria-hidden="true">
+                                <div className="h-px bg-foreground/40" style={{ width: `${(item.count / max) * 100}%` }} />
                             </div>
-                            <span className="shrink-0 font-mono text-xs text-muted-foreground/60">{item.count}</span>
+
+                            {open && detail && <div className="mt-2 bg-background/20 px-3 py-1.5">{detail(item)}</div>}
                         </div>
-                        <div className="mt-1.5 h-px w-full bg-border/20" aria-hidden="true">
-                            <div className="h-px bg-foreground/40" style={{ width: `${(item.count / max) * 100}%` }} />
-                        </div>
-                    </div>
-                ))}
+                    );
+                })}
                 {items.length === 0 && <p className="py-2 font-sans text-sm text-muted-foreground/50">Nothing logged.</p>}
             </div>
 
             {items.length > limit && <ShowAllButton expanded={expanded} total={items.length} onToggle={() => setExpanded(!expanded)} />}
         </>
     );
+}
+
+/** What sits behind an aircraft row: the tails I sat in, and what they did. */
+function AircraftDetail({ item, list }: { item: Tally; list: Flight[] }) {
+    const detail = useMemo(() => aircraftDetail(list, item.key), [list, item.key]);
+
+    return (
+        <div className="flex flex-col gap-2">
+            {detail.registrations.length > 0 && (
+                <div className="flex flex-col">
+                    <span className="py-1 font-sans text-[10px] uppercase tracking-[0.2em] text-muted-foreground/40">
+                        {detail.registrations.length} {detail.registrations.length === 1 ? "tail number" : "tail numbers"}
+                    </span>
+                    {detail.registrations.map((tail) => (
+                        <div key={tail.registration} className="flex items-baseline gap-3 py-0.5">
+                            <span className="w-20 shrink-0 font-mono text-[11px] text-foreground/70">{tail.registration}</span>
+                            <span className="truncate font-sans text-[11px] text-muted-foreground/55">{tail.airline ?? "--"}</span>
+                            <span className="ml-auto shrink-0 font-mono text-[10px] text-muted-foreground/40">{tail.count}x</span>
+                        </div>
+                    ))}
+                </div>
+            )}
+
+            <div className="flex flex-col border-t border-border/15 pt-1">
+                {detail.longest && (
+                    <Fact
+                        label="Longest flight"
+                        value={`${detail.longest.from} → ${detail.longest.to}`}
+                        detail={flightDetail(detail.longest)}
+                    />
+                )}
+                {detail.shortest && (
+                    <Fact
+                        label="Shortest flight"
+                        value={`${detail.shortest.from} → ${detail.shortest.to}`}
+                        detail={flightDetail(detail.shortest)}
+                    />
+                )}
+                {detail.topRoute && <Fact label="Most flown route" value={detail.topRoute.label} detail={`${detail.topRoute.count}x`} />}
+            </div>
+        </div>
+    );
+}
+
+function Fact({ label, value, detail }: { label: string; value: string; detail: string }) {
+    return (
+        <div className="flex items-baseline gap-3 py-0.5">
+            <span className="shrink-0 font-sans text-[11px] text-muted-foreground/50">{label}</span>
+            <span className="truncate font-sans text-[11px] text-foreground/75">{value}</span>
+            <span className="ml-auto shrink-0 font-mono text-[10px] text-muted-foreground/45">{detail}</span>
+        </div>
+    );
+}
+
+/** "9'590 km · 12h 30m" */
+function flightDetail(flight: Flight): string {
+    return [
+        distanceKm(flight.from, flight.to) ? `${formatNumber(distanceKm(flight.from, flight.to) ?? 0)} km` : null,
+        flight.duration ? formatDuration(flight.duration) : null,
+    ]
+        .filter(Boolean)
+        .join(" · ");
 }
 
 function ShowAllButton({ expanded, total, onToggle }: { expanded: boolean; total: number; onToggle: () => void }) {
@@ -128,13 +211,14 @@ function ShowAllButton({ expanded, total, onToggle }: { expanded: boolean; total
     );
 }
 
+/** Label above the route on narrow screens -- side by side there is no room for both. */
 function Superlative({ label, value, detail }: { label: string; value: string; detail?: string }) {
     return (
-        <div className="flex items-baseline justify-between gap-4 border-b border-border/15 py-2 last:border-b-0">
+        <div className="flex flex-col gap-0.5 border-b border-border/15 py-2 last:border-b-0 md:flex-row md:items-baseline md:justify-between md:gap-4">
             <span className="shrink-0 font-sans text-sm tracking-wide text-muted-foreground">{label}</span>
-            <div className="flex min-w-0 flex-1 items-baseline justify-end gap-3">
-                <span className="truncate font-sans text-sm text-foreground/90">{value}</span>
-                {detail && <span className="shrink-0 font-mono text-[11px] text-muted-foreground/45">{detail}</span>}
+            <div className="flex min-w-0 items-baseline gap-3 md:flex-1 md:justify-end">
+                <span className="font-sans text-sm text-foreground/90 md:truncate">{value}</span>
+                {detail && <span className="ml-auto shrink-0 font-mono text-[11px] text-muted-foreground/45 md:ml-0">{detail}</span>}
             </div>
         </div>
     );
@@ -336,14 +420,14 @@ export function FlightsTab() {
                         <Superlative
                             label="Longest flight"
                             value={`${airportLabel(stats.longest.from)} → ${airportLabel(stats.longest.to)}`}
-                            detail={`${formatNumber(distanceKm(stats.longest.from, stats.longest.to) ?? 0)} km`}
+                            detail={flightDetail(stats.longest)}
                         />
                     )}
                     {stats.shortest && (
                         <Superlative
                             label="Shortest flight"
                             value={`${airportLabel(stats.shortest.from)} → ${airportLabel(stats.shortest.to)}`}
-                            detail={`${formatNumber(distanceKm(stats.shortest.from, stats.shortest.to) ?? 0)} km`}
+                            detail={flightDetail(stats.shortest)}
                         />
                     )}
                     {stats.routes[0] && (
@@ -379,7 +463,7 @@ export function FlightsTab() {
                     <BarList items={stats.airlines} />
                 </NierWindow>
                 <NierWindow title="Aircraft">
-                    <BarList items={stats.aircraft} />
+                    <BarList items={stats.aircraft} detail={(item) => <AircraftDetail item={item} list={selected} />} />
                 </NierWindow>
                 <NierWindow title="Airports">
                     <BarList items={stats.topAirports} />
