@@ -29,7 +29,7 @@ function createDiamondIcon(isHome: boolean) {
     });
 }
 
-export function NierLeafletMap({ locations }: { locations: MapLocation[] }) {
+export function NierLeafletMap({ locations, focus }: { locations: MapLocation[]; focus?: [number, number] | null }) {
     const mapRef = useRef<HTMLDivElement>(null);
     const mapInstance = useRef<L.Map | null>(null);
     const [ready, setReady] = useState(false);
@@ -96,6 +96,12 @@ export function NierLeafletMap({ locations }: { locations: MapLocation[] }) {
             mapInstance.current = null;
         };
     }, [locations]);
+
+    // Pan to whichever place the list has open
+    useEffect(() => {
+        if (!focus || !mapInstance.current) return;
+        mapInstance.current.flyTo(focus, Math.max(mapInstance.current.getZoom(), DEFAULT_ZOOM), { duration: 0.8 });
+    }, [focus]);
 
     return (
         <div className="relative h-full w-full">

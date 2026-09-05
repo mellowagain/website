@@ -46,18 +46,34 @@ export function getAirport(code: string): Airport | null {
     return airports[code] ?? null;
 }
 
+/** Great circle distance in km between two [lat, lon] pairs. */
+export function haversine(a: [number, number], b: [number, number]): number {
+    const toRad = (deg: number) => (deg * Math.PI) / 180;
+    const dLat = toRad(b[0] - a[0]);
+    const dLon = toRad(b[1] - a[1]);
+    const h = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(a[0])) * Math.cos(toRad(b[0])) * Math.sin(dLon / 2) ** 2;
+
+    return 2 * EARTH_RADIUS_KM * Math.asin(Math.min(1, Math.sqrt(h)));
+}
+
 /** Great circle distance in km, null if either end is missing coordinates. */
 export function distanceKm(from: string, to: string): number | null {
     const a = getAirport(from);
     const b = getAirport(to);
     if (!a || !b || a.lat === null || a.lon === null || b.lat === null || b.lon === null) return null;
 
-    const toRad = (deg: number) => (deg * Math.PI) / 180;
-    const dLat = toRad(b.lat - a.lat);
-    const dLon = toRad(b.lon - a.lon);
-    const h = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(a.lat)) * Math.cos(toRad(b.lat)) * Math.sin(dLon / 2) ** 2;
+    return haversine([a.lat, a.lon], [b.lat, b.lon]);
+}
 
-    return 2 * EARTH_RADIUS_KM * Math.asin(Math.min(1, Math.sqrt(h)));
+/** Airports within `radius` km of a point, nearest first. */
+export function airportsNear(coords: [number, number], radius: number): string[] {
+    return Object.entries(airports)
+        .flatMap(([code, airport]) =>
+            airport.lat === null || airport.lon === null ? [] : [{ code, distance: haversine(coords, [airport.lat, airport.lon]) }]
+        )
+        .filter((entry) => entry.distance <= radius)
+        .sort((a, b) => a.distance - b.distance)
+        .map((entry) => entry.code);
 }
 
 /** Route key that treats ZRH-AMS and AMS-ZRH as the same city pair. */
@@ -227,4 +243,90 @@ export function computeStats(list: Flight[]): FlightStats {
         lastFlight: chronological[chronological.length - 1] ?? null,
         timesAroundEarth: distance / EARTH_CIRCUMFERENCE_KM,
     };
+}
+
+export interface Trip {
+    legs: Flight[];
+    from: string;
+    to: string;
+    /** where the trip was headed, which is not the last stop on a there-and-back */
+    destination: string;
+    start: string;
+    end: string;
+    duration: number;
+    distance: number;
+}
+
+function daysBetween(from: string, to: string): number {
+    return Math.round((Date.parse(to) - Date.parse(from)) / 86_400_000);
+}
+
+/**
+ * Chains legs into journeys: ZRH -> AMS -> BRU booked as two segments on the
+ * same day is one trip to Brussels, not two unrelated flights. A leg continues
+ * the previous one when it leaves from where the last one landed, at most a day
+ * later.
+ */
+export function groupTrips(list: Flight[]): Trip[] {
+    const chronological = list.slice().sort((a, b) => a.date.localeCompare(b.date) || (a.depTime ?? "").localeCompare(b.depTime ?? ""));
+    const result: Trip[] = [];
+
+    for (const leg of chronological) {
+        const current = result[result.length - 1];
+        const previous = current?.legs[current.legs.length - 1];
+        const connects = previous && previous.to === leg.from && daysBetween(previous.date, leg.date) <= 1;
+
+        if (current && connects) {
+            current.legs.push(leg);
+            current.to = leg.to;
+            current.end = leg.date;
+            current.duration += leg.duration ?? 0;
+            current.distance += distanceKm(leg.from, leg.to) ?? 0;
+            continue;
+        }
+
+        result.push({
+            legs: [leg],
+            from: leg.from,
+            to: leg.to,
+            destination: leg.to,
+            start: leg.date,
+            end: leg.date,
+            duration: leg.duration ?? 0,
+            distance: distanceKm(leg.from, leg.to) ?? 0,
+        });
+    }
+
+    return result.map((trip) => ({ ...trip, destination: turnaround(trip) }));
+}
+
+/**
+ * Where a trip was actually going. Usually where it ended, except for a there
+ * and back again on the same day (MXP -> ATH -> MXP), where the point of the
+ * trip is the far end.
+ */
+function turnaround(trip: Trip): string {
+    if (trip.from !== trip.to) return trip.to;
+
+    const stops = trip.legs.map((leg) => leg.to).filter((code) => code !== trip.from);
+    return stops.reduce(
+        (furthest, code) => ((distanceKm(trip.from, code) ?? 0) > (distanceKm(trip.from, furthest) ?? 0) ? code : furthest),
+        stops[0] ?? trip.to
+    );
+}
+
+export const trips = groupTrips(flightData.flights as Flight[]);
+
+/** Trips that went to one of `codes` -- the journeys to a place, not the way home. */
+export function tripsTo(codes: string[]): Trip[] {
+    return trips.filter((trip) => codes.includes(trip.destination) && !codes.includes(trip.from)).reverse();
+}
+
+/** Trips that only touched one of `codes` on the way somewhere else. */
+export function tripsVia(codes: string[]): Trip[] {
+    return trips
+        .filter(
+            (trip) => !codes.includes(trip.from) && !codes.includes(trip.destination) && trip.legs.some((leg) => codes.includes(leg.to))
+        )
+        .reverse();
 }

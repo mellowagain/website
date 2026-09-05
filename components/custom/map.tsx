@@ -1,9 +1,13 @@
 "use client";
 
+import { useMemo, useState } from "react";
+import dynamic from "next/dynamic";
 import { NierShell } from "@/components/nier-shell";
 import { NierWindow } from "@/components/nier-window";
-import dynamic from "next/dynamic";
 import { MapLocation } from "@/components/nier-map";
+import { FlightsTab } from "@/components/custom/flights";
+import { formatDate, formatDuration, formatNumber, tripsTo, tripsVia, type Trip } from "@/lib/flights";
+import { places, servingAirports, visitedPlaces, type Place } from "@/lib/places";
 
 const NierLeafletMap = dynamic(() => import("@/components/nier-map").then((mod) => mod.NierLeafletMap), {
     ssr: false,
@@ -14,249 +18,192 @@ const NierLeafletMap = dynamic(() => import("@/components/nier-map").then((mod) 
     ),
 });
 
-const places = [
-    {
-        category: "Lived",
-        locations: [
-            {
-                name: "Zurich, Switzerland",
-                coords: [47.3774925, 8.4955363],
-                year: "2025 -- present",
-                note: "Current home base",
-            },
-            {
-                name: "Zug, Switzerland",
-                coords: [47.1354895, 8.4845202],
-                year: "2023 -- 2025",
-                note: "Flat share",
-            },
-            {
-                name: "Aarau, Switzerland",
-                coords: [47.3909865, 8.0493671],
-                year: "2003 -- 2023",
-                note: "at my parents",
-            },
-        ],
-    },
-    {
-        category: "Visited -- Europe",
-        locations: [
-            {
-                name: "Amsterdam, Netherlands",
-                coords: [52.3547418, 4.8215612],
-                year: "2022, 2023, 2024, 2025",
-                note: "Work, Vacation w/ friends",
-            },
-            {
-                name: "Brussels, Belgium",
-                coords: [50.8551696, 4.3342174],
-                year: "2023, 2024, 2025",
-                note: "EuroRust 2023, FOSDEM 2025, Visiting friends",
-            },
-            {
-                name: "Berlin, Germany",
-                coords: [52.5069712, 13.2599517],
-                year: "2025",
-                note: "Work",
-            },
-            {
-                name: "Las Palmas de Gran Canaria, Spain",
-                coords: [28.1173971, -15.4602166],
-                year: "2018, 2024",
-                note: "Vacation w/ parents, Work",
-            },
-            {
-                name: "Vienna, Austria",
-                coords: [48.220318, 16.2972431],
-                year: "2024",
-                note: "EuroRust 2024",
-            },
-            {
-                name: "Delft, Netherlands",
-                coords: [51.9995595, 4.3430983],
-                year: "2024",
-                note: "RustNL 2024",
-            },
-            {
-                name: "Cophenhagen, Denmark",
-                coords: [55.6713089, 12.5526248],
-                year: "2023",
-                note: "Visiting friends",
-            },
-            {
-                name: "Gothenburg, Sweden",
-                coords: [57.7010685, 11.7290356],
-                year: "2022, 2023",
-                note: "Visiting friends",
-            },
-            {
-                name: "Milan, Italy",
-                coords: [45.4021925, 8.9640265],
-                year: "2023",
-                note: "Day trip",
-            },
-            {
-                name: "Athens, Greece",
-                coords: [37.9908692, 23.7177398],
-                year: "2023",
-                note: "Day trip",
-            },
-            {
-                name: "London, UK",
-                coords: [51.5287398, -0.2664005],
-                year: "2023",
-                note: "Day trip",
-            },
-            {
-                name: "Düsseldorf, Germany",
-                coords: [51.238527, 6.7319286],
-                year: "2021",
-                note: "Dokomi 2021",
-            },
-            {
-                name: "Plymouth, UK",
-                coords: [50.3884916, -4.1537691],
-                year: "2020",
-                note: "Language exchange",
-            },
-            {
-                name: "Lisbon, Portugal",
-                coords: [38.7441392, -9.2009351],
-                year: "2018",
-                note: "Vacation w/ parents",
-            },
-        ],
-    },
-    {
-        category: "Visited -- Asia",
-        locations: [
-            {
-                name: "Hong Kong",
-                coords: [22.3529584, 113.9745952],
-                year: "2024",
-                note: "Vacation",
-            },
-            {
-                name: "Manila, Philippines",
-                coords: [14.5993341, 120.958884],
-                year: "2019, 2023",
-                note: "Visiting family",
-            },
-            {
-                name: "Doha, Qatar",
-                coords: [25.2841414, 51.4295968],
-                year: "2019",
-                note: "Transit on my way to the Philippines",
-            },
-        ],
-    },
-    {
-        category: "Visited -- America",
-        locations: [
-            {
-                name: "New York City, USA",
-                coords: [40.6972846, -74.1443092],
-                year: "2023",
-                note: "Vacation w/ friends",
-            },
-        ],
-    },
-    {
-        category: "Want to Visit",
-        locations: [
-            {
-                name: "Taiwan",
-                coords: [23.4827208, 118.1806062],
-                year: "---",
-                note: "MRT system, night markets",
-            },
-            {
-                name: "Vietnam",
-                coords: [15.7405956, 100.6205835],
-                year: "---",
-                note: "Hanoi train street",
-            },
-            {
-                name: "South Korea",
-                coords: [35.8140741, 126.554378],
-                year: "---",
-                note: "Transit, food",
-            },
-            {
-                name: "Singapore",
-                coords: [1.3141703, 103.76185],
-                year: "---",
-                note: "MRT system",
-            },
-            {
-                name: "Japan",
-                coords: [33.0671831, 126.5639527],
-                year: "---",
-                note: "Transit, food",
-            },
-            {
-                name: "Iceland",
-                coords: [64.8432404, -21.8847476],
-                year: "---",
-                note: "Northern lights",
-            },
-        ],
-    },
-];
+const TABS = [
+    { id: "places", label: "Places" },
+    { id: "flights", label: "Flights" },
+] as const;
 
-const mapLocations: MapLocation[] = places
-    .filter((obj) => obj.category !== "Want to Visit")
-    .flatMap(({ locations }) => locations as MapLocation[]);
+type TabId = (typeof TABS)[number]["id"];
 
-export default function Map() {
+const mapLocations: MapLocation[] = visitedPlaces.flatMap(({ locations }) => locations as MapLocation[]);
+
+/** ZRH → AMS → BRU, with rail legs marked by a dashed arrow. */
+function TripChain({ trip }: { trip: Trip }) {
+    return (
+        <span className="font-sans text-xs tracking-wide text-foreground/80">
+            {trip.legs[0].from}
+            {trip.legs.map((leg, i) => (
+                <span key={i}>
+                    <span className="px-1 text-muted-foreground/40">{leg.mode === "rail" ? "⇢" : "→"}</span>
+                    {leg.to}
+                </span>
+            ))}
+        </span>
+    );
+}
+
+interface PlaceTrips {
+    trips: Trip[];
+    /** true when I only ever changed planes here */
+    transit: boolean;
+}
+
+function PlaceRow({
+    place,
+    trips,
+    transit,
+    expanded,
+    onToggle,
+}: {
+    place: Place;
+    trips: Trip[];
+    transit: boolean;
+    expanded: boolean;
+    onToggle: () => void;
+}) {
+    const Row = trips.length > 0 ? "button" : "div";
+    const label = transit ? (trips.length === 1 ? "transit" : "transits") : trips.length === 1 ? "flown trip" : "flown trips";
+
+    return (
+        <>
+            <Row
+                {...(trips.length > 0 ? { onClick: onToggle, "aria-expanded": expanded } : {})}
+                className="group flex w-full items-baseline justify-between gap-4 border-b border-border/15 py-2 text-left transition-colors last:border-b-0 hover:bg-background/30"
+            >
+                <div className="flex min-w-0 items-baseline gap-3">
+                    <span
+                        className={`nier-bullet mt-px inline-block h-1.5 w-1.5 shrink-0 border ${
+                            trips.length > 0 ? "border-foreground/40" : "border-transparent"
+                        } ${expanded ? "nier-bullet-active bg-foreground/25" : "bg-transparent"}`}
+                        aria-hidden="true"
+                    />
+                    <span className="font-sans text-sm text-foreground/90">{place.name}</span>
+                    <span className="truncate font-sans text-[11px] text-muted-foreground/40">{place.note}</span>
+                </div>
+                <div className="flex shrink-0 items-baseline gap-3">
+                    {trips.length > 0 && (
+                        <span className="font-mono text-[10px] text-muted-foreground/40">
+                            {trips.length} {label}
+                        </span>
+                    )}
+                    <span className="font-mono text-xs text-muted-foreground/50">{place.year}</span>
+                </div>
+            </Row>
+
+            {expanded && (
+                <div className="flex flex-col border-b border-border/15 bg-background/20 px-3 py-1.5">
+                    {trips.map((trip) => (
+                        <div key={trip.start} className="flex flex-wrap items-baseline gap-x-3 py-1">
+                            <span className="w-24 shrink-0 font-mono text-[11px] text-muted-foreground/50">{formatDate(trip.start)}</span>
+                            <TripChain trip={trip} />
+                            <span className="ml-auto font-mono text-[10px] text-muted-foreground/40">
+                                {trip.legs.length} {trip.legs.length === 1 ? "leg" : "legs"} · {formatDuration(trip.duration)} ·{" "}
+                                {formatNumber(trip.distance)} km
+                            </span>
+                        </div>
+                    ))}
+                </div>
+            )}
+        </>
+    );
+}
+
+function PlacesTab() {
+    const [expandedPlace, setExpandedPlace] = useState<string | null>(null);
+
+    // Which flights got me to which place -- matched by the airports that serve it
+    const tripsByPlace = useMemo(() => {
+        const map = new Map<string, PlaceTrips>();
+
+        for (const group of places) {
+            for (const place of group.locations) {
+                const codes = servingAirports(place, group.category);
+                const arrivals = codes.length ? tripsTo(codes) : [];
+                // Doha was only ever a stopover, so fall back to the trips that passed through
+                map.set(place.name, arrivals.length ? { trips: arrivals, transit: false } : { trips: tripsVia(codes), transit: true });
+            }
+        }
+
+        return map;
+    }, []);
+
+    const focus = useMemo(() => places.flatMap((g) => g.locations).find((place) => place.name === expandedPlace)?.coords, [expandedPlace]);
+
+    return (
+        <div className="flex flex-col gap-6">
+            <p className="font-sans text-sm leading-relaxed text-foreground/70">
+                Places I&apos;ve called home and places I&apos;ve visited. Mostly motivated by transit infrastructure, cities, and the
+                occasional conference. Zoom out to see all places as markers, or open a visited place to see the flights that got me there.
+            </p>
+
+            <NierWindow title="Map">
+                <div className="h-[400px] w-full overflow-hidden lg:h-[500px]">
+                    <NierLeafletMap locations={mapLocations} focus={focus ?? null} />
+                </div>
+            </NierWindow>
+
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+                <NierWindow title="Countries">
+                    <p className="text-center font-sans text-2xl font-light text-foreground/80">17</p>
+                </NierWindow>
+                <NierWindow title="Cities">
+                    <p className="text-center font-sans text-2xl font-light text-foreground/80">203</p>
+                </NierWindow>
+                <NierWindow title="Distance Travelled">
+                    <p className="text-center font-sans text-2xl font-light text-foreground/80">242&apos;810 km</p>
+                </NierWindow>
+            </div>
+
+            {places.map((group) => (
+                <NierWindow key={group.category} title={group.category}>
+                    <div className="flex flex-col">
+                        {group.locations.map((place) => (
+                            <PlaceRow
+                                key={place.name}
+                                place={place}
+                                trips={tripsByPlace.get(place.name)?.trips ?? []}
+                                transit={tripsByPlace.get(place.name)?.transit ?? false}
+                                expanded={expandedPlace === place.name}
+                                onToggle={() => setExpandedPlace(expandedPlace === place.name ? null : place.name)}
+                            />
+                        ))}
+                    </div>
+                </NierWindow>
+            ))}
+        </div>
+    );
+}
+
+export default function TravelMap() {
+    const [tab, setTab] = useState<TabId>("places");
+
     return (
         <NierShell>
             <div className="flex flex-col gap-6">
-                <p className="font-sans text-sm leading-relaxed text-foreground/70">
-                    Places I&apos;ve called home and places I&apos;ve visited. Mostly motivated by transit infrastructure, cities, and the
-                    occasional conference. Zoom out to see all places as markers.
-                </p>
-
-                {/* Leaflet map in a Nier window */}
-                <NierWindow title="Map">
-                    <div className="h-[400px] w-full overflow-hidden lg:h-[500px]">
-                        <NierLeafletMap locations={mapLocations} />
-                    </div>
-                </NierWindow>
-
-                {/* Stats */}
-                <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-                    <NierWindow title="Countries">
-                        <p className="text-center font-sans text-2xl font-light text-foreground/80">17</p>
-                    </NierWindow>
-                    <NierWindow title="Cities">
-                        <p className="text-center font-sans text-2xl font-light text-foreground/80">203</p>
-                    </NierWindow>
-                    <NierWindow title="Distance Travelled">
-                        <p className="text-center font-sans text-2xl font-light text-foreground/80">242&apos;810 km</p>
-                        {/*<p className="text-center font-sans text-xs leading-relaxed text-foreground/80">Zurich HB</p>*/}
-                    </NierWindow>
+                <div className="flex items-stretch border-b border-border/30">
+                    {TABS.map((item) => (
+                        <button
+                            key={item.id}
+                            onClick={() => setTab(item.id)}
+                            aria-current={tab === item.id ? "page" : undefined}
+                            className={`group -mb-px flex items-center gap-2.5 border-b px-4 py-2.5 font-sans text-xs uppercase tracking-[0.25em] transition-colors ${
+                                tab === item.id
+                                    ? "border-foreground/50 bg-accent/40 text-foreground"
+                                    : "border-transparent text-muted-foreground/55 hover:bg-accent/20 hover:text-foreground/80"
+                            }`}
+                        >
+                            <span
+                                className={`nier-bullet inline-block h-2.5 w-2.5 border border-foreground/40 ${
+                                    tab === item.id ? "nier-bullet-active bg-foreground/25" : "bg-transparent"
+                                }`}
+                                aria-hidden="true"
+                            />
+                            {item.label}
+                        </button>
+                    ))}
                 </div>
 
-                {/* Location lists */}
-                {places.map((group, i) => (
-                    <NierWindow key={i} title={group.category}>
-                        <div className="flex flex-col">
-                            {group.locations.map((loc, j) => (
-                                <button
-                                    key={j}
-                                    className="group flex items-baseline justify-between gap-4 border-b border-border/15 py-2 text-left transition-colors last:border-b-0 hover:bg-background/30"
-                                >
-                                    <div className="flex items-baseline gap-3">
-                                        <span className="font-sans text-sm text-foreground/90">{loc.name}</span>
-                                        <span className="font-sans text-[11px] text-muted-foreground/40">{loc.note}</span>
-                                    </div>
-                                    <span className="shrink-0 font-mono text-xs text-muted-foreground/50">{loc.year}</span>
-                                </button>
-                            ))}
-                        </div>
-                    </NierWindow>
-                ))}
+                {tab === "places" ? <PlacesTab /> : <FlightsTab />}
             </div>
         </NierShell>
     );

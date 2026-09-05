@@ -16,7 +16,6 @@ const menuItems = [
     { id: "/playlist", label: "Playlist" },
     { id: "/cat", label: "Cat" },
     { id: "/map", label: "Map" },
-    { id: "/flights", label: "Flights" },
     { id: "/changelog", label: "Changelog" },
     { id: "/contact", label: "Contact" },
 ];
