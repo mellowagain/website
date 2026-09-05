@@ -1,0 +1,3389 @@
+{
+    "source": "flightdiary_2026_09_06_00_32.csv",
+    "generated": "2026-09-05",
+    "flights": [
+        {
+            "date": "2017-07-17",
+            "number": "EK88",
+            "from": "ZRH",
+            "to": "DXB",
+            "depTime": "15:25",
+            "arrTime": "23:45",
+            "duration": 380,
+            "airline": {
+                "name": "Emirates",
+                "iata": "EK",
+                "icao": "UAE"
+            },
+            "aircraft": {
+                "name": "Airbus A380-800",
+                "code": "A388"
+            },
+            "registration": null,
+            "seat": {
+                "number": null,
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2017-07-18",
+            "number": "EK332",
+            "from": "DXB",
+            "to": "MNL",
+            "depTime": "03:10",
+            "arrTime": "16:15",
+            "duration": 545,
+            "airline": {
+                "name": "Emirates",
+                "iata": "EK",
+                "icao": "UAE"
+            },
+            "aircraft": {
+                "name": "Boeing 777-300ER",
+                "code": "B77W"
+            },
+            "registration": null,
+            "seat": {
+                "number": null,
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2017-07-31",
+            "number": "EK335",
+            "from": "MNL",
+            "to": "DXB",
+            "depTime": "23:55",
+            "arrTime": "04:30",
+            "duration": 515,
+            "airline": {
+                "name": "Emirates",
+                "iata": "EK",
+                "icao": "UAE"
+            },
+            "aircraft": {
+                "name": "Boeing 777-300ER",
+                "code": "B77W"
+            },
+            "registration": null,
+            "seat": {
+                "number": null,
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2017-08-01",
+            "number": "EK85",
+            "from": "DXB",
+            "to": "ZRH",
+            "depTime": "15:35",
+            "arrTime": "20:20",
+            "duration": 405,
+            "airline": {
+                "name": "Emirates",
+                "iata": "EK",
+                "icao": "UAE"
+            },
+            "aircraft": {
+                "name": "Airbus A380-800",
+                "code": "A388"
+            },
+            "registration": null,
+            "seat": {
+                "number": null,
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2018-07-25",
+            "number": "TP929",
+            "from": "ZRH",
+            "to": "LIS",
+            "depTime": "06:20",
+            "arrTime": "08:10",
+            "duration": 170,
+            "airline": {
+                "name": "TAP Air Portugal",
+                "iata": "TP",
+                "icao": "TAP"
+            },
+            "aircraft": {
+                "name": "Airbus A320-200",
+                "code": "A320"
+            },
+            "registration": null,
+            "seat": {
+                "number": null,
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2018-07-25",
+            "number": "TP1116",
+            "from": "LIS",
+            "to": "LPA",
+            "depTime": "10:30",
+            "arrTime": "12:50",
+            "duration": 140,
+            "airline": {
+                "name": "TAP Air Portugal",
+                "iata": "TP",
+                "icao": "TAP"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": null,
+            "seat": {
+                "number": null,
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2018-07-30",
+            "number": "TP1119",
+            "from": "LPA",
+            "to": "LIS",
+            "depTime": "13:35",
+            "arrTime": "15:50",
+            "duration": 135,
+            "airline": {
+                "name": "TAP Air Portugal",
+                "iata": "TP",
+                "icao": "TAP"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": null,
+            "seat": {
+                "number": null,
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2018-07-30",
+            "number": "TP928",
+            "from": "LIS",
+            "to": "ZRH",
+            "depTime": "19:00",
+            "arrTime": "22:40",
+            "duration": 160,
+            "airline": {
+                "name": "TAP Air Portugal",
+                "iata": "TP",
+                "icao": "TAP"
+            },
+            "aircraft": {
+                "name": "Airbus A320-200",
+                "code": "A320"
+            },
+            "registration": null,
+            "seat": {
+                "number": null,
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2019-04-14",
+            "number": "QR94",
+            "from": "ZRH",
+            "to": "DIA",
+            "depTime": "09:25",
+            "arrTime": "16:15",
+            "duration": 350,
+            "airline": {
+                "name": "Qatar Airways",
+                "iata": "QR",
+                "icao": "QTR"
+            },
+            "aircraft": {
+                "name": "Airbus A350-900",
+                "code": "A359"
+            },
+            "registration": null,
+            "seat": {
+                "number": null,
+                "type": "aisle"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2019-04-14",
+            "number": "QR934",
+            "from": "DIA",
+            "to": "MNL",
+            "depTime": "17:30",
+            "arrTime": "08:05",
+            "duration": 575,
+            "airline": {
+                "name": "Qatar Airways",
+                "iata": "QR",
+                "icao": "QTR"
+            },
+            "aircraft": {
+                "name": "Boeing 777-300ER",
+                "code": "B77W"
+            },
+            "registration": null,
+            "seat": {
+                "number": null,
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2019-04-28",
+            "number": "QR929",
+            "from": "MNL",
+            "to": "DIA",
+            "depTime": "23:40",
+            "arrTime": "03:55",
+            "duration": 555,
+            "airline": {
+                "name": "Qatar Airways",
+                "iata": "QR",
+                "icao": "QTR"
+            },
+            "aircraft": {
+                "name": "Boeing 777-300ER",
+                "code": "B77W"
+            },
+            "registration": null,
+            "seat": {
+                "number": "39C",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2019-04-29",
+            "number": "QR95",
+            "from": "DIA",
+            "to": "ZRH",
+            "depTime": "09:10",
+            "arrTime": "14:30",
+            "duration": 380,
+            "airline": {
+                "name": "Qatar Airways",
+                "iata": "QR",
+                "icao": "QTR"
+            },
+            "aircraft": {
+                "name": "Airbus A350-900",
+                "code": "A359"
+            },
+            "registration": null,
+            "seat": {
+                "number": "41D",
+                "type": "aisle"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2019-09-22",
+            "number": "LX332",
+            "from": "ZRH",
+            "to": "LHR",
+            "depTime": "12:05",
+            "arrTime": "13:00",
+            "duration": 115,
+            "airline": {
+                "name": "Swiss International Airlines",
+                "iata": "LX",
+                "icao": "SWR"
+            },
+            "aircraft": {
+                "name": "Airbus A320-200",
+                "code": "A320"
+            },
+            "registration": "HB-IJJ",
+            "seat": {
+                "number": "32D",
+                "type": "aisle"
+            },
+            "class": "economy",
+            "reason": "other",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2019-10-05",
+            "number": "LX325",
+            "from": "LHR",
+            "to": "ZRH",
+            "depTime": "17:10",
+            "arrTime": "19:55",
+            "duration": 105,
+            "airline": {
+                "name": "Swiss International Airlines",
+                "iata": "LX",
+                "icao": "SWR"
+            },
+            "aircraft": {
+                "name": "Airbus A320-200",
+                "code": "A320"
+            },
+            "registration": "HB-JLP",
+            "seat": {
+                "number": "5F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "other",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2022-05-31",
+            "number": "KL1958",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "11:50",
+            "arrTime": "13:35",
+            "duration": 105,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-BXN",
+            "seat": {
+                "number": "22F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2022-06-03",
+            "number": "KL1963",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "17:35",
+            "arrTime": "19:00",
+            "duration": 85,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "PH-EZW",
+            "seat": {
+                "number": "12A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2022-06-05",
+            "number": "LX1016",
+            "from": "ZRH",
+            "to": "DUS",
+            "depTime": "08:00",
+            "arrTime": "09:00",
+            "duration": 60,
+            "airline": {
+                "name": "Swiss International Airlines",
+                "iata": "LX",
+                "icao": "SWR"
+            },
+            "aircraft": {
+                "name": "Embraer E190-E2",
+                "code": "E290"
+            },
+            "registration": "HB-AZA",
+            "seat": {
+                "number": "7A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2022-06-05",
+            "number": "LX1027",
+            "from": "DUS",
+            "to": "ZRH",
+            "depTime": "21:15",
+            "arrTime": "22:10",
+            "duration": 55,
+            "airline": {
+                "name": "Swiss International Airlines",
+                "iata": "LX",
+                "icao": "SWR"
+            },
+            "aircraft": {
+                "name": "Embraer E190-E2",
+                "code": "E290"
+            },
+            "registration": "HB-AZH",
+            "seat": {
+                "number": "27A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2022-06-26",
+            "number": "KL1954",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "09:20",
+            "arrTime": "11:00",
+            "duration": 100,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer E195-E2",
+                "code": "E295"
+            },
+            "registration": null,
+            "seat": {
+                "number": "19F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2022-06-26",
+            "number": "KL1157",
+            "from": "AMS",
+            "to": "GOT",
+            "depTime": "12:15",
+            "arrTime": "13:40",
+            "duration": 85,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer 175",
+                "code": "E75S"
+            },
+            "registration": null,
+            "seat": {
+                "number": "11F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2022-07-04",
+            "number": "KL1158",
+            "from": "GOT",
+            "to": "AMS",
+            "depTime": "14:39",
+            "arrTime": "16:07",
+            "duration": 88,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "PH-EZO",
+            "seat": {
+                "number": "12F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2022-07-04",
+            "number": "KL1963",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "17:47",
+            "arrTime": "19:00",
+            "duration": 73,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer 175",
+                "code": "E75L"
+            },
+            "registration": "PH-EXI",
+            "seat": {
+                "number": "19F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2022-09-26",
+            "number": "KL1958",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "11:50",
+            "arrTime": "13:35",
+            "duration": 105,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "PH-EZY",
+            "seat": {
+                "number": "18A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2022-10-03",
+            "number": "KL1961",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "15:15",
+            "arrTime": "16:45",
+            "duration": 90,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-BCE",
+            "seat": {
+                "number": "30A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2022-11-03",
+            "number": "KL1962",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "17:30",
+            "arrTime": "19:15",
+            "duration": 100,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer E195-E2",
+                "code": "E295"
+            },
+            "registration": "PH-NXG",
+            "seat": {
+                "number": "24F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2022-11-03",
+            "number": "KL1733",
+            "from": "AMS",
+            "to": "BRU",
+            "depTime": "21:45",
+            "arrTime": "22:30",
+            "duration": 45,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "PH-EZT",
+            "seat": {
+                "number": "12F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2022-11-08",
+            "number": "KL1726",
+            "from": "BRU",
+            "to": "AMS",
+            "depTime": "14:45",
+            "arrTime": "15:40",
+            "duration": 55,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer 175",
+                "code": "E75L"
+            },
+            "registration": "PH-EXU",
+            "seat": {
+                "number": "16F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2022-11-08",
+            "number": "KL1963",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "17:05",
+            "arrTime": "18:25",
+            "duration": 80,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-700",
+                "code": "B737"
+            },
+            "registration": "PH-BGI",
+            "seat": {
+                "number": "17F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2022-12-12",
+            "number": "KL1960",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "14:10",
+            "arrTime": "15:50",
+            "duration": 100,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "PH-EXE",
+            "seat": {
+                "number": "23A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2022-12-17",
+            "number": "KL1969",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "21:00",
+            "arrTime": "22:25",
+            "duration": 85,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "PH-EXV",
+            "seat": {
+                "number": "14F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2022-12-25",
+            "number": "U28430",
+            "from": "BSL",
+            "to": "LGW",
+            "depTime": "07:55",
+            "arrTime": "08:30",
+            "duration": 95,
+            "airline": {
+                "name": "Easyjet",
+                "iata": "U2",
+                "icao": "EZY"
+            },
+            "aircraft": {
+                "name": "Airbus A320",
+                "code": "A320"
+            },
+            "registration": "HB-JZY",
+            "seat": {
+                "number": "6D",
+                "type": "aisle"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2022-12-25",
+            "number": "U28437",
+            "from": "LGW",
+            "to": "BSL",
+            "depTime": "18:30",
+            "arrTime": "21:05",
+            "duration": 95,
+            "airline": {
+                "name": "Easyjet",
+                "iata": "U2",
+                "icao": "EZY"
+            },
+            "aircraft": {
+                "name": "Airbus A321neo",
+                "code": "A21N"
+            },
+            "registration": "G-UZMD",
+            "seat": {
+                "number": "40F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-02-24",
+            "number": "KL1964",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "19:10",
+            "arrTime": "20:50",
+            "duration": 100,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-BCD",
+            "seat": {
+                "number": "12A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-02-24",
+            "number": "KL1733",
+            "from": "AMS",
+            "to": "BRU",
+            "depTime": "21:45",
+            "arrTime": "22:30",
+            "duration": 45,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "PH-EZW",
+            "seat": {
+                "number": "15A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-03-05",
+            "number": "KL1726",
+            "from": "BRU",
+            "to": "AMS",
+            "depTime": "14:45",
+            "arrTime": "15:40",
+            "duration": 55,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer 175",
+                "code": "E75L"
+            },
+            "registration": "PH-EXH",
+            "seat": {
+                "number": "15A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-03-05",
+            "number": "KL1963",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "17:05",
+            "arrTime": "18:25",
+            "duration": 80,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-BXF",
+            "seat": {
+                "number": "18F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-03-12",
+            "number": "W65541",
+            "from": "MXP",
+            "to": "ATH",
+            "depTime": "06:30",
+            "arrTime": "10:10",
+            "duration": 160,
+            "airline": {
+                "name": "Wizz Air",
+                "iata": "W6",
+                "icao": "WZZ"
+            },
+            "aircraft": {
+                "name": "Airbus A321neo",
+                "code": "A21N"
+            },
+            "registration": "9H-WAD",
+            "seat": {
+                "number": "20A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-03-12",
+            "number": "U22608",
+            "from": "ATH",
+            "to": "MXP",
+            "depTime": "20:30",
+            "arrTime": "22:05",
+            "duration": 155,
+            "airline": {
+                "name": "Easyjet",
+                "iata": "U2",
+                "icao": "EZY"
+            },
+            "aircraft": {
+                "name": "Airbus A319",
+                "code": "A319"
+            },
+            "registration": "OE-LVH",
+            "seat": {
+                "number": "7C",
+                "type": "aisle"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-03-31",
+            "number": "KL1964",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "19:25",
+            "arrTime": "21:00",
+            "duration": 95,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer E195-E2",
+                "code": "E295"
+            },
+            "registration": "PH-NXJ",
+            "seat": {
+                "number": "8F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-04-03",
+            "number": "KL1963",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "17:20",
+            "arrTime": "18:40",
+            "duration": 80,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-900",
+                "code": "B739"
+            },
+            "registration": "PH-BXP",
+            "seat": {
+                "number": "21F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-05-22",
+            "number": "KL1964",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "19:25",
+            "arrTime": "21:00",
+            "duration": 95,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-700",
+                "code": "B737"
+            },
+            "registration": "PH-BGH",
+            "seat": {
+                "number": "15F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-05-27",
+            "number": "KL1961",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "15:15",
+            "arrTime": "16:45",
+            "duration": 90,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-BXB",
+            "seat": {
+                "number": "14A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-07-22",
+            "number": "LX2160",
+            "from": "GVA",
+            "to": "PMI",
+            "depTime": "06:10",
+            "arrTime": "07:45",
+            "duration": 95,
+            "airline": {
+                "name": "Swiss International Airlines",
+                "iata": "LX",
+                "icao": "SWR"
+            },
+            "aircraft": {
+                "name": "Bombardier CS300",
+                "code": "BCS3"
+            },
+            "registration": "HB-JCM",
+            "seat": {
+                "number": "6A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-07-23",
+            "number": "LX2159",
+            "from": "PMI",
+            "to": "ZRH",
+            "depTime": "12:40",
+            "arrTime": "14:40",
+            "duration": 120,
+            "airline": {
+                "name": "Swiss International Airlines",
+                "iata": "LX",
+                "icao": "SWR"
+            },
+            "aircraft": {
+                "name": "Airbus A321",
+                "code": "A321"
+            },
+            "registration": "HB-IOD",
+            "seat": {
+                "number": "12A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-08-04",
+            "number": "CX382",
+            "from": "ZRH",
+            "to": "HKG",
+            "depTime": "13:30",
+            "arrTime": "06:55",
+            "duration": 745,
+            "airline": {
+                "name": "Cathay Pacific",
+                "iata": "CX",
+                "icao": "CPA"
+            },
+            "aircraft": {
+                "name": "Airbus A350-900",
+                "code": "A359"
+            },
+            "registration": "B-LRX",
+            "seat": {
+                "number": "33A",
+                "type": "window"
+            },
+            "class": "premium-economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-08-05",
+            "number": "CX901",
+            "from": "HKG",
+            "to": "MNL",
+            "depTime": "09:00",
+            "arrTime": "11:25",
+            "duration": 140,
+            "airline": {
+                "name": "Cathay Pacific",
+                "iata": "CX",
+                "icao": "CPA"
+            },
+            "aircraft": {
+                "name": "Airbus A330-300",
+                "code": "A333"
+            },
+            "registration": "B-LBK",
+            "seat": {
+                "number": "56K",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-08-17",
+            "number": "CX918",
+            "from": "MNL",
+            "to": "HKG",
+            "depTime": "17:40",
+            "arrTime": "20:10",
+            "duration": 150,
+            "airline": {
+                "name": "Cathay Pacific",
+                "iata": "CX",
+                "icao": "CPA"
+            },
+            "aircraft": {
+                "name": "Airbus A330-300",
+                "code": "A333"
+            },
+            "registration": "B-HLO",
+            "seat": {
+                "number": "12H",
+                "type": "aisle"
+            },
+            "class": "business",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-08-17",
+            "number": "CX383",
+            "from": "HKG",
+            "to": "ZRH",
+            "depTime": "23:05",
+            "arrTime": "06:30",
+            "duration": 805,
+            "airline": {
+                "name": "Cathay Pacific",
+                "iata": "CX",
+                "icao": "CPA"
+            },
+            "aircraft": {
+                "name": "Airbus A350-1000",
+                "code": "A35K"
+            },
+            "registration": "B-LXC",
+            "seat": {
+                "number": "21K",
+                "type": "window"
+            },
+            "class": "business",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-08-26",
+            "number": "KL1962",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "17:35",
+            "arrTime": "19:15",
+            "duration": 100,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-BXH",
+            "seat": {
+                "number": "7A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-08-26",
+            "number": "KL1733",
+            "from": "AMS",
+            "to": "BRU",
+            "depTime": "21:20",
+            "arrTime": "22:05",
+            "duration": 45,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "PH-EXE",
+            "seat": {
+                "number": "22F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-08-29",
+            "number": "KL1726",
+            "from": "BRU",
+            "to": "AMS",
+            "depTime": "15:05",
+            "arrTime": "16:00",
+            "duration": 55,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "PH-EXY",
+            "seat": {
+                "number": "21E",
+                "type": "middle"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-08-30",
+            "number": "KL1959",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "12:20",
+            "arrTime": "13:45",
+            "duration": 85,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "PH-EXV",
+            "seat": {
+                "number": "8F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-09-16",
+            "number": "AF1615",
+            "from": "ZRH",
+            "to": "CDG",
+            "depTime": "15:50",
+            "arrTime": "17:10",
+            "duration": 80,
+            "airline": {
+                "name": "Air France",
+                "iata": "AF",
+                "icao": "AFR"
+            },
+            "aircraft": {
+                "name": "Airbus A319",
+                "code": "A319"
+            },
+            "registration": "F-GRHK",
+            "seat": {
+                "number": "8A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-09-16",
+            "number": "AF62",
+            "from": "CDG",
+            "to": "EWR",
+            "depTime": "19:30",
+            "arrTime": "22:00",
+            "duration": 510,
+            "airline": {
+                "name": "Air France",
+                "iata": "AF",
+                "icao": "AFR"
+            },
+            "aircraft": {
+                "name": "Boeing 777-200",
+                "code": "B772"
+            },
+            "registration": "F-GSPO",
+            "seat": {
+                "number": "29A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-09-25",
+            "number": "KL646",
+            "from": "JFK",
+            "to": "AMS",
+            "depTime": "18:35",
+            "arrTime": "07:55",
+            "duration": 440,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 787-10",
+                "code": "B78X"
+            },
+            "registration": "PH-BKI",
+            "seat": {
+                "number": "18J",
+                "type": "middle"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-09-26",
+            "number": "KL1957",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "09:40",
+            "arrTime": "11:05",
+            "duration": 85,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer E195-E2",
+                "code": "E295"
+            },
+            "registration": "PH-NXC",
+            "seat": {
+                "number": "15A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-10-11",
+            "number": "KL1962",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "17:35",
+            "arrTime": "19:15",
+            "duration": 100,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-BXD",
+            "seat": {
+                "number": "7A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-10-11",
+            "number": "KL1733",
+            "from": "AMS",
+            "to": "BRU",
+            "depTime": "21:20",
+            "arrTime": "22:05",
+            "duration": 45,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "PH-EZP",
+            "seat": {
+                "number": "11F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-10-16",
+            "number": "KL1724",
+            "from": "BRU",
+            "to": "AMS",
+            "depTime": "10:25",
+            "arrTime": "11:25",
+            "duration": 60,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-700",
+                "code": "B737"
+            },
+            "registration": "PH-BGG",
+            "seat": {
+                "number": "15F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-10-16",
+            "number": "KL1961",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "15:15",
+            "arrTime": "16:45",
+            "duration": 90,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-BXL",
+            "seat": {
+                "number": "6E",
+                "type": "middle"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-12-11",
+            "number": "KL1960",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "14:15",
+            "arrTime": "15:55",
+            "duration": 100,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "PH-EXB",
+            "seat": {
+                "number": "11A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2023-12-18",
+            "number": "KL1969",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "21:00",
+            "arrTime": "22:25",
+            "duration": 85,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "PH-EZA",
+            "seat": {
+                "number": "11A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-02-15",
+            "number": "KL1958",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "11:50",
+            "arrTime": "13:30",
+            "duration": 100,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-BCB",
+            "seat": {
+                "number": "1A",
+                "type": "window"
+            },
+            "class": "business",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-02-15",
+            "number": "KL1131",
+            "from": "AMS",
+            "to": "CPH",
+            "depTime": "15:15",
+            "arrTime": "16:35",
+            "duration": 80,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-BXK",
+            "seat": {
+                "number": "1A",
+                "type": "window"
+            },
+            "class": "business",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-02-20",
+            "number": "KL1134",
+            "from": "CPH",
+            "to": "AMS",
+            "depTime": "18:55",
+            "arrTime": "20:20",
+            "duration": 85,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-BGC",
+            "seat": {
+                "number": "1F",
+                "type": "window"
+            },
+            "class": "business",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-02-20",
+            "number": "KL1969",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "21:00",
+            "arrTime": "22:25",
+            "duration": 85,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "PH-EZS",
+            "seat": {
+                "number": "1F",
+                "type": "window"
+            },
+            "class": "business",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-03-15",
+            "number": "KL1964",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "19:10",
+            "arrTime": "20:50",
+            "duration": 100,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer E195-E2",
+                "code": "E295"
+            },
+            "registration": "PH-NXL",
+            "seat": {
+                "number": "16A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-03-15",
+            "number": "KL1733",
+            "from": "AMS",
+            "to": "BRU",
+            "depTime": "21:45",
+            "arrTime": "22:30",
+            "duration": 45,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "PH-EZZ",
+            "seat": {
+                "number": "14A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-03-19",
+            "number": "KL1726",
+            "from": "BRU",
+            "to": "AMS",
+            "depTime": "14:45",
+            "arrTime": "15:40",
+            "duration": 55,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer 175",
+                "code": "E75S"
+            },
+            "registration": "PH-EXU",
+            "seat": {
+                "number": "8F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-03-19",
+            "number": "KL1963",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "17:05",
+            "arrTime": "18:25",
+            "duration": 80,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer E195-E2",
+                "code": "E295"
+            },
+            "registration": "PH-NXD",
+            "seat": {
+                "number": "14F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-05-06",
+            "number": "KL1920",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "11:50",
+            "arrTime": "13:30",
+            "duration": 100,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-700",
+                "code": "B737"
+            },
+            "registration": "PH-BGI",
+            "seat": {
+                "number": "5A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-05-07",
+            "number": "KL1927",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "21:00",
+            "arrTime": "22:25",
+            "duration": 85,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-BCB",
+            "seat": {
+                "number": "16F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "other",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-05-08",
+            "number": "AF1615",
+            "from": "ZRH",
+            "to": "CDG",
+            "depTime": "14:35",
+            "arrTime": "15:55",
+            "duration": 80,
+            "airline": {
+                "name": "Air France",
+                "iata": "AF",
+                "icao": "AFR"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "F-HBLN",
+            "seat": {
+                "number": "3A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "other",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-05-08",
+            "number": "AF1440",
+            "from": "CDG",
+            "to": "AMS",
+            "depTime": "17:50",
+            "arrTime": "19:15",
+            "duration": 85,
+            "airline": {
+                "name": "Air France",
+                "iata": "AF",
+                "icao": "AFR"
+            },
+            "aircraft": {
+                "name": "Airbus A319",
+                "code": "A319"
+            },
+            "registration": "F-GRXK",
+            "seat": {
+                "number": "7A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "other",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-05-18",
+            "number": "KL1921",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "12:20",
+            "arrTime": "13:45",
+            "duration": 85,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "PH-EZR",
+            "seat": {
+                "number": "4D",
+                "type": "aisle"
+            },
+            "class": "business",
+            "reason": "business",
+            "note": "free upgrade",
+            "mode": "flight"
+        },
+        {
+            "date": "2024-05-30",
+            "number": "KL1916",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "07:00",
+            "arrTime": "08:35",
+            "duration": 95,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-900",
+                "code": "B739"
+            },
+            "registration": "PH-BXO",
+            "seat": {
+                "number": "18B",
+                "type": "middle"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-06-03",
+            "number": "KL1927",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "21:00",
+            "arrTime": "22:25",
+            "duration": 85,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-900",
+                "code": "B739"
+            },
+            "registration": "PH-BXR",
+            "seat": {
+                "number": "18F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-07-05",
+            "number": "KL1924",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "17:35",
+            "arrTime": "19:15",
+            "duration": 100,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer E195-E2",
+                "code": "E295"
+            },
+            "registration": "PH-NXJ",
+            "seat": {
+                "number": "5A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-07-05",
+            "number": "KL1707",
+            "from": "AMS",
+            "to": "BRU",
+            "depTime": "21:30",
+            "arrTime": "22:15",
+            "duration": 45,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "PH-EZE",
+            "seat": {
+                "number": "7F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-07-14",
+            "number": "KL1706",
+            "from": "BRU",
+            "to": "AMS",
+            "depTime": "15:05",
+            "arrTime": "16:00",
+            "duration": 55,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer 175",
+                "code": "E75S"
+            },
+            "registration": "PH-EXK",
+            "seat": {
+                "number": "4F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-07-14",
+            "number": "KL1927",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "21:00",
+            "arrTime": "22:25",
+            "duration": 85,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-HSE",
+            "seat": {
+                "number": "4F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-07-15",
+            "number": "KL1924",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "17:35",
+            "arrTime": "19:15",
+            "duration": 100,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "PH-EZB",
+            "seat": {
+                "number": "5A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-07-20",
+            "number": "KL1921",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "12:20",
+            "arrTime": "13:45",
+            "duration": 85,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer 175",
+                "code": "E75S"
+            },
+            "registration": "PH-EXJ",
+            "seat": {
+                "number": "6F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-10-09",
+            "number": "KL1922",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "14:20",
+            "arrTime": "15:55",
+            "duration": 100,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "PH-EZL",
+            "seat": {
+                "number": "5A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-10-09",
+            "number": "KL1905",
+            "from": "AMS",
+            "to": "VIE",
+            "depTime": "17:15",
+            "arrTime": "19:05",
+            "duration": 110,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-HSE",
+            "seat": {
+                "number": "5F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-10-12",
+            "number": "KL1904",
+            "from": "VIE",
+            "to": "AMS",
+            "depTime": "14:20",
+            "arrTime": "16:15",
+            "duration": 115,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-BXH",
+            "seat": {
+                "number": "5F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-10-12",
+            "number": "KL1927",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "21:00",
+            "arrTime": "22:25",
+            "duration": 85,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-BXF",
+            "seat": {
+                "number": "2D",
+                "type": "window"
+            },
+            "class": "business",
+            "reason": "business",
+            "note": "free upgrade",
+            "mode": "flight"
+        },
+        {
+            "date": "2024-10-17",
+            "number": "KL1924",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "17:35",
+            "arrTime": "19:15",
+            "duration": 100,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-900",
+                "code": "B739"
+            },
+            "registration": "PH-BXR",
+            "seat": {
+                "number": "17F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-10-17",
+            "number": "KL1707",
+            "from": "AMS",
+            "to": "BRU",
+            "depTime": "21:30",
+            "arrTime": "22:15",
+            "duration": 45,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer 175",
+                "code": "E75S"
+            },
+            "registration": "PH-EXH",
+            "seat": {
+                "number": "12F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-10-22",
+            "number": "AF7112",
+            "from": "ZYR",
+            "to": "CDG",
+            "depTime": "18:17",
+            "arrTime": "19:54",
+            "duration": 97,
+            "airline": {
+                "name": "SNCF",
+                "iata": "2C",
+                "icao": "TGV"
+            },
+            "aircraft": null,
+            "registration": null,
+            "seat": {
+                "number": "33",
+                "type": "aisle"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "rail"
+        },
+        {
+            "date": "2024-10-22",
+            "number": "AF1414",
+            "from": "CDG",
+            "to": "ZRH",
+            "depTime": "21:10",
+            "arrTime": "22:30",
+            "duration": 80,
+            "airline": {
+                "name": "Air France",
+                "iata": "AF",
+                "icao": "AFR"
+            },
+            "aircraft": {
+                "name": "Bombardier CS300",
+                "code": "BCS3"
+            },
+            "registration": "F-HZUK",
+            "seat": {
+                "number": "7A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-11-26",
+            "number": "KL1924",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "17:30",
+            "arrTime": "19:15",
+            "duration": 100,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-700",
+                "code": "B737"
+            },
+            "registration": "PH-BGI",
+            "seat": {
+                "number": "5A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-11-26",
+            "number": "KL887",
+            "from": "AMS",
+            "to": "HKG",
+            "depTime": "21:25",
+            "arrTime": "16:20",
+            "duration": 715,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 777-200",
+                "code": "B772"
+            },
+            "registration": "PH-BQO",
+            "seat": {
+                "number": "8K",
+                "type": "window"
+            },
+            "class": "business",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-12-04",
+            "number": "AF185",
+            "from": "HKG",
+            "to": "CDG",
+            "depTime": "22:40",
+            "arrTime": "05:50",
+            "duration": 820,
+            "airline": {
+                "name": "Air France",
+                "iata": "AF",
+                "icao": "AFR"
+            },
+            "aircraft": {
+                "name": "Airbus A350-900",
+                "code": "A359"
+            },
+            "registration": "F-HUVM",
+            "seat": {
+                "number": "10D",
+                "type": "aisle"
+            },
+            "class": "business",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-12-05",
+            "number": "AF1114",
+            "from": "CDG",
+            "to": "ZRH",
+            "depTime": "08:35",
+            "arrTime": "09:50",
+            "duration": 75,
+            "airline": {
+                "name": "Air France",
+                "iata": "AF",
+                "icao": "AFR"
+            },
+            "aircraft": {
+                "name": "Bombardier CS300",
+                "code": "BCS3"
+            },
+            "registration": "F-HPNA",
+            "seat": {
+                "number": "14F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-12-16",
+            "number": "UX1676",
+            "from": "ZRH",
+            "to": "MAD",
+            "depTime": "11:05",
+            "arrTime": "13:30",
+            "duration": 145,
+            "airline": {
+                "name": "Air Europa",
+                "iata": "UX",
+                "icao": "AEA"
+            },
+            "aircraft": {
+                "name": "Airbus A321",
+                "code": "A321"
+            },
+            "registration": "EC-NLJ",
+            "seat": {
+                "number": "17A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-12-16",
+            "number": "UX9164",
+            "from": "MAD",
+            "to": "LPA",
+            "depTime": "15:05",
+            "arrTime": "17:00",
+            "duration": 175,
+            "airline": {
+                "name": "Air Europa",
+                "iata": "UX",
+                "icao": "AEA"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "EC-LUT",
+            "seat": {
+                "number": "29K",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-12-21",
+            "number": "UX9161",
+            "from": "LPA",
+            "to": "MAD",
+            "depTime": "10:00",
+            "arrTime": "13:45",
+            "duration": 165,
+            "airline": {
+                "name": "Air Europa",
+                "iata": "UX",
+                "icao": "AEA"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "EC-LPR",
+            "seat": {
+                "number": "22A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2024-12-21",
+            "number": "UX1671",
+            "from": "MAD",
+            "to": "ZRH",
+            "depTime": "14:55",
+            "arrTime": "17:15",
+            "duration": 135,
+            "airline": {
+                "name": "Air Europa",
+                "iata": "UX",
+                "icao": "AEA"
+            },
+            "aircraft": {
+                "name": "Airbus A321",
+                "code": "A321"
+            },
+            "registration": "EC-OCT",
+            "seat": {
+                "number": "22F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2025-01-29",
+            "number": "KL1926",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "19:20",
+            "arrTime": "20:27",
+            "duration": 67,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-BCD",
+            "seat": {
+                "number": "7A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2025-01-29",
+            "number": "KL1707",
+            "from": "AMS",
+            "to": "BRU",
+            "depTime": "21:50",
+            "arrTime": "22:15",
+            "duration": 25,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer 175",
+                "code": "E75L"
+            },
+            "registration": "PH-EXG",
+            "seat": {
+                "number": "5A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2025-02-04",
+            "number": "KL1706",
+            "from": "BRU",
+            "to": "AMS",
+            "depTime": "14:52",
+            "arrTime": "15:40",
+            "duration": 48,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer 175",
+                "code": "E75L"
+            },
+            "registration": "PH-EXM",
+            "seat": {
+                "number": "3F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2025-02-04",
+            "number": "KL1925",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "17:14",
+            "arrTime": "18:25",
+            "duration": 71,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-BXA",
+            "seat": {
+                "number": "6A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2025-05-19",
+            "number": "KL1920",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "11:50",
+            "arrTime": "13:25",
+            "duration": 95,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-BXG",
+            "seat": {
+                "number": "5A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2025-05-25",
+            "number": "KL1923",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "15:20",
+            "arrTime": "16:45",
+            "duration": 85,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-BXU",
+            "seat": {
+                "number": "5F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "business",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2025-06-04",
+            "number": "KL1924",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "17:35",
+            "arrTime": "19:10",
+            "duration": 95,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-900",
+                "code": "B739"
+            },
+            "registration": "PH-BXS",
+            "seat": {
+                "number": "5F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2025-06-04",
+            "number": "KL1707",
+            "from": "AMS",
+            "to": "BRU",
+            "depTime": "21:30",
+            "arrTime": "22:15",
+            "duration": 45,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer 175",
+                "code": "E75L"
+            },
+            "registration": "PH-EXL",
+            "seat": {
+                "number": "5A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2025-06-11",
+            "number": "KL1706",
+            "from": "BRU",
+            "to": "AMS",
+            "depTime": "15:05",
+            "arrTime": "16:00",
+            "duration": 55,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer 175",
+                "code": "E75L"
+            },
+            "registration": "PH-EXL",
+            "seat": {
+                "number": "5F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2025-06-11",
+            "number": "KL1925",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "17:20",
+            "arrTime": "18:40",
+            "duration": 80,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer E195-E2",
+                "code": "E295"
+            },
+            "registration": "PH-NXG",
+            "seat": {
+                "number": "5A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2025-06-24",
+            "number": "HBPMT",
+            "from": "ZRH",
+            "to": "ZRH",
+            "depTime": "18:50",
+            "arrTime": "19:25",
+            "duration": 35,
+            "airline": null,
+            "aircraft": {
+                "name": "Piper PA-28-181 Archer 3",
+                "code": "P28A"
+            },
+            "registration": "HB-PMT",
+            "seat": {
+                "number": null,
+                "type": "window"
+            },
+            "class": "private",
+            "reason": "other",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2025-08-21",
+            "number": "KL1924",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "17:35",
+            "arrTime": "19:10",
+            "duration": 95,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "PH-EZH",
+            "seat": {
+                "number": "3A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2025-08-21",
+            "number": "KL1707",
+            "from": "AMS",
+            "to": "BRU",
+            "depTime": "21:30",
+            "arrTime": "22:15",
+            "duration": 45,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "PH-EXF",
+            "seat": {
+                "number": "2A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2025-08-30",
+            "number": "AF7112",
+            "from": "ZYR",
+            "to": "CDG",
+            "depTime": "17:52",
+            "arrTime": "19:54",
+            "duration": 122,
+            "airline": {
+                "name": "SNCF",
+                "iata": "2C",
+                "icao": "TGV"
+            },
+            "aircraft": null,
+            "registration": null,
+            "seat": {
+                "number": "61",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "rail"
+        },
+        {
+            "date": "2025-08-30",
+            "number": "AF1414",
+            "from": "CDG",
+            "to": "ZRH",
+            "depTime": "21:10",
+            "arrTime": "22:30",
+            "duration": 80,
+            "airline": {
+                "name": "Air France",
+                "iata": "AF",
+                "icao": "AFR"
+            },
+            "aircraft": {
+                "name": "Bombardier CS300",
+                "code": "BCS3"
+            },
+            "registration": "F-HZUH",
+            "seat": {
+                "number": "7A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2025-10-01",
+            "number": "KL1924",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "17:35",
+            "arrTime": "19:10",
+            "duration": 95,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-BGB",
+            "seat": {
+                "number": "7F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2025-10-01",
+            "number": "KL1707",
+            "from": "AMS",
+            "to": "BRU",
+            "depTime": "21:30",
+            "arrTime": "22:15",
+            "duration": 45,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer ERJ-190",
+                "code": "E190"
+            },
+            "registration": "PH-EZR",
+            "seat": {
+                "number": "3A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2025-10-08",
+            "number": "KL1706",
+            "from": "BRU",
+            "to": "AMS",
+            "depTime": "15:05",
+            "arrTime": "16:00",
+            "duration": 55,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer 175",
+                "code": "E75L"
+            },
+            "registration": "PH-EXX",
+            "seat": {
+                "number": "3F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2025-10-08",
+            "number": "KL1925",
+            "from": "AMS",
+            "to": "ZRH",
+            "depTime": "17:20",
+            "arrTime": "18:40",
+            "duration": 80,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-BXF",
+            "seat": {
+                "number": "5A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2026-04-03",
+            "number": "AF1615",
+            "from": "ZRH",
+            "to": "CDG",
+            "depTime": "14:50",
+            "arrTime": "16:10",
+            "duration": 80,
+            "airline": {
+                "name": "Air France",
+                "iata": "AF",
+                "icao": "AFR"
+            },
+            "aircraft": {
+                "name": "Airbus A320-200",
+                "code": "A320"
+            },
+            "registration": "F-GKXR",
+            "seat": {
+                "number": "9A",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2026-04-03",
+            "number": "AF7187",
+            "from": "CDG",
+            "to": "ZYR",
+            "depTime": "19:07",
+            "arrTime": "20:56",
+            "duration": 109,
+            "airline": {
+                "name": "SNCF",
+                "iata": "2C",
+                "icao": "TGV"
+            },
+            "aircraft": null,
+            "registration": null,
+            "seat": {
+                "number": "200",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "rail"
+        },
+        {
+            "date": "2026-04-06",
+            "number": "AF7186",
+            "from": "ZYR",
+            "to": "CDG",
+            "depTime": "16:04",
+            "arrTime": "17:53",
+            "duration": 109,
+            "airline": {
+                "name": "SNCF",
+                "iata": "2C",
+                "icao": "TGV"
+            },
+            "aircraft": null,
+            "registration": null,
+            "seat": {
+                "number": "200",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "rail"
+        },
+        {
+            "date": "2026-04-06",
+            "number": "AF1414",
+            "from": "CDG",
+            "to": "ZRH",
+            "depTime": "21:05",
+            "arrTime": "22:25",
+            "duration": 80,
+            "airline": {
+                "name": "Air France",
+                "iata": "AF",
+                "icao": "AFR"
+            },
+            "aircraft": {
+                "name": "Airbus A220-300",
+                "code": "BCS3"
+            },
+            "registration": "F-HPNA",
+            "seat": {
+                "number": "6F",
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2026-08-27",
+            "number": "KL1924",
+            "from": "ZRH",
+            "to": "AMS",
+            "depTime": "17:35",
+            "arrTime": "19:10",
+            "duration": 95,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Boeing 737-800",
+                "code": "B738"
+            },
+            "registration": "PH-BCD",
+            "seat": {
+                "number": null,
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2026-08-27",
+            "number": "KL1707",
+            "from": "AMS",
+            "to": "BRU",
+            "depTime": "21:30",
+            "arrTime": "22:15",
+            "duration": 45,
+            "airline": {
+                "name": "KLM Royal Dutch Airlines",
+                "iata": "KL",
+                "icao": "KLM"
+            },
+            "aircraft": {
+                "name": "Embraer 175",
+                "code": "E75L"
+            },
+            "registration": "PH-EXH",
+            "seat": {
+                "number": null,
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        },
+        {
+            "date": "2026-08-31",
+            "number": "AF7186",
+            "from": "ZYR",
+            "to": "CDG",
+            "depTime": "16:10",
+            "arrTime": "17:52",
+            "duration": 102,
+            "airline": {
+                "name": "SNCF",
+                "iata": "2C",
+                "icao": "TGV"
+            },
+            "aircraft": null,
+            "registration": null,
+            "seat": {
+                "number": null,
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "rail"
+        },
+        {
+            "date": "2026-08-31",
+            "number": "AF1414",
+            "from": "CDG",
+            "to": "ZRH",
+            "depTime": "21:05",
+            "arrTime": "22:25",
+            "duration": 80,
+            "airline": {
+                "name": "Air France",
+                "iata": "AF",
+                "icao": "AFR"
+            },
+            "aircraft": {
+                "name": "Bombardier CS300",
+                "code": "BCS3"
+            },
+            "registration": "F-HZUJ",
+            "seat": {
+                "number": null,
+                "type": "window"
+            },
+            "class": "economy",
+            "reason": "leisure",
+            "note": null,
+            "mode": "flight"
+        }
+    ]
+}

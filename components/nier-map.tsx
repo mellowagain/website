@@ -45,10 +45,13 @@ export function NierLeafletMap({ locations }: { locations: MapLocation[] }) {
         });
 
         // Dark-themed tiles (CartoDB Dark Matter, desaturated)
-        L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png", { maxZoom: 18, subdomains: "abcd" }).addTo(map);
+        L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png?key=cb1_2ygv_1_c5413c0ee978ff0265cb95c5", {
+            maxZoom: 18,
+            subdomains: "abcd",
+        }).addTo(map);
 
         // Labels layer (lighter, on top)
-        L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png", {
+        L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png?key=cb1_2ygv_1_c5413c0ee978ff0265cb95c5", {
             maxZoom: 18,
             subdomains: "abcd",
             opacity: 0.5,

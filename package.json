@@ -11,7 +11,8 @@
         "start": "next start",
         "lint": "eslint .",
         "format": "prettier --write .",
-        "format:check": "prettier --check ."
+        "format:check": "prettier --check .",
+        "flights:import": "node scripts/import-flightdiary.mjs"
     },
     "dependencies": {
         "@hookform/resolvers": "^5.4.0",
