@@ -4,7 +4,7 @@
  * used by /flights (`data/flights.json`), and keeps the airport lookup table
  * (`data/airports.json`) in sync.
  *
- *   node scripts/import-flightdiary.mjs flightdiary_2026_09_06_00_32.csv
+ *   node scripts/import-flightdiary.mjs flightdiary_<date>.csv
  *
  * Airports that are not in the lookup table yet are resolved against the
  * OurAirports dataset (network). Entries already present are never overwritten,
@@ -21,12 +21,12 @@
  *   --out <file>        output flight log      (default data/flights.json)
  *   --airports <file>   airport lookup table   (default data/airports.json)
  *   --overrides <file>  per-flight corrections (default data/flight-overrides.json)
- *   --offline           never hit the network, stub unknown airports instead
  */
 
 import fs from "node:fs";
 import path from "node:path";
 import process from "node:process";
+import * as prettier from "prettier";
 
 const OURAIRPORTS_URL = "https://davidmegginson.github.io/ourairports-data/airports.csv";
 
@@ -36,25 +36,18 @@ const FLIGHT_CLASSES = { 1: "economy", 2: "business", 3: "first", 4: "premium-ec
 const FLIGHT_REASONS = { 1: "leisure", 2: "business", 3: "crew", 4: "other" };
 
 function parseArgs(argv) {
-    const args = {
-        csv: null,
-        out: "data/flights.json",
-        airports: "data/airports.json",
-        overrides: "data/flight-overrides.json",
-        offline: false,
-    };
+    const args = { csv: null, out: "data/flights.json", airports: "data/airports.json", overrides: "data/flight-overrides.json" };
 
     for (let i = 0; i < argv.length; i++) {
         const arg = argv[i];
         if (arg === "--out") args.out = argv[++i];
         else if (arg === "--airports") args.airports = argv[++i];
         else if (arg === "--overrides") args.overrides = argv[++i];
-        else if (arg === "--offline") args.offline = true;
         else if (arg.startsWith("-")) fail(`unknown flag: ${arg}`);
         else args.csv = arg;
     }
 
-    if (!args.csv) fail("usage: node scripts/import-flightdiary.mjs <flightdiary.csv> [--out data/flights.json] [--offline]");
+    if (!args.csv) fail("usage: node scripts/import-flightdiary.mjs <flightdiary.csv> [--out data/flights.json]");
     return args;
 }
 
@@ -63,7 +56,7 @@ function fail(message) {
     process.exit(1);
 }
 
-/** Minimal RFC 4180 parser -- the FR24 export quotes any field containing a comma or space. */
+// minimal RFC 4180 -- the FR24 export quotes any field containing a comma or space
 function parseCsv(text) {
     const rows = [];
     let row = [];
@@ -114,7 +107,7 @@ function csvToObjects(text) {
     return rows.map((row) => Object.fromEntries(header.map((column, i) => [column, (row[i] ?? "").trim()])));
 }
 
-/** "Zurich / Kloten (ZRH/LSZH)" -> { code, icao, city, name } */
+// "Zurich / Kloten (ZRH/LSZH)" -> { code, icao, city, name }
 function parseAirport(value) {
     const match = value.match(/^(.*?)\s*\(([^/]*)\/([^)]*)\)\s*$/);
     if (!match) fail(`cannot parse airport: ${JSON.stringify(value)}`);
@@ -127,7 +120,7 @@ function parseAirport(value) {
     return { code, iata: iata.trim() || null, icao: icao.trim() || null, city: city.trim(), name: rest.join(" / ").trim() || city.trim() };
 }
 
-/** "Qatar Airways (QR/QTR)" -> { name, iata, icao }, or null when unset. */
+// "Qatar Airways (QR/QTR)" -> { name, iata, icao }, or null when unset
 function parseAirline(value) {
     const match = value.match(/^(.*?)\s*\(([^/]*)\/([^)]*)\)\s*$/);
     if (!match) return value.trim() ? { name: value.trim(), iata: null, icao: null } : null;
@@ -137,7 +130,7 @@ function parseAirline(value) {
     return { name: name.trim(), iata: iata.trim() || null, icao: icao.trim() || null };
 }
 
-/** "Airbus A350-900 (A359)" -> { name, code }, or null for rail segments. */
+// "Airbus A350-900 (A359)" -> { name, code }, or null for rail segments
 function parseAircraft(value) {
     const match = value.match(/^(.*?)\s*\(([^)]*)\)\s*$/);
     if (!match) return value.trim() ? { name: value.trim(), code: null } : null;
@@ -148,7 +141,7 @@ function parseAircraft(value) {
     return { name: name.trim().replace(/^(\S+) \1 /, "$1 "), code: code.trim() || null };
 }
 
-/** "05:50:00" -> 350 minutes */
+// "05:50:00" -> 350 minutes
 function parseDuration(value) {
     const match = value.match(/^(\d+):(\d{2}):(\d{2})$/);
     if (!match) return null;
@@ -156,19 +149,16 @@ function parseDuration(value) {
     return Number(hours) * 60 + Number(minutes) + Math.round(Number(seconds) / 60);
 }
 
-/** "09:25:00" -> "09:25" */
+// "09:25:00" -> "09:25"
 function parseTime(value) {
     const match = value.match(/^(\d{2}):(\d{2})/);
     return match ? `${match[1]}:${match[2]}` : null;
 }
 
+const regions = new Intl.DisplayNames(["en"], { type: "region" });
+
 function countryName(code) {
-    if (!code) return null;
-    try {
-        return new Intl.DisplayNames(["en"], { type: "region" }).of(code) ?? code;
-    } catch {
-        return code;
-    }
+    return code ? (regions.of(code) ?? code) : null;
 }
 
 async function fetchOurAirports() {
@@ -239,10 +229,10 @@ async function main() {
     const missing = [...stops.values()].filter((stop) => !airports[stop.code]);
     if (missing.length) {
         console.log(`${missing.length} unknown airport(s): ${missing.map((s) => s.code).join(", ")}`);
-        const dataset = args.offline ? null : await fetchOurAirports();
+        const dataset = await fetchOurAirports();
 
         for (const stop of missing) {
-            const row = dataset && ((stop.icao && dataset.byIcao.get(stop.icao)) || (stop.iata && dataset.byIata.get(stop.iata)));
+            const row = (stop.icao && dataset.byIcao.get(stop.icao)) || (stop.iata && dataset.byIata.get(stop.iata));
             airports[stop.code] = toAirportEntry(stop, row);
         }
     }
@@ -307,17 +297,10 @@ async function main() {
     }
 }
 
-/** Written through prettier so `pnpm run format:check` stays happy in CI. */
+// written through prettier so `pnpm run format:check` stays happy in CI
 async function writeJson(file, value) {
-    let output = JSON.stringify(value, null, 4) + "\n";
-
-    try {
-        const prettier = await import("prettier");
-        const config = (await prettier.resolveConfig(file)) ?? {};
-        output = await prettier.format(output, { ...config, filepath: file });
-    } catch {
-        console.warn(`  prettier unavailable, writing ${path.basename(file)} unformatted`);
-    }
+    const config = await prettier.resolveConfig(file);
+    const output = await prettier.format(JSON.stringify(value, null, 4), { ...config, filepath: file });
 
     fs.mkdirSync(path.dirname(file), { recursive: true });
     fs.writeFileSync(file, output);

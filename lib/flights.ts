@@ -1,3 +1,4 @@
+import { format, isSameYear, parseISO } from "date-fns";
 import airportData from "@/data/airports.json";
 import flightData from "@/data/flights.json";
 
@@ -35,7 +36,7 @@ export interface Flight {
     mode: FlightMode;
 }
 
-export const airports = airportData as Record<string, Airport>;
+const airports = airportData as Record<string, Airport>;
 export const flights = (flightData.flights as Flight[]).slice().reverse(); // newest first
 export const flightsGenerated = flightData.generated;
 
@@ -46,8 +47,7 @@ export function getAirport(code: string): Airport | null {
     return airports[code] ?? null;
 }
 
-/** Great circle distance in km between two [lat, lon] pairs. */
-export function haversine(a: [number, number], b: [number, number]): number {
+function haversine(a: [number, number], b: [number, number]): number {
     const toRad = (deg: number) => (deg * Math.PI) / 180;
     const dLat = toRad(b[0] - a[0]);
     const dLon = toRad(b[1] - a[1]);
@@ -56,32 +56,40 @@ export function haversine(a: [number, number], b: [number, number]): number {
     return 2 * EARTH_RADIUS_KM * Math.asin(Math.min(1, Math.sqrt(h)));
 }
 
-/** Great circle distance in km, null if either end is missing coordinates. */
-export function distanceKm(from: string, to: string): number | null {
-    const a = getAirport(from);
-    const b = getAirport(to);
-    if (!a || !b || a.lat === null || a.lon === null || b.lat === null || b.lon === null) return null;
-
-    return haversine([a.lat, a.lon], [b.lat, b.lon]);
+export function coordsOf(code: string): [number, number] | null {
+    const airport = getAirport(code);
+    return airport && airport.lat !== null && airport.lon !== null ? [airport.lat, airport.lon] : null;
 }
 
-/** Airports within `radius` km of a point, nearest first. */
+export function distanceKm(from: string, to: string): number | null {
+    const a = coordsOf(from);
+    const b = coordsOf(to);
+
+    return a && b ? haversine(a, b) : null;
+}
+
+// nearest first
 export function airportsNear(coords: [number, number], radius: number): string[] {
-    return Object.entries(airports)
-        .flatMap(([code, airport]) =>
-            airport.lat === null || airport.lon === null ? [] : [{ code, distance: haversine(coords, [airport.lat, airport.lon]) }]
-        )
+    return Object.keys(airports)
+        .flatMap((code) => {
+            const position = coordsOf(code);
+            return position ? [{ code, distance: haversine(coords, position) }] : [];
+        })
         .filter((entry) => entry.distance <= radius)
         .sort((a, b) => a.distance - b.distance)
         .map((entry) => entry.code);
 }
 
-/** Route key that treats ZRH-AMS and AMS-ZRH as the same city pair. */
+// both directions of a route are the same city pair
 export function routeKey(from: string, to: string): string {
     return [from, to].sort().join("-");
 }
 
-export function flightYear(flight: Flight): string {
+export function routeLabel(from: string, to: string): string {
+    return [from, to].sort().join(" ↔ ");
+}
+
+function flightYear(flight: Flight): string {
     return flight.date.slice(0, 4);
 }
 
@@ -89,14 +97,14 @@ export function years(list: Flight[] = flights): string[] {
     return [...new Set(list.map(flightYear))].sort((a, b) => b.localeCompare(a));
 }
 
-/** 242810 -> "242'810", matching the Swiss grouping used elsewhere on the site. */
+// 242810 -> 242'810
 export function formatNumber(value: number): string {
     return Math.round(value)
         .toString()
         .replace(/\B(?=(\d{3})+(?!\d))/g, "’");
 }
 
-/** 1370 -> "22h 50m", 24h+ -> "2d 6h" */
+// 1370 -> 22h 50m, 24h+ -> 2d 6h
 export function formatDuration(minutes: number): string {
     const days = Math.floor(minutes / 1440);
     const hours = Math.floor((minutes % 1440) / 60);
@@ -107,20 +115,16 @@ export function formatDuration(minutes: number): string {
     return `${mins}m`;
 }
 
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
 export function formatDate(date: string): string {
-    const [year, month, day] = date.split("-");
-    return `${day} ${MONTHS[Number(month) - 1]} ${year}`;
+    return format(parseISO(date), "dd MMM yyyy");
 }
 
-/** "22 Sep -- 05 Oct 2023", dropping the year from the first half when both share it. */
+// 22 Sep -- 05 Oct 2023
 export function formatDateRange(start: string, end: string): string {
     if (start === end) return formatDate(start);
-    if (start.slice(0, 4) !== end.slice(0, 4)) return `${formatDate(start)} – ${formatDate(end)}`;
 
-    const [, month, day] = start.split("-");
-    return `${day} ${MONTHS[Number(month) - 1]} – ${formatDate(end)}`;
+    const from = parseISO(start);
+    return `${format(from, isSameYear(from, parseISO(end)) ? "dd MMM" : "dd MMM yyyy")} – ${formatDate(end)}`;
 }
 
 export function airportLabel(code: string): string {
@@ -152,7 +156,7 @@ function tally(list: Flight[], pick: (flight: Flight) => { key: string; label: s
     return [...map.values()].sort((a, b) => b.count - a.count || b.distance - a.distance || a.label.localeCompare(b.label));
 }
 
-/** How often each airport was touched, counting departures and arrivals separately. */
+// departures and arrivals count separately
 function countVisits(list: Flight[]): Tally[] {
     const map = new Map<string, Tally>();
 
@@ -167,28 +171,22 @@ function countVisits(list: Flight[]): Tally[] {
     return [...map.values()].sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
 }
 
-/**
- * Longest first. Distance decides, but the two directions of a route are the
- * same distance, so the one that took longer counts as the longer flight.
- */
+// both directions of a route are the same distance, so time breaks the tie
 function byDistanceThenDuration(a: { flight: Flight; distance: number }, b: { flight: Flight; distance: number }): number {
     return b.distance - a.distance || (b.flight.duration ?? 0) - (a.flight.duration ?? 0);
 }
 
-/** How an aircraft type is identified in the tallies: its ICAO code, or the name when it has none. */
-export function aircraftKey(flight: Flight): string | null {
+function aircraftKey(flight: Flight): string | null {
     return flight.aircraft ? (flight.aircraft.code ?? flight.aircraft.name) : null;
 }
 
 export interface AircraftDetail {
-    flights: number;
     registrations: { registration: string; airline: string | null; count: number }[];
     longest: Flight | null;
     shortest: Flight | null;
     topRoute: Tally | null;
 }
 
-/** Everything behind one row of the aircraft tally: the tails I sat in and what I did with them. */
 export function aircraftDetail(list: Flight[], key: string): AircraftDetail {
     const flown = list.filter((flight) => aircraftKey(flight) === key);
 
@@ -210,15 +208,11 @@ export function aircraftDetail(list: Flight[], key: string): AircraftDetail {
         .sort(byDistanceThenDuration);
 
     return {
-        flights: flown.length,
         registrations: [...tails.values()].sort((a, b) => b.count - a.count || a.registration.localeCompare(b.registration)),
         longest: ranked[0]?.flight ?? null,
         shortest: ranked[ranked.length - 1]?.flight ?? null,
         topRoute:
-            tally(flown, (flight) => ({
-                key: routeKey(flight.from, flight.to),
-                label: routeKey(flight.from, flight.to).replace("-", " ↔ "),
-            }))[0] ?? null,
+            tally(flown, (flight) => ({ key: routeKey(flight.from, flight.to), label: routeLabel(flight.from, flight.to) }))[0] ?? null,
     };
 }
 
@@ -233,13 +227,11 @@ export interface FlightStats {
     aircraft: Tally[];
     topAirports: Tally[];
     routes: Tally[];
-    classes: Tally[];
     perYear: { year: string; count: number; distance: number }[];
     longest: Flight | null;
     shortest: Flight | null;
     firstFlight: Flight | null;
     lastFlight: Flight | null;
-    timesAroundEarth: number;
 }
 
 export function computeStats(list: Flight[]): FlightStats {
@@ -292,16 +284,14 @@ export function computeStats(list: Flight[]): FlightStats {
         topAirports: countVisits(list),
         routes: tally(list, (flight) => ({
             key: routeKey(flight.from, flight.to),
-            label: routeKey(flight.from, flight.to).replace("-", " ↔ "),
+            label: routeLabel(flight.from, flight.to),
             sublabel: [getAirport(flight.from)?.city, getAirport(flight.to)?.city].filter(Boolean).sort().join(" / "),
         })),
-        classes: tally(air, (flight) => (flight.class ? { key: flight.class, label: flight.class.replace("-", " ") } : null)),
         perYear: [...perYear.values()].sort((a, b) => a.year.localeCompare(b.year)),
         longest: ranked[0]?.flight ?? null,
         shortest: ranked[ranked.length - 1]?.flight ?? null,
         firstFlight: chronological[0] ?? null,
         lastFlight: chronological[chronological.length - 1] ?? null,
-        timesAroundEarth: distance / EARTH_CIRCUMFERENCE_KM,
     };
 }
 
@@ -309,7 +299,7 @@ export interface Trip {
     legs: Flight[];
     from: string;
     to: string;
-    /** where the trip was headed, which is not the last stop on a there-and-back */
+    // not the last stop when the trip came back to where it started
     destination: string;
     start: string;
     end: string;
@@ -321,19 +311,14 @@ function daysBetween(from: string, to: string): number {
     return Math.round((Date.parse(to) - Date.parse(from)) / 86_400_000);
 }
 
-/** "09:25" -> 565 */
 function minutesOfDay(time: string | null): number | null {
     return time ? Number(time.slice(0, 2)) * 60 + Number(time.slice(3, 5)) : null;
 }
 
-/** Anything longer than this at the same airport is a stay, not a connection. */
+// longer than this at the same airport is a stay, not a connection
 const MAX_LAYOVER_MINUTES = 12 * 60;
 
-/**
- * Whether a leg continues the previous one. Both times are local to the same
- * airport, so comparing them directly is fine; an arrival earlier in the day
- * than its own departure means the flight landed the next morning.
- */
+// both times are local to the same airport, so they compare directly
 function connects(previous: Flight, leg: Flight): boolean {
     if (previous.to !== leg.from) return false;
 
@@ -345,19 +330,15 @@ function connects(previous: Flight, leg: Flight): boolean {
     const previousDeparture = minutesOfDay(previous.depTime);
     if (departure === null || arrival === null || previousDeparture === null) return gap === 0;
 
+    // landed the morning after it took off
     const overnight = arrival < previousDeparture ? 1440 : 0;
     const layover = gap * 1440 + departure - (overnight + arrival);
 
     return layover >= 0 && layover <= MAX_LAYOVER_MINUTES;
 }
 
-/**
- * Chains legs into journeys: ZRH -> AMS -> BRU booked as two segments on the
- * same day is one trip to Brussels, not two unrelated flights. A leg continues
- * the previous one when it leaves from where the last one landed within a
- * layover, so a night spent in the connecting city starts a new trip.
- */
-export function groupTrips(list: Flight[]): Trip[] {
+// ZRH -> AMS -> BRU on one evening is a single trip to Brussels
+function groupTrips(list: Flight[]): Trip[] {
     const chronological = list.slice().sort((a, b) => a.date.localeCompare(b.date) || (a.depTime ?? "").localeCompare(b.depTime ?? ""));
     const result: Trip[] = [];
 
@@ -389,11 +370,7 @@ export function groupTrips(list: Flight[]): Trip[] {
     return result.map((trip) => ({ ...trip, destination: turnaround(trip) }));
 }
 
-/**
- * Where a trip was actually going. Usually where it ended, except for a there
- * and back again on the same day (MXP -> ATH -> MXP), where the point of the
- * trip is the far end.
- */
+// a trip that came home again (MXP -> ATH -> MXP) was going to its far end
 function turnaround(trip: Trip): string {
     if (trip.from !== trip.to) return trip.to;
 
@@ -408,32 +385,26 @@ export const trips = groupTrips(flightData.flights as Flight[]);
 
 export interface Visit {
     outbound: Trip;
-    /** the way back, which is rarely the way out reversed */
     inbound: Trip | null;
     start: string;
     end: string;
     distance: number;
-    duration: number;
     days: number;
 }
 
 export interface VisitOptions {
-    /** only count journeys that set off between these dates */
+    // only count journeys that set off between these dates
     from?: string;
     to?: string;
-    /** trips already claimed by a more specific place */
+    // trips already claimed by a more specific place
     exclude?: Set<Trip>;
 }
 
-/** A journey home this long after arriving belongs to some other trip. */
+// a journey home later than this belongs to some other trip
 const RETURN_WINDOW_DAYS = 45;
 
-/**
- * Pairs the journey out to a place with the journey back from it. The two rarely
- * mirror each other -- New York was ZRH -> CDG -> EWR out and JFK -> AMS -> ZRH
- * back -- so the return is whichever trip next sets off from where this one left
- * me, not something matched on route.
- */
+// the way back rarely mirrors the way out (New York was out via CDG, back via AMS),
+// so it is whichever trip next sets off from where this one landed
 export function visitsTo(codes: string[], options: VisitOptions = {}): Visit[] {
     const visits: Visit[] = [];
 
@@ -454,7 +425,6 @@ export function visitsTo(codes: string[], options: VisitOptions = {}): Visit[] {
             start: outbound.start,
             end: inbound?.end ?? outbound.end,
             distance: outbound.distance + (inbound?.distance ?? 0),
-            duration: outbound.duration + (inbound?.duration ?? 0),
             days: daysBetween(outbound.end, inbound?.start ?? outbound.end),
         });
     });
@@ -462,7 +432,6 @@ export function visitsTo(codes: string[], options: VisitOptions = {}): Visit[] {
     return visits.reverse();
 }
 
-/** Trips that only touched one of `codes` on the way somewhere else. */
 export function tripsVia(codes: string[]): Trip[] {
     return trips
         .filter(

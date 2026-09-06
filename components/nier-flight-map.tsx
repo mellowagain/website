@@ -20,16 +20,11 @@ export interface FlightPoint {
     code: string;
     name: string;
     city: string;
-    country: string | null;
     coords: [number, number];
     count: number;
 }
 
-/**
- * Interpolates a great circle so routes bend the way they do on FR24 instead of
- * cutting straight across the projection. Longitudes are unwrapped, otherwise a
- * route crossing the antimeridian gets drawn the long way around the map.
- */
+// routes bend the way they do on FR24 rather than cutting straight across the projection
 function greatCircle(from: [number, number], to: [number, number]): [number, number][] {
     const toRad = (deg: number) => (deg * Math.PI) / 180;
     const toDeg = (rad: number) => (rad * 180) / Math.PI;
@@ -162,7 +157,6 @@ export function NierFlightMap({ routes, points }: { routes: FlightRoute[]; point
                 weight: 0.8 + share * 2.2,
                 opacity: 0.3 + share * 0.5,
                 dashArray: route.mode === "rail" ? "3 5" : undefined,
-                interactive: true,
             })
                 .bindPopup(popup(route.label, route.mode === "rail" ? "rail segment" : "route", `${route.count}x flown`), {
                     closeButton: false,
@@ -183,8 +177,6 @@ export function NierFlightMap({ routes, points }: { routes: FlightRoute[]; point
 
         if (points.length) {
             map.fitBounds(L.latLngBounds(points.map((point) => point.coords)), { padding: [40, 40], maxZoom: 6 });
-        } else {
-            map.setView(FALLBACK_CENTER, FALLBACK_ZOOM);
         }
     }, [routes, points]);
 

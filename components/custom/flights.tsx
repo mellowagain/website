@@ -8,6 +8,7 @@ import {
     aircraftDetail,
     airportLabel,
     computeStats,
+    coordsOf,
     distanceKm,
     EARTH_CIRCUMFERENCE_KM,
     flights as allFlights,
@@ -17,6 +18,7 @@ import {
     formatNumber,
     getAirport,
     routeKey,
+    routeLabel,
     years,
     type Flight,
     type Tally,
@@ -46,6 +48,14 @@ const MOON_KM = 384_400;
 const MARS_KM = 225_000_000;
 const COMPARISON_INTERVAL_MS = 4500;
 
+function toPoint(code: string): FlightPoint | null {
+    const airport = getAirport(code);
+    const coords = coordsOf(code);
+    if (!airport || !coords) return null;
+
+    return { code, name: airport.name, city: airport.city, coords, count: 0 };
+}
+
 function share(distance: number, target: number): string {
     const ratio = distance / target;
     if (ratio >= 1) return `${ratio.toFixed(1)}x`;
@@ -53,7 +63,7 @@ function share(distance: number, target: number): string {
     return `${(ratio * 100).toFixed(2)}%`;
 }
 
-/** The FR24 party trick: the same distance, restated every few seconds. */
+// the same distance, restated every few seconds
 function DistanceComparison({ distance, hop }: { distance: number; hop: Tally | undefined }) {
     const comparisons = useMemo(() => {
         const list = [
@@ -146,7 +156,6 @@ function BarList({ items, limit = 12, detail }: { items: Tally[]; limit?: number
     );
 }
 
-/** What sits behind an aircraft row: the tails I sat in, and what they did. */
 function AircraftDetail({ item, list }: { item: Tally; list: Flight[] }) {
     const detail = useMemo(() => aircraftDetail(list, item.key), [list, item.key]);
 
@@ -198,7 +207,7 @@ function Fact({ label, value, detail }: { label: string; value: string; detail: 
     );
 }
 
-/** "9'590 km · 12h 30m" */
+// 9'590 km · 12h 30m
 function flightDetail(flight: Flight): string {
     return [
         distanceKm(flight.from, flight.to) ? `${formatNumber(distanceKm(flight.from, flight.to) ?? 0)} km` : null,
@@ -219,7 +228,7 @@ function ShowAllButton({ expanded, total, onToggle }: { expanded: boolean; total
     );
 }
 
-/** Label above the route on narrow screens -- side by side there is no room for both. */
+// label sits above the route on narrow screens, beside it from md up
 function Superlative({ label, value, detail }: { label: string; value: string; detail?: string }) {
     return (
         <div className="flex flex-col gap-0.5 border-b border-border/15 py-2 last:border-b-0 md:flex-row md:items-baseline md:justify-between md:gap-4">
@@ -232,15 +241,10 @@ function Superlative({ label, value, detail }: { label: string; value: string; d
     );
 }
 
-/**
- * One line per segment: when and where on top, what it was flown with below.
- * Rail segments carry a RAIL designator where the aircraft type code sits, so
- * they read as their own kind of thing instead of a mislabelled flight.
- */
 function FlightRow({ flight }: { flight: Flight }) {
     const distance = distanceKm(flight.from, flight.to);
     const rail = flight.mode === "rail";
-    // Air France sells the TGV legs as economy or business, but the seat is first class either way
+    // Air France sells the TGV legs as economy or business and seats you in first class either way
     const cabin = rail ? "1st class" : flight.class ? (CABINS[flight.class] ?? flight.class) : null;
     const extras = [flight.seat?.number, flight.registration].filter(Boolean);
 
@@ -308,33 +312,23 @@ export function FlightsTab() {
         const pointMap = new Map<string, FlightPoint>();
 
         for (const flight of selected) {
-            const from = getAirport(flight.from);
-            const to = getAirport(flight.to);
-            if (!from?.lat || !from?.lon || !to?.lat || !to?.lon) continue;
+            const from = toPoint(flight.from);
+            const to = toPoint(flight.to);
+            if (!from || !to) continue;
 
-            for (const [code, airport] of [
-                [flight.from, from],
-                [flight.to, to],
-            ] as const) {
-                const point = pointMap.get(code) ?? {
-                    code,
-                    name: airport.name,
-                    city: airport.city,
-                    country: airport.countryName,
-                    coords: [airport.lat as number, airport.lon as number] as [number, number],
-                    count: 0,
-                };
+            for (const stop of [from, to]) {
+                const point = pointMap.get(stop.code) ?? stop;
                 point.count += 1;
-                pointMap.set(code, point);
+                pointMap.set(stop.code, point);
             }
 
             if (flight.from === flight.to) continue;
 
             const key = routeKey(flight.from, flight.to);
             const route = routeMap.get(key) ?? {
-                from: [from.lat, from.lon] as [number, number],
-                to: [to.lat, to.lon] as [number, number],
-                label: key.replace("-", " ↔ "),
+                from: from.coords,
+                to: to.coords,
+                label: routeLabel(flight.from, flight.to),
                 count: 0,
                 mode: flight.mode,
             };

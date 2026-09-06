@@ -27,7 +27,6 @@ type TabId = (typeof TABS)[number]["id"];
 
 const mapLocations: MapLocation[] = visitedPlaces.flatMap(({ locations }) => locations as MapLocation[]);
 
-/** ZRH → AMS → BRU, with rail legs marked by a dashed arrow. */
 function TripChain({ trip }: { trip: Trip }) {
     return (
         <span className="font-sans text-xs tracking-wide text-foreground/80">
@@ -42,7 +41,6 @@ function TripChain({ trip }: { trip: Trip }) {
     );
 }
 
-/** One journey there and, when there was one, the journey back. */
 function VisitEntry({ visit }: { visit: Visit }) {
     return (
         <div className="flex flex-col gap-1 py-1.5 md:flex-row md:items-baseline md:gap-3">
@@ -109,7 +107,7 @@ function PlaceRow({ place, entry, expanded, onToggle }: { place: Place; entry?: 
                     <span className="truncate font-sans text-[11px] text-muted-foreground/40 max-md:hidden">{place.note}</span>
                 </div>
 
-                <div className="flex shrink-0 items-baseline gap-3 pl-[calc(0.375rem+0.75rem)] md:pl-0">
+                <div className="flex shrink-0 items-baseline gap-3 pl-[1.125rem] md:pl-0">
                     <span className="font-sans text-[11px] text-muted-foreground/40 md:hidden">{place.note}</span>
                     {count > 0 && (
                         <span className="ml-auto font-mono text-[10px] text-muted-foreground/40 md:ml-0">
@@ -137,7 +135,7 @@ function PlaceRow({ place, entry, expanded, onToggle }: { place: Place; entry?: 
 function PlacesTab() {
     const [expandedPlace, setExpandedPlace] = useState<string | null>(null);
 
-    // Which journeys got me to which place -- matched by the airports that serve it
+    // matched by the airports that serve each place
     const visits = useMemo(() => visitsByPlace(), []);
 
     const focus = useMemo(() => places.flatMap((g) => g.locations).find((place) => place.name === expandedPlace)?.coords, [expandedPlace]);
