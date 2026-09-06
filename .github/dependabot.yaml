@@ -6,6 +6,11 @@ updates:
       interval: monthly
     cooldown:
       default-days: 7
+    ignore:
+      # typescript-eslint (via eslint-config-next) refuses to load under TS >= 7.
+      # Tracking: https://github.com/typescript-eslint/typescript-eslint/issues/10940
+      - dependency-name: "typescript"
+        versions: [">=7"]
     groups:
       all:
         applies-to: version-updates
