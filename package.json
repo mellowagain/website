@@ -12,7 +12,8 @@
         "lint": "eslint .",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
-        "flights:import": "node scripts/import-flightdiary.mjs"
+        "flights:import": "node scripts/import-flightdiary.mjs",
+        "spotify:token": "node scripts/grab-refresh-token.mjs"
     },
     "dependencies": {
         "@hookform/resolvers": "^5.4.0",
