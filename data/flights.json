@@ -1,6 +1,6 @@
 {
-    "source": "flightdiary_2026_09_06_00_32.csv",
-    "generated": "2026-09-05",
+    "source": "flightdiary_2026_09_06_02_01.csv",
+    "generated": "2026-09-06",
     "flights": [
         {
             "date": "2017-07-17",
@@ -3350,7 +3350,7 @@
             "aircraft": null,
             "registration": null,
             "seat": {
-                "number": null,
+                "number": "122",
                 "type": "window"
             },
             "class": "economy",

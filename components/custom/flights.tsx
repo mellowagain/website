@@ -240,7 +240,8 @@ function Superlative({ label, value, detail }: { label: string; value: string; d
 function FlightRow({ flight }: { flight: Flight }) {
     const distance = distanceKm(flight.from, flight.to);
     const rail = flight.mode === "rail";
-    const cabin = flight.class ? (CABINS[flight.class] ?? flight.class) : null;
+    // Air France sells the TGV legs as economy or business, but the seat is first class either way
+    const cabin = rail ? "1st class" : flight.class ? (CABINS[flight.class] ?? flight.class) : null;
     const extras = [flight.seat?.number, flight.registration].filter(Boolean);
 
     return (
@@ -282,7 +283,7 @@ function FlightRow({ flight }: { flight: Flight }) {
                     {cabin && (
                         <span
                             className={`font-mono text-[11px] uppercase tracking-wider ${
-                                flight.class === "economy" ? "text-muted-foreground/40" : "text-foreground/75"
+                                !rail && flight.class === "economy" ? "text-muted-foreground/40" : "text-foreground/75"
                             }`}
                         >
                             {cabin}
@@ -351,8 +352,9 @@ export function FlightsTab() {
         <div className="flex flex-col gap-6">
             <p className="font-sans text-sm leading-relaxed text-foreground/70">
                 Every flight I&apos;ve taken since 2017, logged in my Flightradar24 flight diary and exported into this page. Mostly Zurich
-                and Amsterdam, mostly KLM, mostly a window seat. Train segments booked under a flight number are logged too, but kept out of
-                the flight totals.
+                and Amsterdam, mostly KLM, mostly a window seat. Train segments sold under a flight number are logged too, but kept out of
+                the flight totals -- Air France tickets those as economy or business and then seats you in first class anyway, so that is
+                what the log shows.
             </p>
 
             {/* Year filter */}
