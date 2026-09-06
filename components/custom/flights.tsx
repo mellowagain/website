@@ -353,8 +353,7 @@ export function FlightsTab() {
             <p className="font-sans text-sm leading-relaxed text-foreground/70">
                 Every flight I&apos;ve taken since 2017, logged in my Flightradar24 flight diary and exported into this page. Mostly Zurich
                 and Amsterdam, mostly KLM, mostly a window seat. Train segments sold under a flight number are logged too, but kept out of
-                the flight totals -- Air France tickets those as economy or business and then seats you in first class anyway, so that is
-                what the log shows.
+                the flight totals.
             </p>
 
             {/* Year filter */}

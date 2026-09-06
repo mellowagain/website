@@ -63,7 +63,7 @@ export const places: PlaceGroup[] = [
             {
                 name: "Brussels, Belgium",
                 coords: [50.8551696, 4.3342174],
-                year: "2023, 2024, 2025",
+                year: "2022, 2023, 2024, 2025, 2026",
                 note: "EuroRust 2023, FOSDEM 2025, Visiting friends",
             },
             {
@@ -94,13 +94,13 @@ export const places: PlaceGroup[] = [
             {
                 name: "Cophenhagen, Denmark",
                 coords: [55.6713089, 12.5526248],
-                year: "2023",
+                year: "2024",
                 note: "Visiting friends",
             },
             {
                 name: "Gothenburg, Sweden",
                 coords: [57.7010685, 11.7290356],
-                year: "2022, 2023",
+                year: "2022, 2024",
                 note: "Visiting friends",
             },
             {
@@ -118,19 +118,19 @@ export const places: PlaceGroup[] = [
             {
                 name: "London, UK",
                 coords: [51.5287398, -0.2664005],
-                year: "2023",
+                year: "2022",
                 note: "Day trip",
             },
             {
                 name: "Düsseldorf, Germany",
                 coords: [51.238527, 6.7319286],
-                year: "2021",
-                note: "Dokomi 2021",
+                year: "2022",
+                note: "Dokomi 2022",
             },
             {
                 name: "Plymouth, UK",
                 coords: [50.3884916, -4.1537691],
-                year: "2020",
+                year: "2019",
                 note: "Language exchange",
                 match: { airports: ["LHR"], from: "2019-01-01", to: "2020-12-31" },
             },
