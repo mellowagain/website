@@ -6,7 +6,7 @@ import { NierLoadingIndicator } from "@/components/nier-shell";
 import { formatDistanceToNow } from "date-fns";
 import { Key } from "react";
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const fetcher = (url: string) => fetch(url, { cache: "no-store" }).then((res) => res.json());
 
 export default function RecentlyPlayed() {
     const { data, error, isLoading } = useSWR("/api/spotify/recent", fetcher, {
