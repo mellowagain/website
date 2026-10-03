@@ -62,9 +62,7 @@ export async function GET() {
         headers: {
             Authorization: `Bearer ${access_token}`,
         },
-        next: {
-            revalidate: process.env.NODE_ENV === "production" ? 30 : undefined, // 30s cache during prod, for dev no cache
-        },
+        cache: "no-store",
     });
 
     if (response.status === 204 || response.status > 400) {
