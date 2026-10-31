@@ -1,0 +1,14 @@
+{
+    "name": "website",
+    "image": "ghcr.io/mellowagain/website-dev:latest",
+    "remoteUser": "node",
+    "forwardPorts": [3000],
+    "mounts": [
+        "source=claude-config-${devcontainerId},target=/home/node/.claude,type=volume",
+        "source=codex-config-${devcontainerId},target=/home/node/.codex,type=volume"
+    ],
+    "containerEnv": {
+        "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+        "NEXT_TELEMETRY_DISABLED": "1"
+    }
+}
