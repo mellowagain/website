@@ -1,5 +1,7 @@
 FROM mcr.microsoft.com/devcontainers/typescript-node:26
 
+LABEL org.opencontainers.image.source="https://github.com/mellowagain/website"
+
 RUN apt-get update && apt-get install -y --no-install-recommends libimage-exiftool-perl \
  && rm -rf /var/lib/apt/lists/*
 
